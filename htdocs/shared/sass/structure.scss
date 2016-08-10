@@ -1,0 +1,446 @@
+/*----------------------------------------------
+ Body
+----------------------------------------------*/
+body{
+	position:relative;
+	color:#333;
+	font-size:0.9rem;
+	font-family:Meiryo,'Hiragino Kaku Gothic Pro',sans-serif;
+	line-height:1.8;
+	background-color:#ecece0;
+	background-repeat:no-repeat,no-repeat;
+	background-position:left -50px, right -50px;
+}
+
+/*----------------------------------------------
+ Header
+----------------------------------------------*/
+header{
+	padding: 0 10px;
+	#header-inner{
+		@include clearfix;
+		max-width:$contentWidth;
+		margin:0 auto 20px auto;
+		padding-bottom:85px;
+		position: relative;
+
+		h1#logo,
+		p#logo{
+			position:absolute;
+			top: 20px;
+			left:0;
+			font-size:0;
+			line-height: 0;
+		}
+
+		p#tagline{
+			position:absolute;
+			left:0;
+			top: 55px;
+			padding:10px 0;
+		}
+
+		p#sp-search-btn{
+			display:none;
+		}
+
+		form{
+			position:absolute;
+			top:13px;
+			right:0;
+			font-size: 0;
+			line-height: 0;
+			input#text{
+				width:160px!important;
+				float:left;
+				border-right:none;
+				border-radius:4px 0 0 4px;
+				height:15px;
+			}
+			input#btn{
+				width:29px;
+				float:left;
+				font-size:0;
+				line-height:0;
+				padding:0 0 0 0;
+			}
+		}
+
+		ul.utility{
+			position:absolute;
+			top:55px;
+			right:0;
+			li{
+				margin-right:8px;
+				font-size: 0.8rem;
+				display:inline-block;
+				a{
+					background:#f9f9f9;
+					border-radius:4px;
+				    display: inline-block;
+				    padding:4px 10px 2px 26px;
+				    position: relative;
+				    text-decoration: none;
+				}
+				a:before {
+					position: absolute;
+				    top: 0;
+				    left: 10px;
+				    bottom: 0;
+				    transform: rotate(45deg);
+				    margin: auto;
+				    width: 4px;
+				    height: 4px;
+				    border-right: 2px solid #387922;
+				    border-top: 2px solid #387922;
+				    vertical-align: middle;
+				    content: "";
+				}
+				a:after {
+				    position: absolute;
+				    top: 0;
+				    bottom: 0;
+				    left: 10px;
+				    content: "";
+				    margin: auto;
+				    vertical-align: middle;
+				}
+				a:hover,
+				a:active{
+					background:#fff;
+				}
+			}
+			li:last-child{
+				margin-right: 0;
+			}
+		}
+	}
+	nav{
+		width: 100%;
+		margin: 0;
+		ul{
+			max-width:$contentWidth;
+			margin:0 auto;
+			box-shadow:0 2px 3px 0 #dedede;
+			background:#fff;
+			border-radius:4px;
+			@include clearfix;
+			li{
+				width: 16.6666666666%;
+				float:left;
+				text-align: center;
+
+				a,
+				a:link,
+				a:visited{
+					display: block;
+					padding:20px 4px 16px 4px;
+					color: #121212;
+					font-size:0.9rem;
+					font-weight: bold;
+					background:url("data:image/jpeg;base64,/9j/7gAOQWRvYmUAZMAAAAAB/9sAhAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAgICAgICAgICAgIDAwMDAwMDAwMDAQEBAQEBAQIBAQICAgECAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwP/wAARCAAcAAEDAREAAhEBAxEB/8QASwABAQAAAAAAAAAAAAAAAAAAAAoBAQAAAAAAAAAAAAAAAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAARAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AK2AAAAf/9k=") no-repeat left center;		
+					text-decoration: none;
+				}
+
+				a:hover,
+				a:focus{
+					color:#387922;
+					padding-bottom:13px;
+					border-bottom:3px solid #387922;
+				}
+			}
+
+			li:first-child{
+				a,
+				a:link,
+				a:visited,
+				a:hover,
+				a:focus,{
+					background:none;
+				}
+			} 
+		}
+	}
+}
+
+/*----------------------------------------------
+ Global Nav Current
+----------------------------------------------*/
+body.select header nav li.select a,
+body.buy header nav li.buy a,
+body.plant header nav li.plant a,
+body.maintenance header nav li.maintenance a,
+body.tool header nav li.tool a,
+body.blog header nav li.blog a{
+	color:#387922;
+	padding-bottom:13px;
+	border-bottom:3px solid #387922;
+}
+
+/*----------------------------------------------
+ Social
+----------------------------------------------*/
+div.social{
+	text-align:center;
+
+	ul{
+		li{
+			display: inline;
+		}
+	}
+}
+
+/*----------------------------------------------
+ Footer
+----------------------------------------------*/
+footer{
+	background:#387922 url("/shared/images/bg_footer.png") repeat-x left top;
+	p{
+		padding:40px 0 30px;
+		text-align:center;
+		color:#fff;
+	}
+}
+
+/*----------------------------------------------
+ Breadcrumb
+----------------------------------------------*/
+#breadcrumb{
+	max-width:$contentWidth;
+	margin:0 auto 20px 0;
+	ul{
+		@include clearfix;
+
+		li{
+			position:relative;
+			color:#333;
+			display:inline;
+			float:left;
+			font-size:0.8rem;
+			margin-right:8px;
+			padding-right:18px;
+		}
+
+		li:after{
+			content:">";
+			display:block;
+			position:absolute;
+			right:0;
+			top:0;
+		}
+
+		li:last-child:after{
+			display:none;
+		}
+	}
+}
+
+/*----------------------------------------------
+ Content
+----------------------------------------------*/
+#content{
+	max-width:$contentWidth;
+	margin:0 auto;
+	border-radius:4px;
+	#content-inner{
+		width:100%;
+		overflow: hidden;
+	}
+}
+
+body.lyt-main header,
+body.lyt-main-sub header{
+	nav{
+		ul{
+			border-radius:4px 4px 4px 4px;
+		}
+	}
+}
+
+body.lyt-main #content{
+	max-width:$contentWidth;
+	margin-top:20px;
+	margin-bottom:20px;
+	@include clearfix;
+	main{
+		width:100%;
+		background:#fff;
+		#main-inner{
+			padding:20px;
+			background:#fff;
+			box-shadow:0 2px 3px 0 #dedede;
+			border-radius:4px;
+		}
+	}
+}
+
+body #content{
+	main{
+		#main-inner > p{
+			margin-bottom:20px;
+		}
+	}
+}
+
+body.lyt-main-sub #content{
+	max-width:$contentWidth;
+	margin-top:20px;
+	margin-bottom:20px;
+	@include clearfix;
+	main{
+		width:$mainWidth;
+		float:left;
+		#main-inner{
+			padding:20px;
+			background:#fff;
+			box-shadow:0 2px 3px 0 #dedede;
+			border-radius:4px;
+		}
+	}
+
+	nav#nav-local{
+		width:$navLocalWidth;
+		margin-left:20px; 
+		float:right;
+		box-shadow:0 2px 3px 0 #dedede;
+
+		p.title{
+			a{
+				border-radius:4px 4px 0 0;
+				display:block;
+				color: #fff;
+				text-decoration: none;
+				background:#777;
+				transition: all 0.3s ease 0s;
+				padding:14px 0 12px 14px;
+			}
+			a:hover{
+				background:#555;
+			}
+		}
+
+		ul{
+			li{
+				a{
+					display: block;
+					border-bottom:1px solid #ccc;
+					padding:14px 0 12px 28px;
+				    background:#f1f1f1 url("/shared/images/arrow_02.png") no-repeat 14px 1.65em;
+					background-size:5px 8px;
+					text-decoration:none;
+				}
+				a:hover,
+				a:focus{
+					background-color:#fff;
+					text-decoration: none;
+				}
+			}
+			li:last-child a{
+					border-bottom:none;
+					border-radius:0 0 4px 4px;
+			}
+		}
+	}
+
+	div#nav-sidebar{
+		width:$navLocalWidth;
+		margin-left:20px; 
+		float:right;
+		p.title{
+			font-size:1.0rem;
+			font-weight: bold;
+			padding:0 0 10px 0;
+			position: relative;
+			text-align: center;
+			span {
+				position:relative;
+				z-index: 2;
+				display: inline-block;
+				margin:0 2.5em;
+				padding:0 1em;
+				background:#ecece0;
+				text-align: left;
+			}
+		}
+		p.title:before {
+			position: absolute;
+			top: 37.5%;
+			z-index: 1;
+			content: '';
+			display: block;
+			width: 100%;
+			height: 1px;
+			background: #ccc;
+		}
+
+		ul,ol{
+			margin-bottom:30px;
+			box-shadow:0 2px 3px 0 #dedede;
+			li{
+				border-bottom:1px solid #ccc;
+				background:#f1f1f1;
+				p{
+					text-align:right;
+					font-size:0.75rem;
+					padding:10px 10px 0 0;
+					color:#333;
+				}
+				a{
+					display: block;
+					padding:14px 0 12px 28px;
+				    background:url("/shared/images/arrow_02.png") no-repeat 14px 1.55em;
+				    background-size:5px 8px;
+					text-decoration:none;
+				}
+			}
+			li:first-child{
+				border-radius:4px 4px 0 0;
+			}
+			li:last-child{
+				border-bottom:none;
+				border-radius:0 0 4px 4px;
+			}
+			li:hover{
+				background:#fff;
+			}
+		}
+		ul:last-child{
+			margin-bottom:0;
+		}
+		ul.category.turf li.cat-turf{background:#fff;}
+		ul.category.web li.cat-web{background:#fff;}
+		ul.category.diy li.cat-diy{background:#fff;}
+		ul.category.other li.cat-other{background:#fff;}
+		ol{
+			list-style-type:none;
+		}
+	}
+}
+
+/*----------------------------------------------
+ Page top
+----------------------------------------------*/
+p.page_top{
+	display: block;
+	max-width:$contentWidth;
+	z-index: 9999;
+	position: fixed;
+	bottom:20px;
+	right:20px;
+	a{
+		display: block;
+		height: 45px;
+		width :46px;
+		background:url("/shared/images/page_top.png") no-repeat left top;
+		font-size: 0;
+		line-height: 0;
+	}
+	a:hover{
+		display: block;
+		height: 45px;
+		width :46px;
+		background:url("/shared/images/page_top.png") no-repeat left bottom;
+		font-size: 0;
+		line-height: 0;
+	}
+}

@@ -1,0 +1,38 @@
+/*----------------------------------------------
+ Width
+----------------------------------------------*/
+$contentWidth:1020px;
+$mainWidth:700px;  
+$navLocalWidth:300px;
+
+/*----------------------------------------------
+ Clearfix
+----------------------------------------------*/
+@mixin clearfix {
+    &:before,
+    &:after {
+        content:"";
+        display:table;
+    }
+
+    &:after {
+        clear:both;
+    }
+}
+
+/*----------------------------------------------
+ Grid
+----------------------------------------------*/
+@mixin column($num,$margin:20){
+    @include clearfix;
+    margin-left:#{-$margin}px;
+    $margin_num:$num - 1;
+    $margin_width:#{$margin*$num}px;
+    > .col{
+        float:left;
+        margin:0 0 20px #{$margin}px;
+        width:-webkit-calc((100% - #{$margin_width}) / #{$num});
+        width:calc((100% - #{$margin_width}) / #{$num});
+        overflow:hidden;
+    }
+}
