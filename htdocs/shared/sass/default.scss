@@ -49,6 +49,7 @@ strong{
 }
 
 input[type="text"],
+input[type="email"],
 input[type="input"],
 textarea{
 	padding:6px 8px;
@@ -60,8 +61,8 @@ textarea{
 
 textarea{
 	height:10em;
+	resize:vertical;
 }
-
 
 input[type="radio"],input[type="checkbox"]{
 	position:relative;
@@ -70,10 +71,6 @@ input[type="radio"],input[type="checkbox"]{
 
 input[type="checkbox"]{
 	margin-right:5px;
-}
-
-textarea{
-	resize:vertical;
 }
 
 input[type="radio"] + label,

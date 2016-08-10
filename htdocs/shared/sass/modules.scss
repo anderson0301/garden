@@ -377,9 +377,49 @@ div.social{
 			background:#ccc;
 		}
 		dd{
+			ul{
+			    width: 100%;
+			    margin-bottom:20px;
+			    overflow: hidden;
+			    @include clearfix;
+
+			    li{
+				    float: left;
+				    margin: 0 2px 2px 0;
+				    text-align: center;
+				    a{
+				    	width:68px;
+				    	padding:10px 20px;
+				    	position: relative;
+				    	text-decoration: none;
+				    	color: #fff;
+				    	display:inline-block;
+
+				    	.sns_count {
+						    position: absolute;
+						    font-size: 10px;
+						    right: 2px;
+						    bottom: -3px;
+						}
+					}
+
+					a:hover {
+						opacity: 0.8;
+					}
+				}
+
+				li.tw a{background:#00acee;}
+				li.fb a{background:#4561b0;}
+				li.go a{background:#dd4b30;}
+				li.ht a{background:#5279E7;}
+				li.po a{background:#F03E51;}
+				li.fe a{background:#87C040;}
+			}
 		}
 	}
 }
+
+
 
 /*----------------------------------------------
  Table
@@ -506,13 +546,6 @@ div.comment{
 				margin-bottom:20px;
 			}
 		}
-		p.btn-submit{
-			text-align:center;
-			input {
-				margin-bottom:10px;
-    			padding: 5px 20px;
-			}
-		}
 	}
 
 	p.title{
@@ -539,6 +572,57 @@ div.comment{
 		width: 100%;
 		height: 1px;
 		background: #ccc;
+	}
+}
+
+/*----------------------------------------------
+ Contact Form
+----------------------------------------------*/
+span.wpcf7-not-valid-tip{
+	display:inline-block;
+	margin-top:10px;
+	color:#f00000;
+}
+
+div.wpcf7-response-output {
+    margin-bottom: 10px;
+    padding: 10px 20px;
+}
+
+div.wpcf7-validation-errors {
+	color: #f00000;
+	border: 2px solid #f00000;
+}
+
+div.wpcf7-mail-sent-ok {
+	border: 2px solid #000;
+}
+
+div.wpcf7 .screen-reader-response {
+	position: absolute;
+	overflow: hidden;
+	clip: rect(1px, 1px, 1px, 1px);
+	height: 1px;
+	width: 1px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.wpcf7-display-none,
+div.wpcf7 div.ajax-error{
+	display: none;
+}
+
+
+/*----------------------------------------------
+ Form button
+----------------------------------------------*/
+p.btn-submit{
+	text-align:center;
+	input {
+		margin-bottom:10px;
+		padding: 5px 20px;
 	}
 }
 
@@ -577,7 +661,7 @@ span.date{
 	padding:1px 3px 0 3px;
 	margin:0 8px 1px 0;
 	vertical-align:middle;
-	font-size:0.75rem;
+	font-size:0.72rem;
 	color:#fff;
 	border-radius:4px;
 	text-align:center;
@@ -586,13 +670,13 @@ span.date{
 p.new span {
 	position: absolute;
 	display: inline-block;
-	left: -38px;
+	left: -36px;
 	box-shadow: 0px 0px 10px rgba(0,0,0,0.2), inset 0px 5px 30px rgba(255,255,255,0.2);
 	text-align: center;
 	text-transform: uppercase;
-	bottom: 7px;
+	bottom: 2px;
 	background: #f00000;
-	width: 100px;
+	width: 90px;
 	padding: 3px 10px;
 	transform: rotate(45deg);
 	color:#fff;
@@ -617,7 +701,7 @@ p.new:after {
 	position: absolute;
 	bottom: 74px;
 	z-index: -1;
-	left: -10px;
+	left: -15px;
 	border: 17px solid;
 	border-color: #662121 transparent transparent transparent;
 }

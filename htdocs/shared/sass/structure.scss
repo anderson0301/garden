@@ -339,6 +339,11 @@ body.lyt-main-sub #content{
 					border-bottom:none;
 					border-radius:0 0 4px 4px;
 			}
+			li.current_page_item{
+				a{
+					background-color:#fff;
+				}
+			}
 		}
 	}
 
