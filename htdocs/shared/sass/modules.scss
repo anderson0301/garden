@@ -203,6 +203,7 @@ h2.hdg-l2-top:before {
 }
 
 h3.hdg-l3-01 {
+	margin-top:20px;
 	margin-bottom:20px;
 	padding:2px 0 0 10px;
 	border-left:5px solid #ccc;
@@ -716,6 +717,7 @@ pre{
 	border-radius: 3px;
 	overflow: auto;
 	padding: 10px 15px;
+	margin-bottom: 10px;
 }
 
 /*----------------------------------------------
@@ -725,6 +727,121 @@ pre{
 	margin-bottom:20px;
 }
 
+/*----------------------------------------------
+ Page nation
+----------------------------------------------*/
+ul.list-pagenation{
+  margin: 30px 0;
+}
+ 
+ul.list-pagenation,
+ul.list-pagenation li a {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+ 
+ul.list-pagenation a {
+  font-weight:300;
+  text-decoration:none;
+  border: 1px solid #dbdbdb;
+  border-left-width: 0;
+  min-width:36px;
+  min-height:36px;
+  color:#333;
+}
+ 
+ul.list-pagenation li:not([class*="current"]) a:hover {
+  background-color: #eee;
+}
+ 
+ul.list-pagenation li:first-of-type a {
+  border-left-width: 1px;
+}
+ 
+ul.list-pagenation li.first a::before,
+ul.list-pagenation li.last a::after,
+ul.list-pagenation li.prev a::before,
+ul.list-pagenation li.next a::after {
+  display: inline-block;
+  font-family: Fontawesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0);
+}
+ 
+ul.list-pagenation li.current a {
+ background-color: #ddd;
+ cursor: default;
+ pointer-events: none;
+}
+ 
+ul.list-pagenation > li:first-child > a {
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+}
+ 
+ul.list-pagenation > li:last-child > a {
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+}
+ 
+@media only screen and ( max-width: 680px ) {
+  ul.list-pagenation li.first,
+  ul.list-pagenation li.last {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+ 
+  ul.list-pagenation li.prev a { border-left-width: 1px; }
+}
+ 
+@media only screen and ( max-width: 500px ) {
+  ul.list-pagenation li {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+ 
+  ul.list-pagenation li.current,
+  ul.list-pagenation li.first,
+  ul.list-pagenation li.last,
+  ul.list-pagenation li.prev,
+  ul.list-pagenation li.next{
+    position: initial;
+    top: initial;
+    left: initial;
+  }
+ 
+  ul.list-pagenation li.prev a {
+  	border-left-width: 0;
+  }
+}
+ 
+@media only screen and ( max-width: 400px ) {
+  ul.list-pagenation li.first,
+  ul.list-pagenation li.last {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+ 
+  ul.list-pagenation li.prev a {
+  	border-left-width: 1px;
+  }
+}
+ 
+@media only screen and ( max-width: 240px ) { 
+  ul.list-pagenation li { width: 50%;}
+  ul.list-pagenation li.current {
+    width: 100%;
+    border-left-width: 1px;
+  }
+}
 
 /*----------------------------------------------
  Adjust

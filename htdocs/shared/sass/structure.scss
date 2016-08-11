@@ -166,12 +166,18 @@ header{
 /*----------------------------------------------
  Global Nav Current
 ----------------------------------------------*/
-body.select header nav li.select a,
-body.buy header nav li.buy a,
-body.plant header nav li.plant a,
-body.maintenance header nav li.maintenance a,
-body.tool header nav li.tool a,
-body.blog header nav li.blog a{
+body.g-select header nav li.select a,
+body.g-buy header nav li.buy a,
+body.g-plant header nav li.plant a,
+body.g-maintenance header nav li.maintenance a,
+body.g-tool header nav li.tool a,
+body.g-blog header nav li.blog a,
+body.g-category header nav li.blog a,
+body.g-2016 header nav li.blog a,
+body.g-2017 header nav li.blog a,
+body.g-2018 header nav li.blog a,
+body.g-2019 header nav li.blog a,
+body.g-2020 header nav li.blog a{
 	color:#387922;
 	padding-bottom:13px;
 	border-bottom:3px solid #387922;
@@ -412,15 +418,19 @@ body.lyt-main-sub #content{
 		ul:last-child{
 			margin-bottom:0;
 		}
-		ul.category.turf li.cat-turf{background:#fff;}
-		ul.category.web li.cat-web{background:#fff;}
-		ul.category.diy li.cat-diy{background:#fff;}
-		ul.category.other li.cat-other{background:#fff;}
+		ul.archive li.current{
+			background:#fff;
+		}
+		
 		ol{
 			list-style-type:none;
 		}
 	}
 }
+
+body.lyt-main-sub.web div#nav-sidebar ul li.cat-web{background:#fff!important;}
+body.lyt-main-sub.diy div#nav-sidebar ul li.cat-diy{background:#fff!important;}
+body.lyt-main-sub.turf div#nav-sidebar ul li.cat-turf{background:#fff!important;}
 
 /*----------------------------------------------
  Page top

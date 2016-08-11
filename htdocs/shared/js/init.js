@@ -53,7 +53,7 @@ $(function(){
 $(function(){
     var dir = location.href.split('/');
     if(dir&&dir[3]){
-        $('body').addClass(dir[3]);
+        $('body').addClass("g-"+dir[3]);
     }
 });
 
