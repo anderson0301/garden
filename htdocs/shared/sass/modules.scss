@@ -247,6 +247,11 @@ ul.list-link-01{
 			background:url("/shared/images/arrow_02.png") no-repeat left 0.8em;
 			background-size:5px 8px;
 		}
+		a[target="_blank"] {
+			padding:2px 0 2px 14px;
+			background:url("/shared/images/arrow_03.png") no-repeat left 0.7em;
+			background-size:11px 9px;
+		}
 		p.date{
 			padding:20px 0 0 0;
 			
@@ -386,15 +391,15 @@ div.social{
 
 			    li{
 				    float: left;
+				    width:16.33333%;
 				    margin: 0 2px 2px 0;
 				    text-align: center;
 				    a{
-				    	width:68px;
 				    	padding:10px 20px;
 				    	position: relative;
 				    	text-decoration: none;
 				    	color: #fff;
-				    	display:inline-block;
+				    	display:block;
 
 				    	.sns_count {
 						    position: absolute;
@@ -407,6 +412,9 @@ div.social{
 					a:hover {
 						opacity: 0.8;
 					}
+				}
+				li:last-child{
+				    margin: 0 0 2px 0;
 				}
 
 				li.tw a{background:#00acee;}
