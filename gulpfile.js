@@ -41,6 +41,7 @@ gulp.task('sass', function() {
     gulp.src(config.path.sass+'/*')
         .pipe(plumber())
         .pipe(sass({
+            //style:'expanded',
             style:'compressed',
             'sourcemap=none': true,
             sourcemapPath:'dest',

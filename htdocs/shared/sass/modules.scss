@@ -124,9 +124,10 @@ div.bd-type-02{
 }
 
 /*----------------------------------------------
- #news
+ #news,#recommend
 ----------------------------------------------*/
-div#news{
+div#news,
+div#recommend{
 	.grid-3{
 		.col{
 			position:relative;
@@ -439,7 +440,7 @@ table.tbl-01{
 	border-collapse:collapse;
 	th,td{
 		border:1px solid #ccc;
-		padding:15px 20px;
+		padding:10px 15px;
 		text-align:left;
 	}
 	th{
@@ -454,6 +455,10 @@ table.sp-lyt-on{
 	td{
 		width: 65%;
 	}
+}
+
+div.tbl-scroll{
+	overflow:auto;
 }
 
 /*----------------------------------------------
