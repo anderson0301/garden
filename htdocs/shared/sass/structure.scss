@@ -425,6 +425,42 @@ body.lyt-main-sub #content{
 		ol{
 			list-style-type:none;
 		}
+
+		ul.whatsnew,
+		ol.rank{
+			margin-bottom:30px;
+			box-shadow:none;
+			li{
+				margin: 0 0 10px 0;
+				border-bottom:1px dotted #ccc;
+				background:#ecece0;
+				position:relative;
+				p{
+					padding:5px 0 0 0;
+				}
+				a{
+					display: inline-block;
+					padding:0 0 0 90px;
+				    background:none;
+					min-height:100px;
+					text-decoration:none;
+					z-index:9999;
+				}
+				img{
+					position:absolute;
+					left: 0;
+					top: 0;
+					z-index: 9998;
+				}
+				a:hover span.txt,
+				a:focus span.txt{
+					text-decoration:underline;
+				}
+			}
+			li:last-child{
+				border-bottom: none;
+			}
+		}
 	}
 }
 
