@@ -265,6 +265,42 @@ ul.list-link-01{
 	}
 }
 
+ul.list-related-01{
+	margin:0 0 30px 0;
+	@include clearfix;
+	li {
+		width: 47.77777777777777777777%;
+		float: left;
+		position:relative;
+		min-height: 80px;
+		margin: 0 20px 20px 0;
+		a{
+			display:inline-block;
+			padding:2px 0 2px 14px;
+			background-size:5px 8px;
+			img{
+				width:80px!important;
+				width:80px!important;
+				position:absolute;
+				left: 0;
+				top: 0;
+			}
+			span.txt{
+				display: block;
+				padding:25px 0 0 76px;
+			}
+			span.cat{
+				position:absolute;
+				left: 90px;
+				top: 0;
+			}
+		}
+	}
+	li:nth-child(even) {
+		margin-right: 0;
+	}
+}
+
 ul.list-notice-01{
 	margin:0 0 10px 0;
 	li {
