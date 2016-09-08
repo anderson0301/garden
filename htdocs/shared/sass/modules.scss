@@ -265,7 +265,7 @@ ul.list-link-01{
 	}
 }
 
-ul.list-related-01{
+ul.list-link-thum{
 	margin:0 0 30px 0;
 	@include clearfix;
 	li {
@@ -289,7 +289,8 @@ ul.list-related-01{
 				display: block;
 				padding:25px 0 0 76px;
 			}
-			span.cat{
+			span.cat,
+			span.date{
 				position:absolute;
 				left: 90px;
 				top: 0;
@@ -298,6 +299,14 @@ ul.list-related-01{
 	}
 	li:nth-child(even) {
 		margin-right: 0;
+	}
+
+	li.icon-double {
+		a{
+			span.date{
+				left:180px;
+			}
+		}
 	}
 }
 
@@ -686,7 +695,7 @@ span.cat{
 	padding:1px 3px 0 3px;
 	margin:0 8px 1px 0;
 	vertical-align:middle;
-	font-size:0.75rem;
+	font-size:0.72rem;
 	color:#fff;
 	border-radius:4px;
 	text-align:center;

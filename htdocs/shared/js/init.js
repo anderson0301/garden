@@ -7,7 +7,7 @@ $(function(){
     $('.grid-3 > .col > .bd-type-01').matchHeight();
     $('.grid-3 > .col').matchHeight();
     $('.grid-2 > .col').matchHeight();
-    $('ul.list-related-01 > li').matchHeight();
+    $('ul.list-link-thum > li').matchHeight();
 });
 
 /* ==================================
