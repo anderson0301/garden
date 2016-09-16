@@ -128,10 +128,12 @@ div.bd-type-02{
 ----------------------------------------------*/
 div#news,
 div#recommend{
-	.grid-3{
+	.grid-3,
+	.grid-2{
 		.col{
 			position:relative;
 			.bd-type-01{
+				z-index: 9998;
 				padding-bottom:40px;
 				h2{
 					font-size: 1.05rem;
@@ -145,12 +147,25 @@ div#recommend{
 						text-decoration:none;
 					}
 				}
-				p{
+				p.meta{
 					position:absolute;
 					right:10px;
 					bottom:10px;
 				}
 			}
+			p.new{
+				z-index:9999;
+				position:absolute;
+				background: #000;
+			    min-width: 60px;
+			    color: #fff;
+			    text-align: center;
+			    top: 0;
+			    left: 0;
+			    span{
+			    	display: block;
+			    }
+			} 
 		}
 	}
 }
@@ -729,45 +744,6 @@ span.date{
 	color:#fff;
 	border-radius:4px;
 	text-align:center;
-}
-
-p.new span {
-	position: absolute;
-	display: inline-block;
-	left: -36px;
-	box-shadow: 0px 0px 10px rgba(0,0,0,0.2), inset 0px 5px 30px rgba(255,255,255,0.2);
-	text-align: center;
-	text-transform: uppercase;
-	bottom: 2px;
-	background: #f00000;
-	width: 90px;
-	padding: 3px 10px;
-	transform: rotate(45deg);
-	color:#fff;
-} 
-
-p.new:before {
-	content: "";
-	width: 0;
-	height: 0;
-	position: absolute;
-	bottom: -17px;
-	left: 69px;
-	z-index: -1;
-	border: 17px solid;
-	border-color: transparent transparent #662121 transparent;
-}
-
-p.new:after {
-	content: "";
-	width: 0;
-	height: 0;
-	position: absolute;
-	bottom: 74px;
-	z-index: -1;
-	left: -15px;
-	border: 17px solid;
-	border-color: #662121 transparent transparent transparent;
 }
 
 
