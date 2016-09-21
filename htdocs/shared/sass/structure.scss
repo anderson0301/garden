@@ -428,7 +428,7 @@ body.lyt-main-sub #content{
 
 		ul.whatsnew,
 		ol.rank{
-			margin-bottom:30px;
+			margin-bottom:0;
 			box-shadow:none;
 			li{
 				margin: 0 0 10px 0;
@@ -459,6 +459,37 @@ body.lyt-main-sub #content{
 			}
 			li:last-child{
 				border-bottom: none;
+			}
+			li:nth-child(n + 6) {
+				display: none;
+			}
+			li:nth-child(5) {
+				border-bottom:none;
+			}
+			li.child-05{
+				border-bottom:1px dotted #ccc!important;
+			}
+		}
+		p.more{
+			text-align:center;
+			a{
+				display: inline-block;
+				margin: 0 0 30px 0;
+				padding:4px 22px 4px 36px;
+				border-radius:4px;
+				text-decoration: none;
+				background-color:#f9f9f9;
+				background-image:url("/shared/images/arrow_04_open.png");
+				background-repeat:no-repeat;
+				background-position:14px 0.85rem;
+				background-size:13px 8px;
+			}
+			a.open{
+				background-image:url("/shared/images/arrow_04_close.png");
+			}
+			a:hover,
+			a:focus{
+				background-color:#fff;
 			}
 		}
 	}

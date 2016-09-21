@@ -59,7 +59,6 @@ $(function(){
     }
 });
 
-
 /* ==================================
 ** スマートフォン検索窓
 ** =================================*/
@@ -67,6 +66,28 @@ $(function(){
     $('p#sp-search-btn').click(function(){
         $(this).toggleClass('open');
         $('#header-inner form').toggleClass('open');
+    });
+});
+
+/* ==================================
+** トグルボタン
+** =================================*/
+$(function(){
+    $('p.more a').on('click',function(event){
+        event.preventDefault();
+        var $className = 'open';
+        var $moreContents = $(this).parent().prev().find("li:gt(4)");
+        if($(this).hasClass($className)){
+            $(this).removeClass($className);
+            $(this).text("さらに見る");
+            $(this).parent().prev().find("li:eq(4)").removeClass("child-05");
+            $moreContents.stop().slideUp('fast');
+        }else{
+            $(this).addClass($className);
+            $(this).text("閉じる");
+            $(this).parent().prev().find("li:eq(4)").addClass("child-05");
+            $moreContents.stop().slideDown('fast');
+        }
     });
 });
 
