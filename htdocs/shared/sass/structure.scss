@@ -385,7 +385,8 @@ body.lyt-main-sub #content{
 			background: #ccc;
 		}
 
-		ul,ol{
+		ul.category,
+		ul.archive{
 			margin-bottom:30px;
 			box-shadow:0 2px 3px 0 #dedede;
 			li{
@@ -415,12 +416,12 @@ body.lyt-main-sub #content{
 			li:hover{
 				background:#fff;
 			}
+			li.current{
+				background:#fff;
+			}
 		}
 		ul:last-child{
 			margin-bottom:0;
-		}
-		ul.archive li.current{
-			background:#fff;
 		}
 		
 		ol{
