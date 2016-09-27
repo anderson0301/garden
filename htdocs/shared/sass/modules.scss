@@ -298,10 +298,12 @@ ul.list-link-thum{
 		float: left;
 		position:relative;
 		min-height: 80px;
-		margin: 0 20px 20px 0;
+		margin: 0 20px 10px 0;
+		padding-bottom:10px;
+		border-bottom:1px dotted #ccc;
 		a{
 			display:inline-block;
-			padding:2px 0 2px 14px;
+			padding:2px 0 0 14px;
 			background-size:5px 8px;
 			img{
 				width:80px!important;
