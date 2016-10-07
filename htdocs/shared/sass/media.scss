@@ -98,10 +98,6 @@ body.lyt-main-sub #content{
 	}
 }
 
-div.grid-2 > .col {
-	width: calc(100% - 20px);
-}
-
 div.grid-3 > .col {
 	width: calc((100% - 40px) / 2);
 }
@@ -292,6 +288,10 @@ ul.list-link-thum{
 
 div.grid-3 > .col {
 	width: calc((100% - 20px) / 1);
+}
+
+div.grid-2 > .col {
+	width: calc(100% - 20px);
 }
 
 div.comment{
