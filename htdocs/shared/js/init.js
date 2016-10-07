@@ -4,11 +4,11 @@
 ** 高さ揃え
 ** =================================*/
 $(function(){
-    $('.grid-3 > .col > .bd-type-01').matchHeight();
-    $('.grid-2 > .col > .bd-type-01').matchHeight();
+    $('.grid-3').find('.col').find('.bd-type-01').matchHeight();
+    $('.grid-2').find('.col').find('.bd-type-01').matchHeight();
     $('.grid-3 > .col').matchHeight();
     $('.grid-2 > .col').matchHeight();
-    $('ul.list-link-thum > li').matchHeight();
+    $('ul.list-link-thum').find('li').matchHeight();
 });
 
 /* ==================================
@@ -41,7 +41,7 @@ $(function(){
         }
     });
  
-    $('p.page_top a').click(function () {
+    $('p.page_top').find('a').click(function () {
         $('body,html').animate({
         scrollTop: 0
         }, 500);
@@ -64,7 +64,7 @@ $(function(){
 ** =================================*/
 $(function(){
     var $pathName = location.pathname;
-    $("dl.archive dd ul li a").each(function(){
+    $('dl.archive dd ul').find('li').find('a').each(function(){
         var $href = $(this).attr("href");
         if ($pathName.indexOf($href) != -1) {
             $(this).parent().addClass("current");
@@ -88,7 +88,7 @@ $(function(){
 $(function(){
 
     //新着情報、人気記事
-    $('p.more a').on('click',function(event){
+    $('p.more').on('click','a',function(event){
         event.preventDefault();
         var $className = 'open';
         var $moreContents = $(this).parent().prev().find("li:gt(4)");
@@ -106,7 +106,7 @@ $(function(){
     });
 
     //アーカイブ
-    $('p.more2 a').on('click',function(event){
+    $('p.more2').on('click','a',function(event){
         event.preventDefault();
         var $className = 'open';
         var $moreContentsTitle = $(this).parent().prev().find("dt:gt(0)");
