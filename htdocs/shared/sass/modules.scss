@@ -377,6 +377,50 @@ ul.list-error{
 	}
 }
 
+ul.list-info{
+	text-align:center;
+	margin-bottom:10px;
+	li{
+		display:inline;
+		a{
+			border-radius:4px;
+			color:#fff;
+			padding:3px 8px 3px 28px;
+			font-size:0.8rem;
+			text-decoration:none;
+		}
+	}
+	li:last-child{
+		margin-left:6px;
+	}
+	li.tw{
+		a{
+			background-color:#1b95e0;
+			background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2072%2072%22%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h72v72H0z%22%2F%3E%3Cpath%20class%3D%22icon%22%20fill%3D%22%23fff%22%20d%3D%22M68.812%2015.14c-2.348%201.04-4.87%201.744-7.52%202.06%202.704-1.62%204.78-4.186%205.757-7.243-2.53%201.5-5.33%202.592-8.314%203.176C56.35%2010.59%2052.948%209%2049.182%209c-7.23%200-13.092%205.86-13.092%2013.093%200%201.026.118%202.02.338%202.98C25.543%2024.527%2015.9%2019.318%209.44%2011.396c-1.125%201.936-1.77%204.184-1.77%206.58%200%204.543%202.312%208.552%205.824%2010.9-2.146-.07-4.165-.658-5.93-1.64-.002.056-.002.11-.002.163%200%206.345%204.513%2011.638%2010.504%2012.84-1.1.298-2.256.457-3.45.457-.845%200-1.666-.078-2.464-.23%201.667%205.2%206.5%208.985%2012.23%209.09-4.482%203.51-10.13%205.605-16.26%205.605-1.055%200-2.096-.06-3.122-.184%205.794%203.717%2012.676%205.882%2020.067%205.882%2024.083%200%2037.25-19.95%2037.25-37.25%200-.565-.013-1.133-.038-1.693%202.558-1.847%204.778-4.15%206.532-6.774z%22%2F%3E%3C%2Fsvg%3E");
+			background-position:6px 0.3em;
+			background-repeat:no-repeat;
+			background-size:18px 18px;
+		}
+		a:hover,
+		a:focus{
+			background-color:#0c7abf;
+		}
+	}
+	li.rss{
+		a{
+			background-color:#e0812a;
+			background-image:url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIzMDBweCIgaGVpZ2h0PSIzMDBweCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDMwMCAzMDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQo8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNMTQwLjkzNiwyODUuMzE4aDUzLjg1NmMwLTk4LjUyMy04Mi44NjEtMTc4LjcwOC0xODQuNzY3LTE3OC43MDh2NTEuODkyICBjMzQuOTk2LDAsNjcuODIzLDEzLjE4LDkyLjUyOCwzNy4wODZDMTI3LjMxMywyMTkuNTA2LDE0MC45MzYsMjUxLjM4OSwxNDAuOTM2LDI4NS4zMTh6Ii8+DQo8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNMTAsMjQ5LjE0MWMwLDE5Ljg0LDE2LjY4NCwzNS45NDksMzcuMjkxLDM1Ljk0OXMzNy4zMzYtMTYuMTIzLDM3LjMzNi0zNS45NDkgIGMwLTE5Ljg1NS0xNi43MjktMzUuOTQ5LTM3LjMzNi0zNS45NDlDMjYuNjg4LDIxMy4xOTEsMTAsMjI5LjI3OSwxMCwyNDkuMTQxeiIvPg0KPHBhdGggZmlsbD0iI0ZGRkZGRiIgZD0iTTI5MCwyODUuMzU5QzI5MCwxMzYuMTA3LDE2NC40MzIsMTQuNjQsMTAuMTE3LDE0LjY0djUxLjkwMmMxMjQuNjA5LDAsMjI1Ljk4Niw5OC4xODQsMjI1Ljk4NiwyMTguODE3SDI5MCAgeiIvPg0KPC9nPg0KPC9zdmc+");
+			background-position:7px 0.3em;
+			background-repeat:no-repeat;
+			background-size:16px 16px;
+		}
+		a:hover,
+		a:focus{
+			background-color:#c86810;
+		}
+	}
+}
+
 ul.list-page-nation{
 	margin:20px 0 0 0;
 	text-align:center;
@@ -705,7 +749,6 @@ div.wpcf7 div.ajax-error{
 	display: none;
 }
 
-
 /*----------------------------------------------
  Form button
 ----------------------------------------------*/
@@ -895,6 +938,34 @@ ul.list-pagenation > li:last-child > a {
 }
 
 /*----------------------------------------------
+ Button
+----------------------------------------------*/
+p.btn-01{
+	text-align:center;
+	margin-bottom:20px;
+}
+
+p.btn-01 a {
+	padding:10px 40px 10px 54px;
+	display:inline-block;
+	border-radius:4px;
+	border:1px solid #000;
+    color:#333;
+    text-decoration:none;
+    font-weight: bold;
+    background:#fff url("/shared/images/arrow_02.png") no-repeat 38px 1.3em;
+	background-size:5px 8px;
+}
+
+p.btn-01 a:hover,
+p.btn-01 a:focus{
+	color:#fff;
+    background:#000 url("/shared/images/arrow_02.png") no-repeat 38px 1.3em;
+    background-size:5px 8px;
+    transition:background-color 0.35s ease 0s, color 0.35s ease 0s;
+}
+
+/*----------------------------------------------
  Adjust
 ----------------------------------------------*/
 .mt0{margin-top:0!important;}
@@ -907,6 +978,7 @@ ul.list-pagenation > li:last-child > a {
 .mb10{margin-bottom:10px!important;}
 .mb20{margin-bottom:20px!important;}
 .mb30{margin-bottom:30px!important;}
+.mb40{margin-bottom:40px!important;}
 .ml0{margin-left:0!important;}
 .ml05{margin-left:5px!important;}
 .ml10{margin-left:10px!important;}

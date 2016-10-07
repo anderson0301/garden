@@ -60,6 +60,19 @@ $(function(){
 });
 
 /* ==================================
+** サードバーアーカイブリストカレント表示
+** =================================*/
+$(function(){
+    var $pathName = location.pathname;
+    $("dl.archive dd ul li a").each(function(){
+        var $href = $(this).attr("href");
+        if ($pathName.indexOf($href) != -1) {
+            $(this).parent().addClass("current");
+        }
+    });
+});
+
+/* ==================================
 ** スマートフォン検索窓
 ** =================================*/
 $(function(){
@@ -73,6 +86,8 @@ $(function(){
 ** トグルボタン
 ** =================================*/
 $(function(){
+
+    //新着情報、人気記事
     $('p.more a').on('click',function(event){
         event.preventDefault();
         var $className = 'open';
@@ -87,6 +102,25 @@ $(function(){
             $(this).text("閉じる");
             $(this).parent().prev().find("li:eq(4)").addClass("child-05");
             $moreContents.stop().slideDown('fast');
+        }
+    });
+
+    //アーカイブ
+    $('p.more2 a').on('click',function(event){
+        event.preventDefault();
+        var $className = 'open';
+        var $moreContentsTitle = $(this).parent().prev().find("dt:gt(0)");
+        var $moreContentsArticle = $(this).parent().prev().find("dd:gt(0)");
+        if($(this).hasClass($className)){
+            $(this).removeClass($className);
+            $(this).text("さらに見る");
+            $moreContentsTitle.stop().slideUp('fast');
+            $moreContentsArticle.stop().slideUp('fast');
+        }else{
+            $(this).addClass($className);
+            $(this).text("閉じる");
+            $moreContentsTitle.stop().slideDown('fast');
+            $moreContentsArticle.stop().slideDown('fast');
         }
     });
 });
