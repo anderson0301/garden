@@ -283,7 +283,8 @@ body.lyt-main #content{
 
 body #content{
 	main{
-		#main-inner > p{
+		#main-inner > p,
+		#main-inner > blockquote p{
 			margin-bottom:20px;
 		}
 	}
@@ -519,10 +520,6 @@ body.lyt-main-sub #content{
 						text-decoration: none;
 					}
 				}
-			}
-			dt:nth-child(n + 2),
-			dd:nth-child(n + 3) {
-				display: none;
 			}
 		}
 		

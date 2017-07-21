@@ -35,11 +35,9 @@ if(matchMedia){var mq=window.matchMedia("(max-width: 768px)");mq.addListener(wid
 
 $(window).load(function(){
     setTimeout(function(){
-        $(document.getElementById('loading-img')).fadeOut(300);
-        $(document.getElementById('loading')).animate({
-            "opacity":"1"
-        },500);
-    },300);
+        $('#loading-img').fadeOut(300);
+        $('#loading').animate({"opacity":"1"},500);
+    },3000000);
 });
 
 })(jQuery);

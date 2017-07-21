@@ -147,6 +147,9 @@ div#recommend{
 						text-decoration:none;
 					}
 				}
+				p.excerpt{
+					padding-left:24px;
+				}
 				p.meta{
 					position:absolute;
 					right:10px;
@@ -452,6 +455,60 @@ ol.list-number-01{
 	}
 }
 
+ul.list-prev-next{
+	border:1px solid #ccc;
+	border-radius:4px;
+	margin-bottom: 20px;
+	@include clearfix;
+	li{
+		width: 49.81111111111%;
+		float: left;
+		position: relative;
+		a{
+			display:block;
+			padding: 10px;
+			@include clearfix;
+			span{
+				width: 60%;
+				float: right;
+				display: block;
+			}
+			img{
+				width: 35%!important;
+				float: left;
+				vertical-align:middle;
+			}
+		}
+		a:before{
+			background:url("/shared/images/arrow_01.png") no-repeat 0 0;
+			background-size: 30px 30px;
+			content: "";
+			display: block;
+			width:30px;
+			height:30px;
+			position: absolute;
+			top: 37%;
+			font-size: 0;
+			line-height: 0;
+		}
+		a:hover span,
+		a:focus span{
+			text-decoration: underline!important;
+		}
+	}
+	li:first-child{
+		border-right:1px solid #ccc;
+		a:before{
+			transform: rotateY(180deg);
+			left: -15px;
+		}
+	}
+	li:last-child{
+		a:before{
+			right: -15px;
+		}
+	}
+}
 
 /*----------------------------------------------
  Image Layout
@@ -569,12 +626,27 @@ table.tbl-01{
 	}
 }
 
+table.tbl-01 .w-10{width: 10%;}
+table.tbl-01 .w-20{width: 20%;}
+table.tbl-01 .w-30{width: 30%;}
+table.tbl-01 .w-40{width: 40%;}
+table.tbl-01 .w-50{width: 50%;}
+
 table.sp-lyt-on{
 	th{
 		width: 35%;
 	}
 	td{
 		width: 65%;
+	}
+}
+
+table.sp-lyt-on-02{
+	th{
+		width: 20%;
+	}
+	td{
+		width: 80%;
 	}
 }
 
@@ -815,6 +887,25 @@ pre{
 }
 
 /*----------------------------------------------
+ Box
+----------------------------------------------*/
+div.add-post{
+	border: 1px solid #ff0000;
+	border-radius: 4px;
+	position: relative;
+	padding: 15px 15px 0 15px;
+	margin:30px 0;
+	p.title{
+		position: absolute;
+		top: -13px;
+		left: 12px;
+		background: #fff;
+		padding: 0 4px;
+		font-weight: bold;
+	}
+}
+
+/*----------------------------------------------
  Adsense
 ----------------------------------------------*/
 .ad-sidebar{
@@ -892,6 +983,37 @@ ul.list-pagenation > li:last-child > a {
   }
  
   ul.list-pagenation li.prev a { border-left-width: 1px; }
+
+  ul.list-prev-next{
+	li{
+		a{
+			span{
+				width: 100%;
+			}
+			img{
+				display: none;
+			}
+		}
+
+		a:before{
+			background-size: 18px 18px;
+			width:18px;
+			height:18px;
+			top: 40%;
+			font-size: 0.85rem;
+		}
+	}
+	li:first-child{
+		a:before{
+			left: -10px;
+		}
+	}
+	li:last-child{
+		a:before{
+			right: -10px;
+		}
+	}
+  }
 }
  
 @media only screen and ( max-width: 500px ) {
@@ -963,6 +1085,35 @@ p.btn-01 a:focus{
     background:#000 url("/shared/images/arrow_02.png") no-repeat 38px 1.3em;
     background-size:5px 8px;
     transition:background-color 0.35s ease 0s, color 0.35s ease 0s;
+}
+
+/*----------------------------------------------
+ Blockquote
+----------------------------------------------*/
+blockquote{
+	display:block;
+	background: #fff;
+	padding:15px 15px 0 50px;
+	margin:0 0 10px;
+	position:relative;
+	border:1px solid #387922;
+	border-radius:4px;
+	background:#f6f6f6;
+}
+
+blockquote:before{
+	content:"\201C";
+	font-family:Georgia, serif;
+	font-size:60px;
+	font-weight:bold;
+	position:absolute;
+	left:10px;
+	top:-16px;
+	color:#387922;
+}
+
+blockquote:after{
+	content:"";
 }
 
 /*----------------------------------------------

@@ -9,6 +9,7 @@ $(function(){
     $('.grid-3 > .col').matchHeight();
     $('.grid-2 > .col').matchHeight();
     $('ul.list-link-thum').find('li').matchHeight();
+    $('ul.list-prev-next').find('li').matchHeight();
 });
 
 /* ==================================
@@ -24,7 +25,7 @@ $(function(){
         }else{
             $('p.page_top').fadeOut();
         }
-         
+
         scrollHeight = $(document).height(); 
         scrollPosition = $(window).height() + $(window).scrollTop(); 
         footHeight = $("footer").innerHeight();
@@ -124,6 +125,41 @@ $(function(){
         }
     });
 });
+
+/* ==================================
+** クリックイベント計測
+** =================================*/
+$(function(){
+    
+    //芝生の選び方
+    $('header nav ul li.select a').click(function(){
+        ga('send','event','gnav','click','select');
+    });
+
+    //芝生の購入
+    $('header nav ul li.buy a').click(function(){
+        ga('send','event','gnav','click','buy');
+    });
+
+    //芝生の張り方
+    $('header nav ul li.plant a').click(function(){
+        ga('send','event','gnav','click','plant');
+    });
+
+    //芝生の手入れ
+    $('header nav ul li.maintenance a').click(function(){
+        ga('send','event','gnav','click','maintenance');
+    });
+
+    //芝生の道具
+    $('header nav ul li.tool a').click(function(){
+        ga('send','event','gnav','click','tool');
+    });
+
+    //芝生のマイホームブログ
+    $('header nav ul li.blog a').click(function(){
+        ga('send','event','gnav','click','blog');
+    });});
 
 })(jQuery);
 /* ==================================
