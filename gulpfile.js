@@ -37,7 +37,7 @@ gulp.task('server', function() {
             ],
             host:'garden2',
             port:'8000',
-            open:true,
+            open:'http://garden2:8000/writing.html',
         }));
 });
 
