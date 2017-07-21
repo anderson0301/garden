@@ -35,7 +35,7 @@ gulp.task('server', function() {
                     baseDir: 'htdocs'
                 })
             ],
-            host:'garden',
+            host:'garden2',
             port:'8000',
             open:true,
         }));

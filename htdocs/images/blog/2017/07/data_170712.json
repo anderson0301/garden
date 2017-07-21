@@ -1,0 +1,33 @@
+blockJSON([
+
+{
+    "heading": "Aブロック",
+    "person": [
+        {"img": "http://placehold.jp/333333/ffffff/250x200.png?text=A1"},
+		{"img": "http://placehold.jp/333333/ffffff/250x200.png?text=A2"},
+		{"img": "http://placehold.jp/333333/ffffff/250x200.png?text=A3"},
+		{"img": "http://placehold.jp/333333/ffffff/250x200.png?text=A4"},
+		{"img": "http://placehold.jp/333333/ffffff/250x200.png?text=A5"},
+		{"img": "http://placehold.jp/333333/ffffff/250x200.png?text=A6"}
+    ]
+},
+
+{
+    "heading": "Bブロック",
+    "person": [
+        {"img": "http://placehold.jp/333333/ffffff/250x200.png?text=B1"},
+		{"img": "http://placehold.jp/333333/ffffff/250x200.png?text=B2"}
+    ]
+},
+
+{
+    "heading": "Cブロック",
+    "person": [
+        {"img": "http://placehold.jp/333333/ffffff/250x200.png?text=C1"},
+		{"img": "http://placehold.jp/333333/ffffff/250x200.png?text=C2"},
+		{"img": "http://placehold.jp/333333/ffffff/250x200.png?text=C3"},
+		{"img": "http://placehold.jp/333333/ffffff/250x200.png?text=C4"}
+    ]
+}
+
+])

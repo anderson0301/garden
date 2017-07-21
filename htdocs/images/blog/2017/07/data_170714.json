@@ -1,0 +1,16 @@
+carouselJSON([
+{
+"img": "http://placehold.jp/333333/ffffff/960x450.png?text=1",
+"link":"https://yahoo.co.jp/"
+},
+{
+"img": "http://placehold.jp/333333/ffffff/960x450.png?text=2",
+"link": "https://yahoo.co.jp/",
+"target": true
+},
+{
+"img": "http://placehold.jp/333333/ffffff/960x450.png?text=3",
+"link": "https://yahoo.co.jp/",
+"target": true
+}
+])
