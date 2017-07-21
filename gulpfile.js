@@ -7,6 +7,7 @@ var sass = require('gulp-ruby-sass');
 var plumber = require('gulp-plumber');
 var autoprefixer = require("gulp-autoprefixer");
 var pleeease = require('gulp-pleeease');
+var connectSSI = require('connect-ssi');
 
 /* ----------------------------------------------------------------------------------
 　Config
@@ -28,6 +29,12 @@ gulp.task('server', function() {
     gulp.src(root+'/')
         .pipe(server({
             livereload:true,
+            middleware: [
+                connectSSI({
+                    ext: '.html',
+                    baseDir: 'htdocs'
+                })
+            ],
             host:'garden',
             port:'8000',
             open:true,
