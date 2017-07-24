@@ -1,3 +1,4 @@
 #無視ファイルリスト
 node_modules/
 */.DS_Store
+gulpfile.js
