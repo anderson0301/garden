@@ -1,1 +1,1 @@
-gulp imagemin
+gulp imageMin

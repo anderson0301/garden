@@ -1,5 +1,5 @@
 {
-  "name": "garden",
+  "name": "web-diy.rdy.jp",
   "version": "0.0.0",
   "description": "",
   "main": "gulpfile.js",
@@ -12,10 +12,15 @@
     "connect-ssi": "^1.1.1",
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.1.0",
+    "gulp-imagemin": "^3.3.0",
     "gulp-pleeease": "^1.2.0",
     "gulp-plumber": "^1.0.0",
     "gulp-ruby-sass": "^0.7.1",
     "gulp-uglify": "^1.1.0",
-    "gulp-webserver": "^0.9.0"
+    "gulp-webserver": "^0.9.0",
+    "imagemin-jpegtran": "^5.0.2",
+    "imagemin-mozjpeg": "^6.0.0",
+    "imagemin-optipng": "^5.2.1",
+    "imagemin-pngquant": "^5.0.1"
   }
 }

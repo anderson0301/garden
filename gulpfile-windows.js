@@ -8,6 +8,9 @@ var plumber = require('gulp-plumber');
 var autoprefixer = require("gulp-autoprefixer");
 var pleeease = require('gulp-pleeease');
 var connectSSI = require('connect-ssi');
+var imagemin = require("gulp-imagemin");
+var pngquant  = require('imagemin-pngquant');
+var mozjpeg  = require('imagemin-mozjpeg');
 
 /* ----------------------------------------------------------------------------------
 　Config
@@ -21,6 +24,29 @@ var root = "htdocs",
         "js"        :root+"/shared/js/"
     }
 };
+
+/* ----------------------------------------------------------------------------------
+　Image
+---------------------------------------------------------------------------------- */
+gulp.task("imageMin", function() {
+    gulp.src('./htdocs/images/_blog/**/*.{png,jpg}',{ base: "./htdocs/images/_blog/" })
+		.pipe(imagemin([
+			pngquant({
+				quality:'65-80',
+				speed:1,
+				floyd:0
+			}),
+			mozjpeg({
+				quality:85,
+				progressive:true
+			}),
+			imagemin.svgo(),
+			imagemin.optipng(),
+			imagemin.gifsicle()
+			]
+		)) 
+		.pipe(gulp.dest("./htdocs/images/blog/"));
+});
 
 /* ----------------------------------------------------------------------------------
 　Live Reload
