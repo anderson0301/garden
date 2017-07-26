@@ -29,7 +29,7 @@ var root = "htdocs",
 　Image
 ---------------------------------------------------------------------------------- */
 gulp.task("imageMin", function() {
-    gulp.src('./htdocs/images/_blog/**/*.{png,jpg}',{ base: "./htdocs/images/_blog/" })
+    gulp.src('./htdocs/images/blog_original/**/*.{png,jpg}',{ base: "./htdocs/images/blog_original/" })
 		.pipe(imagemin([
 			pngquant({
 				quality:'65-80',
