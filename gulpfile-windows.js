@@ -46,6 +46,24 @@ gulp.task("imageMin", function() {
 			]
 		)) 
 		.pipe(gulp.dest("./htdocs/images/blog/"));
+		
+	gulp.src('./htdocs/wp-content/uploads_original/*.{png,jpg}',{ base: "./htdocs/wp-content/uploads_original/" })
+		.pipe(imagemin([
+			pngquant({
+				quality:'65-80',
+				speed:1,
+				floyd:0
+			}),
+			jpegtran({
+				quality:85,
+				progressive:true
+			}),
+			imagemin.svgo(),
+			imagemin.optipng(),
+			imagemin.gifsicle()
+			]
+		)) 
+		.pipe(gulp.dest("./htdocs/wp-content/uploads/"));
 });
 
 /* ----------------------------------------------------------------------------------
