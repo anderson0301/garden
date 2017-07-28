@@ -10,7 +10,7 @@ var pleeease = require('gulp-pleeease');
 var connectSSI = require('connect-ssi');
 var imagemin = require("gulp-imagemin");
 var pngquant  = require('imagemin-pngquant');
-var mozjpeg  = require('imagemin-mozjpeg');
+var jpegtran  = require('imagemin-jpegtran');
 
 /* ----------------------------------------------------------------------------------
 　Config
@@ -36,7 +36,7 @@ gulp.task("imageMin", function() {
 				speed:1,
 				floyd:0
 			}),
-			mozjpeg({
+			jpegtran({
 				quality:85,
 				progressive:true
 			}),
