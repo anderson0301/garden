@@ -4,86 +4,111 @@
 <!--======================================ここから記事用ソース======================================-->
 
 
-
-
-
-<p>購入したMacBook Pro 2017について先日ご紹介させていただきましたが、快適にMacBookを使うために合わせて購入したアイテムを4つご紹介させていただきたいと思います。</p>
+<p>ローカルサーバを立てる際、WindowsではXAMPP、MacではMAMPを使うのがわりとセオリーだと思います。しかし、最近のMacにはApacheが最初から入っているので、実はMAMPなどのツールは必要なく、既存ファイルの設定をゴニョゴニョいじることでローカルサーバを複数立てることが可能です。本記事ではMAMPを使わずに、Macで複数のローカルサーバを立てる手順をご紹介させていただきたいと思います。</p>
 [adsense_top]
-<h2 class="hdg-l2-01">&#9312;Magic Keyboard（テンキー付き）</h2>
-<p>2017年6月に発売されたApple純正のワイヤレスキーボードです。テンキーなしのMagic Keyboardは以前からありましたが、実はテンキー付きのフルサイズキーボードは有線のものしかなかったんですよね。これまで会社でも自宅でもフルサイズをずっと使ってきたこともあり、最初は純正以外でMacで使えるキーボードを探していたのですが、この商品が発売された事を知り迷わず公式サイトから購入しました。</p>
-<ul class="list-link-01">
-<li><a href="http://goo.gl/kqGJKv/" target="_blank">Magic Keyboard（テンキー付き）- 日本語（JIS）</a></li>
+<h2 class="hdg-l2-01">MacでMAMPもXAMPPもを使わずに複数のローカルサーバを立てる手順</h2>
+<p>以下の手順で設定を行っていきたいと思います。</p>
+<ol class="list-number-01">
+<li>Apacheをテスト起動</li>
+<li>ユーザーディレクトリの作成</li>
+<li>httpd.confを編集</li>
+<li>ユーザ名.confの作成</li>
+<li>httpd-vhost.confを編集</li>
+<li>hostsファイルを編集</li>
+<li>Apacheを再起動</li>
+<li>ローカルサーバを開く</li>
+</ol>
+<p>今回、ホームディレクトリに「Sites」というフォルダを作って、さらにSites/直下に「hoge」「moge」ディレクトリを格納し、それぞれをローカルサーバとして設定してみたいと思います。</p>
+<pre><code>users
+└ユーザ名
+ └Sites
+  └hoge（これをローカルサーバに）
+  └moge（これをローカルサーバに）</code></pre>
+<h3 class="hdg-l3-01">&#9312;Apacheをテスト起動</h3>
+<p>最初からMacにApacheは入っていますが、念のためターミナルで以下のコマンドを叩いて、Apacheが起動するか確認してみましょう。</p>
+<pre><code>sudo apachectl start</code></pre>
+<p>パスワードを求められたら、お使いのMacのパスワードを入力してください。</p>
+<p>続いて、ブラウザでhttp://localhost/を開いてみてください。<strong>「It works!」</strong>が表示されていればOKです。</p>
+<p><img src="/images/blog/2017/09/15_01_01.png" alt="" width="660" height="200"></p>
+<h3 class="hdg-l3-01">&#9313;ユーザーディレクトリの作成</h3>
+<p>ターミナルで以下のコマンドを叩いて、ユーザーディレクトリ「Sites」を作成しておきます。</p>
+<pre><code>mkdir Sites</code></pre>
+<h3 class="hdg-l3-01">&#9314;httpd.confの編集</h3>
+<p>httpd.confは/etc/apache2/直下にありますが、Finderから階層を降りようとしても/etc/というフォルダは見つかりません。Finderのメニューから[フォルダへ移動]より以下のパスを入力して移動することでたどり着くことができます。</p>
+<pre><code>/etc/apache2/</code></pre>
+<h4 class="hdg-l4-01">SSIを有効にする</h3>
+<p>デフォルトではSSIが無効になっているので、以下の変更を加えます。</p>
+<pre><code>#AddType text/html .shtml
+#AddOutputFilter INCLUDES .shtml</code></pre>
+↓
+<pre><code>AddType text/html .shtml
+AddOutputFilter INCLUDES .shtml .html</code></pre>
+<ul class="list-notice-01">
+<li><span>※</span>ついでに.htmlの拡張子も有効化します</li>
 </ul>
-<p><img src="/images/blog/2017/09/06_01_01.jpg" alt="" width="660" height="450"></p>
+<h4 class="hdg-l4-01">PHPを有効にする</h3>
+<p>phpを使わなければ別にやる必要は無いんですが、WordPressなどをローカルで動かしたい場合はphpが必要になるため、以下の変更を加えます。</p>
+<pre><code>#LoadModule php5_module libexec/apache2/libphp5.so</code></pre>
+↓
+<pre><code>LoadModule php5_module libexec/apache2/libphp5.so</code></pre>
+<h4 class="hdg-l4-01">ユーザーディレクトリを有効化</h3>
+<p>以下のコメントアウトされている記述について、コメントアウトを外します。</p>
+<pre><code>#LoadModule userdir_module libexec/apache2/mod_userdir.so</code></pre>
+↓
+<pre><code>LoadModule userdir_module libexec/apache2/mod_userdir.so</code></pre>
+<pre><code>#Include /private/etc/apache2/extra/httpd-userdir.conf</code></pre>
+↓
+<pre><code>Include /private/etc/apache2/extra/httpd-userdir.conf</code></pre>
+<p>この<strong>「ユーザーディレクトリの有効化」</strong>及び後述の<strong>「ユーザ名.confの作成」</strong>はWindows環境では不要な操作ですが、Macではデフォルトのルートディレクトリ「/Library/WebServer/Documents/」配下の権限はなんとroot権限になっており、ここに複数ローカルサーバ用のディレクトリを作っても<strong>「Fobidden」</strong>となってしまいます。そのためこのように、ユーザーディレクトリを使うよう設定をすることで、任意のディレクトリをローカルサーバとして扱うことが可能となります。</p>
+[adsense_middle]
+<h4 class="hdg-l4-01">バーチャルホストを有効化</h3>
+<p>以下のコメントアウトされている記述について、コメントアウトを外します。</p>
+<pre><code>#Include /private/etc/apache2/extra/httpd-vhosts.conf</code></pre>
+↓
+<pre><code>Include /private/etc/apache2/extra/httpd-vhosts.conf </code></pre>
+<h3 class="hdg-l3-01">&#9315;ユーザ名.confの作成</h3>
+<p>/etc/apache2/users/ユーザー名.confを作成し、以下の記述で保存します。</p>
+<pre><code>&lt;Directory &quot;/Users/ユーザ名/Sites/&quot;&gt;
+AllowOverride All
+Options Indexes FollowSymLinks Multiviews
+Require all granted
+&lt;/Directory&gt;</code></pre>
+<h3 class="hdg-l3-01">&#9316;httpd-vhost.confを編集</h3>
+<p>バーチャルホストを設定します。/etc/apache2/extra/httpd-vhosts.confをエディタで開いて、一番下に以下の記述を加えます。</p>
+<pre><code>#hoge
+Listen 8082
+&lt;VirtualHost *:8082&gt;
+DocumentRoot &quot;/Users/ユーザ名/Sites/hoge&quot;
+serverName hoge
+&lt;/VirtualHost&gt;
 
-<p>さすがのApple純正、ワイヤレスキーボードでよく指摘されるような遅延は全くありません。有線と同じ感覚で使用できています。ケーブルレスはデスクが整頓されて気持ちがイイですね。</p>
-<p>これまでは<a href="http://www.diatec.co.jp/products/list.php?s[]=100:1001:0" target="_blank" class="blank">ダイヤテックのMajestouch</a>というカチャカチャ音がするキーボードを使っていたので、最初はこの浅いストロークやペチペチという感覚に戸惑いましたが、1週間も使用しているととすぐに慣れました。今後長い付き合いになると思います。</p>
-<h2 class="hdg-l2-01">&#9313;MX Anywhere 2</h2>
-<p><img src="/images/blog/2017/09/06_01_02.jpg" alt="" width="660" height="450"></p>
-<table class="tbl-01 sp-lyt-on">
-<tbody>
-<tr>
-<th>商品名</th>
-<td><a href="http://amzn.to/2tsMY1n" target="_blank">Logitech MX Anywhere 2 Wireless Mobile Mouse ロジクール MX どこでも 2 ワイヤレスモバイルマウス [並行輸入品]</a></td>
-</tr>
-<tr>
-<th>値段</th>
-<td>6,774円</td>
-</tr>
-</tbody>
-</table>
-<p>ロジクール（Logitech）のワイヤレスマウスです。<br>
-本体の他に説明書、充電用のUSBケーブル、Bluetooth機能のないマシンでも使えるようUSBレシーバーもついています。</p>
-<p><img src="/images/blog/2017/09/06_01_03.jpg" alt="" width="660" height="450"></p>
-<p>Amazonで購入しましたが並行輸入品なので、通常の定価よりも3,000円ほど安く手に入りました。レシーバーも付いていますが、Bluetoothで接続できるのでMacBookとの相性もバッチリです。最初はマウスもApple純正のMagic Mouseにしようかなと思いましたが、どうにもあの独特な形状に馴染めそうになく、これまで使い慣れていることもあり安心のロジクール（Logitech）にしました。</p>
-<p>私の男性標準サイズの手にちょうどすっぽりと収まるくらいの大きさです。</p>
-<p><img src="/images/blog/2017/09/06_01_04.jpg" alt="" width="660" height="450"></p>
-<p>スクロールスピードが簡単に変更できますし、バッテリーも長持ちしますし（USB充電）、当然遅延も発生しないのでとてもいいマウスだと思います。先日会社用で<a href="/2017/08/170823_01/">M280</a>を購入しましたが、会社用もこれにしてしまおうかと思うくらいです。</p>
-<p><img src="/images/blog/2017/09/06_01_05.jpg" alt="" width="660" height="450"></p>
-<h2 class="hdg-l2-01">&#9314;スタンド</h2>
-<p><img src="/images/blog/2017/09/06_01_06.jpg" alt="" width="660" height="450"></p>
-<table class="tbl-01 sp-lyt-on">
-<tbody>
-<tr>
-<th>商品名</th>
-<td><a href="http://amzn.to/2tspwBt" target="_blank">Jelly Comb ノートパソコンスタンド 縦置き/収納 クラムシェル アルミ MacBook/iPad/laptop/タブレット適用</a></td>
-</tr>
-<tr>
-<th>値段</th>
-<td>3,299円</td>
-</tr>
-</tbody>
-</table>
-<p>最初からMackBookはクラムシェルで使う想定でしたので、縦置きできるスタンドも購入しました。Appleの純正スタンドではありませんが、クオリティは引けをとりません。アルミの質感は高級感もあり、純正と見間違えるくらいMacBookとよくマッチします。アタッチメントが2サイズ付いてくるので、MacBookの各種サイズに使用可能です。作りもしっかりしていて剛性感があります。MacBookを縦置きするとデスク周りがスッキリし、購入して正解でした。</p>
-<p><img src="/images/blog/2017/09/06_01_07.jpg" alt="" width="660" height="450"></p>
-<p>実際に薄い方のアタッチメントを使ってMacBookを置いた姿がこちらです。非常に安定感があっていい感じです。</p>
-<p><img src="/images/blog/2017/09/06_01_08.jpg" alt="" width="660" height="450"></p>
-<h2 class="hdg-l2-01">&#9315;ハブ</h2>
-<p><img src="/images/blog/2017/09/06_01_09.jpg" alt="" width="660" height="450"></p>
-<table class="tbl-01 sp-lyt-on">
-<tbody>
-<tr>
-<th>商品名</th>
-<td><a href="http://amzn.to/2tssHJB" target="_blank">Ephram USB Type Cハブ</a></td>
-</tr>
-<tr>
-<th>値段</th>
-<td>5,500円</td>
-</tr>
-</tbody>
-</table>
-<p>MacBook Pro 2017は、イヤホンジャックと左右2つずつのThunderbolt 3（USB-C）しかポートを備えていません。しかしどうしてもUSB接続やHDMI出力を行いたいシーンはまだまだあるため、ハブは必須アイテムです。</p>
-<p>購入したハブはUSB2つ、HDMI1つ、USB-C1つ、SDカードスロット1つ、micro SDカードスロット1つの拡張ポートを備えています。ケーブルレスなので、USB-Cで装着するとMacBookとぴったりくっつき、デスクの邪魔になりません。</p>
-<p><img src="/images/blog/2017/09/06_01_10.jpg" alt="" width="660" height="450"></p>
-<p>SDカード及び1micro SDカードが装着できます。</p>
-<p><img src="/images/blog/2017/09/06_01_11.jpg" alt="" width="660" height="450"></p>
-<p>USBが2つと、もちろんUSB-Cも備えています。</p>
-<p><img src="/images/blog/2017/09/06_01_12.jpg" alt="" width="660" height="450"></p>
-<p>なんとさらにSDカードスロットの反対側にはHDMI端子が！元々家にあったHDMIケーブルを外部ディスプレイ用に使いたかったこともあり、これが購入の決め手になりました。</p>
-<p><img src="/images/blog/2017/09/06_01_13.jpg" alt="" width="660" height="450"></p>
-<p>必要なポートを「多すぎず少なすぎず」揃えており、理にかなった商品だなと思います。ケーブルがなくMacBookに差し込むと一体化するので邪魔にもなりにくいのもグッドです。色がシルバーしかなかったので、私のスペースグレイのMacBookに接続すると取ってつけた感が目立つのですが、それを差し引いても5,500円を出す価値はあると思います。
+#moge
+Listen 8084
+&lt;VirtualHost *:8084&gt;
+DocumentRoot &quot;/Users/ユーザ名/Sites/moge&quot;
+serverName moge
+&lt;/VirtualHost&gt;</code></pre>
+<h3 class="hdg-l3-01">&#9317;hostsファイルを編集</h3>
+<p>先ほどhttpd-vhost.confで設定したサーバーネームにあわせて以下の記述を書き加えます。</p>
+<pre><code>127.0.0.1 hoge
+127.0.0.1 moge
+::1	hoge
+::1	moge</code></pre>
+<h3 class="hdg-l3-01">&#9318;Apacheを再起動</h3>
+<p>ターミナルで以下のコマンドを叩いて、Apacheを再起動します。</p>
+<pre><code>sudo apachectl restart</code></pre>
+<h3 class="hdg-l3-01">&#9319;ローカルサーバを開く</h3>
+<p>hogeとmogeそれぞれ、以下のURLでローカルサーバが表示できれば成功です。</p>
+<ul class="list-notice-01">
+<li><span>※</span>確認用として、適当なindex.htmlを/Users/ユーザ名/Sites/hoge/直下と/Users/ユーザ名/Sites/moge/直下にそれぞれ格納しておきましょう</li>
+</ul>
+<pre><code>http://hoge:8082/index.html</code></pre>
+<p><img src="/images/blog/2017/09/15_01_02.png" alt="" width="660" height="200"></p>
+<pre><code>http://moge:8084/index.html</code></pre>
+<p><img src="/images/blog/2017/09/15_01_03.png" alt="" width="660" height="200"></p>
 <h2 class="hdg-l2-01">まとめ</h2>
-<p>以上、MacBook Pro 2017を個人的に最大限活用するために購入したアイテムを4つご紹介させいただきました。クラムシェルモードでの使用、また外付けのキーボードやマウスをどれにしようかお悩みの方は、ぜひ本記事をご参考にしていただければ幸いです。</p>
+<p>最初はMAMPやXAMPP for Macなどを使ってやろうかなとも思ったんですが、せっかくなのでMacの勉強も兼ねて、何のツールもいれずにローカルサーバを構築してみました。Windowsとは異なりユーザーディレクトリを作ってそれを許可してあげないとForbiddenになるところで引っかかったところが難儀でしたが、上記の手順にてローカルサーバを構築することで、これまでWindowsで構築していた環境と同じ感覚で作業を行うことができるようになりました。</p>
+<p>Macでローカルサーバを複数構築する際はMAMPやXAMPPを使わなくても可能ですので、ぜひ本記事をご参考にしていただければ幸いです。</p>
 
 
 
