@@ -3,38 +3,29 @@
 
 <!--======================================ここから記事用ソース======================================-->
 
-
-<p>macOS Sierra以降、PPTPによるVPN接続が廃止されましたが、実はサードパーティのアプリを使用することでVPN接続を行うことが可能です。本記事では、VPNクライアント「Flow VPN Mac Client」を使ったmacOS SierraでのVPN接続手順についてご紹介させていただきたいと思います。</p>
-[adsense_top]
-<h2 class="hdg-l2-01">macOS SierraのPPTPによるVPN接続廃止について</h2>
-<p>Appleの公式サイトでは以下のように紹介されています。</p>
-<ul class="list-link-01">
-<li><a href="https://support.apple.com/ja-jp/HT206844" target="_blank">iOS 10 および macOS Sierra にアップグレードする前に PPTP VPN の削除に備える - Apple サポート</a></li>
+<p>先日会社でもやっとAdobe CCが導入されたので、DreamWeaver CS6で定義していたサイト管理について引っ越しを行いました。本記事では、DreamWeaverのサイト管理を簡単に引っ越しする手順（CS6からCC）についてご紹介させていただきたいと思います。</p>
+<h2 class="hdg-l2-01">サイト管理の引っ越し手順</h2>
+<p>まずはこれまで使用していたCS6を立ち上げて、メニューにある<strong>[サイト]</strong>から<strong>[サイト管理]</strong>をクリックします。</p>
+<p><img src="/images/blog/2017/09/22_01_01.png" alt="" width="660" height="200"></p>
+<p>定義しているサイトの一覧が表示されます。全て選択した状態で下部にあるアイコンをクリックして、サイトの定義ファイルを書き出します。</p>
+<p><img src="/images/blog/2017/09/22_01_02.png" alt="" width="660" height="500"></p>
+<p>各サイトの定義ファイルが書き出されました。</p>
+<ul class="list-notice-01">
+<li><span>※</span>拡張子が「ste」のファイルが書き出されているかと思います</li>
 </ul>
-<blockquote>
-<p>PPTP VPNサーバを設置している場合、iOS 10およびmacOS Sierraを利用するユーザは、そのサーバに接続できなくなります。iOS 10およびmacOS Sierraでは、ユーザが各自のデバイスをアップグレードした時点で、VPNプロファイルからPPTP接続が削除されます。</p>
-</blockquote>
-<h2 class="hdg-l2-01">「Flow VPN Mac Client」を使ってVPN接続</h2>
-<p>通常ならmacOS SierraではVPN接続ができませんが、このサードパーティのアプリを使用することで、これまでと同じようにVPN接続を行うことが可能になります。本記事の執筆時点（2017年9月20日）ではベータ版（v2.11）として無償で提供されていますが、今後有料になる可能性もあると思いますので、今のうちに手に入れておくといいかもしれませんね。</p>
-[adsense_middle]
-<h2 class="hdg-l2-01">VPN接続までの手順</h2>
-<h3 class="hdg-l3-01">&#9312;ダウンロード、インストール</h3>
-<p>以下のサイトにアクセスし、<strong>[Download Flow VPN Connect (2.11)]</strong>をクリックしてアプリをダウンロードします。ダウンロードしたファイルはアプリケーションフォルダに入れておきましょう。</p>
-<ul class="list-link-01">
-<li><a href="https://www.flowvpn.com/download-mac/" target="_blank">Flow VPN Connect &#8211; PPTP, OpenVPN and SSH VPN Client</a></li>
-</ul>
-<p><img src="/images/blog/2017/09/20_01_01.png" alt="" width="660" height="300"></p>
-<h3 class="hdg-l3-01">&#9313;接続先のIPアドレス、ユーザーID、パスワードを入力</h3>
-<p>アプリを起動して、接続したいVPNの情報を入力します。</p>
-<p><img src="/images/blog/2017/09/20_01_02.png" alt="" width="660" height="450"></p>
-<h3 class="hdg-l3-01">&#9314;VPN接続</h3>
-<p><strong>[Connect]</strong>をクリックするとVPN接続が行われます。</p>
-<p><img src="/images/blog/2017/09/20_01_03.png" alt="" width="660" height="450"></p>
-<p><strong>「Connecting...」</strong>と表示されていれば成功です。</p>
-<p><img src="/images/blog/2017/09/20_01_04.png" alt="" width="660" height="450"></p>
+<p><img src="/images/blog/2017/09/22_01_03.png" alt="" width="660" height="500"></p>
+<p>次に、DreamWeaverのCCを立ち上げます。ここでもやはりメニューの<strong>[サイト]</strong>から<strong>[サイト管理]</strong>をクリックします。</p>
+<p><img src="/images/blog/2017/09/22_01_04.png" alt="" width="660" height="200"></p>
+<p>立ち上がったサイト管理のウインドウ右下にある、「サイトの読み込み」をクリックします。</p>
+<p><img src="/images/blog/2017/09/22_01_05.png" alt="" width="660" height="400"></p>
+<p>先ほど書き出したサイトの定義ファイルを全て選択し、<strong>[開く]</strong>をクリックします。</p>
+<p><img src="/images/blog/2017/09/22_01_06.png" alt="" width="660" height="500"></p>
+<p>サイトの定義がCS6と同じになりました。これでサイト管理のお引越しは完了です。</p>
+<p><img src="/images/blog/2017/09/22_01_07.png" alt="" width="660" height="400"></p>
 <h2 class="hdg-l2-01">まとめ</h2>
-<p>会社はWindows環境なので全く問題ないのですが、<a href="/2017/08/170830_01/">自宅のマシンは先日MacBookに乗り換えてしまった</a>ため、緊急時における自宅から会社のシステムを使うためのVPN接続ができなくなっていました。最初は仮想環境でWindowsをインストールするしかないかなあと思っていたのですが、このアプリのおかげでMacでも問題なくVPN接続を行うことができひと安心です。</p>
-<p>デフォルトではできないmacOS SierraからのVPN接続ですが、「Flow VPN Mac Client」を使うことで可能となりますので、ぜひ本記事をご参考にお試しいただければ幸いです。</p>
+<p>ご紹介させていただいた方法で引越しを行えば、わざわざゼロからサイト管理を定義し直す必要はありません。管理しているサイトが多ければ多いほどCS6からCCへの引っ越しが楽に済みますので、DreamWeaverをCS6からCCに乗り換える際は、ぜひ本記事をご参考にしていただければ幸いです。</p>
+
+
 
 
 
