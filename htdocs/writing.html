@@ -2,64 +2,15 @@
 
 
 <!--======================================ここから記事用ソース======================================-->
-
-<p>必須入力のセルに対して未入力であればアラートを表示する、という機能をExcelで作りました。備忘録も兼ねて、本記事で作り方をご紹介させていただきたいと思います。</p>
 [adsense_top]
-<h2 class="hdg-l2-01">機能実装手順</h2>
-<ol class="list-number-01">
-<li>入力セルに名前を定義</li>
-<li>ThisWorkbookを開き、コードを記述</li>
-<li>マクロ有効ブック（*.xlsm）で保存</li>
-<li>エラー機能を確認</li>
-</ol>
-<h3 class="hdg-l3-01">&#9312;入力セルに名前を定義</h3>
-<p>まず、必須入力チェックを行いたいセルにカーソルを合わせて、右クリックから<strong>[名前を定義]</strong>をクリックします。</p>
-<p><img src="/images/blog/2017/09/27_01_01.png" alt="" width="660" height="500"></p>
-<p>表示されたダイアログに、任意の名前を設定します。ここでは<strong>「【必須テスト】」</strong>としました。</p>
-<ul class="list-notice-01">
-<li><span>※</span>ここで定義した名前は、後程記述するVBAで使用します</li>
-</ul>
-<p><img src="/images/blog/2017/09/27_01_02.png" alt="" width="660" height="300"></p>
-<h3 class="hdg-l3-01">&#9313;VBE（Visual Basic Editor）を起動し、コードを記述</h3>
-<p>Alt + F11でVBE（Visual Basic Editor）を起動します。続けて、「ThisWorkbook」に以下のコードを記述します。</p>
-<ul class="list-notice-01">
-<li><span>※</span>ここでは<strong>「ファイルを閉じる際」</strong>にアラートを表示するようにしてみたいと思います</li>
-</ul>
-<pre><code>Private Sub Workbook_BeforeClose(Cancel As Boolean)
+<img src="/images/blog/2017/10/04_01_01.png" alt="" width="660" height="100">
+<img src="/images/blog/2017/10/04_01_02.png" alt="" width="660" height="400">
+<img src="/images/blog/2017/10/04_01_03.png" alt="" width="660" height="500">
+<img src="/images/blog/2017/10/04_01_04.png" alt="" width="660" height="500">
 
-flag = 0
-For Each cell1 In ActiveSheet.Range("【必須】test")
-If cell1.Value = "" Then
-MsgBox "【テスト】未入力です！"
-flag = 1
-End If
-Next
-If flag = 1 Then
-Cancel = True
-End If
-
-End Sub</code></pre>
-<p><img src="/images/blog/2017/09/27_01_03.png" alt="" width="660" height="300"></p>
-<h3 class="hdg-l3-01">&#9314;マクロ有効ブック（*.xlsm）で保存</h3>
-<p>ファイルを保存しようとすると、以下のダイアログが表示されます。<strong>[いいえ]</strong>をクリックします。</p>
-<ul class="list-notice-01">
-<li><span>※</span>マクロ有効ブック（*.xlsm）で保存しないと先ほどのコードは失われてしまいます</li>
-</ul>
-<p><img src="/images/blog/2017/09/27_01_04.png" alt="" width="660" height="200"></p>
-<p><strong>[Excel マクロ有効ブック（*.xlsm）]</strong>をプルダウンから選択し、保存します。</p>
-<p><img src="/images/blog/2017/09/27_01_05.png" alt="" width="660" height="550"></p>
-<h3 class="hdg-l3-01">&#9315;エラー機能を確認</h3>
-<p>実際にセルを未入力の状態でファイルを閉じようとしてみましょう。下図のようにエラーが表示されればOKです。</p>
-<p><img src="/images/blog/2017/09/27_01_06.png" alt="" width="660" height="500"></p>
-[adsense_middle]
-<h2 class="hdg-l2-01">ファイル保存前や保存後でのアラート表示も可能</h2>
-<p>コードの1行目を以下のようにすることで、ファイルの保存前や保存後にアラートを表示するようにすることも可能です。</p>
-<h3 class="hdg-l3-01">ファイル保存前</h3>
-<pre><code> Private Sub Workbook_BeforeSave(ByVal SaveAsUI As Boolean, Cancel As Boolean)</code></pre>
-<h3 class="hdg-l3-01">ファイル保存後</h3>
-<pre><code>Private Sub Workbook_AfterSave(ByVal Success As Boolean)</code></pre>
 <h2 class="hdg-l2-01">まとめ</h2>
-<p>複数人が同じフォーマットのExcelを提出するケースなどにおいて、機械的にアラートを出すことで入力ミスを減らすことができます。Excelはあんまり得意じゃないのですが、オフィスワークの1つのスキルとして覚えておいて損はないと思います。</p>
+<p></p>
+
 
 
 <!--======================================ここまで記事用ソース======================================-->
