@@ -163,7 +163,12 @@ $(function(){
 
     //関連リンク
     $('ul.js-related li a').click(function(){
-        ga('send','event','related','click');
+        ga('send','event','related','click','hoge');
+    });
+
+    //パンくず
+    $('div#breadcrumb ul li a').click(function(){
+        ga('send','event','breadcrumb','click','moge');
     });
 
 });
