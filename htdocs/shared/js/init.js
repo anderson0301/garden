@@ -156,10 +156,17 @@ $(function(){
         ga('send','event','gnav','click','tool');
     });
 
-    //芝生のマイホームブログ
+    //マイホームブログ
     $('header nav ul li.blog a').click(function(){
         ga('send','event','gnav','click','blog');
-    });});
+    });
+
+    //関連リンク
+    $('ul.js-related li a').click(function(){
+        ga('send','event','related','click');
+    });
+
+});
 
 })(jQuery);
 /* ==================================
