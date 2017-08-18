@@ -287,6 +287,14 @@ ul.list-link-thum{
 ----------------------------------------------*/
 @media screen and (max-width:540px){
 
+#breadcrumb{
+	ul{
+		li.title{
+			display:none;
+		}
+	}
+}
+
 div.grid-3 > .col {
 	width: calc((100% - 20px) / 1);
 }
