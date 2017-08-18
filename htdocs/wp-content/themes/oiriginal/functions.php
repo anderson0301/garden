@@ -1,4 +1,4 @@
-﻿<?php
+﻿﻿<?php
 
 if ( version_compare( $GLOBALS['wp_version'], '4.4-alpha', '<' ) ) {
 	require get_template_directory() . '/inc/back-compat.php';
@@ -404,41 +404,43 @@ add_filter( 'show_admin_bar', 'mytheme_kill_admin_bar' , 1000 );
 /*====================================================
 ページャー
 =====================================================*/
-function responsive_pagination($pages = '', $range = 4){
-  $showitems = ($range * 2)+1;
- 
-  global $paged;
-  if(empty($paged)) $paged = 1;
- 
-  //ページ情報の取得
-  if($pages == '') {
-    global $wp_query;
-    $pages = $wp_query->max_num_pages;
-    if(!$pages){
-      $pages = 1;
+function responsive_pagination($pages = '', $range = 2){
+    $showitems = ($range * 2)+1;  
+    global $paged;
+    if(empty($paged)) $paged = 1;
+    
+    if($pages == ''){
+        global $wp_query;
+        $pages = $wp_query->max_num_pages;
+        if(!$pages){
+            $pages = 1;
+        }
     }
-  }
- 
-  if(1 != $pages) {
-    echo '<ul class="list-pagenation" role="menubar" aria-label="Pagination">';
-    //先頭へ
-    echo '<li class="first"><a href="'.get_pagenum_link(1).'"><span>&laquo;</span></a></li>';
-    //1つ戻る
-    echo '<li class="prev"><a href="'.get_pagenum_link($paged - 1).'"><span>&lsaquo;</span></a></li>';
-    //番号つきページ送りボタン
-    for ($i=1; $i <= $pages; $i++)     {
-      if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems ))       {
-        echo ($paged == $i)? '<li class="current"><a>'.$i.'</a></li>':'<li><a href="'.get_pagenum_link($i).'" class="inactive" >'.$i.'</a></li>';
-      }
-    }
-    //1つ進む
-    echo '<li class="next"><a href="'.get_pagenum_link($paged + 1).'"><span>&rsaquo;</span></a></li>';
-    //最後尾へ
-    echo '<li class="last"><a href="'.get_pagenum_link($pages).'"><span>&raquo;</span></a></li>';
-    echo '</ul>';
-  }
-}
 
+    if(1 != $pages){
+        echo "<ul class='list-pagenation' role='menubar' aria-label='Pagination'>";
+        
+        //先頭へ
+        if($paged > 2 && $paged > $range+1 && $showitems < $pages) echo "<li class='first'><a href='".get_pagenum_link(1)."'><span>&laquo;</span></a></li>";
+        
+        //1つ戻る
+        if($paged > 1 && $showitems < $pages) echo "<li class='prev'><a href='".get_pagenum_link($paged - 1)."'><span>&lsaquo;</span></a></li>";
+        
+        for ($i=1; $i <= $pages; $i++){
+            if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems )){
+                echo ($paged == $i)? "<li class='current'><a>".$i."</a></li>":"<li><a href='".get_pagenum_link($i)."' class='inactive'>".$i."</a></li>";
+            }
+        }
+        
+        //1つ進む
+        if($paged < $pages && $showitems < $pages) echo "<li class='next'><a href='".get_pagenum_link($paged + 1)."'><span>&rsaquo;</span></a></li>";
+        
+        //最後尾へ
+        if($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) echo "<li class='last'><a href='".get_pagenum_link($pages)."'><span>&raquo;</span></a></li>";
+        
+        echo "</ul>\n";
+    }
+}
 /*====================================================
 投稿記事内の文字列変換をオフ
 =====================================================*/

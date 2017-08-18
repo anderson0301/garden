@@ -1,4 +1,4 @@
-<?php $myAmp = false; $string = $post->post_content;if($_GET['amp'] === '1' && strpos($string,'<script>') === false && is_single()){$myAmp = true;}?>
+<?php $myAmp = false;$string = $post->post_content;if($_GET['amp'] === '1' && strpos($string,'<script>') === false && is_single()){$myAmp = true;}?>
 <header>
 <div id="header-inner">
 <?php if($myAmp): ?>
