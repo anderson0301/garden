@@ -1015,49 +1015,6 @@ ul.list-pagenation > li:last-child > a {
 	}
   }
 }
- 
-@media only screen and ( max-width: 500px ) {
-  ul.list-pagenation li {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-  }
- 
-  ul.list-pagenation li.current,
-  ul.list-pagenation li.first,
-  ul.list-pagenation li.last,
-  ul.list-pagenation li.prev,
-  ul.list-pagenation li.next{
-    position: initial;
-    top: initial;
-    left: initial;
-  }
- 
-  ul.list-pagenation li.prev a {
-  	border-left-width: 0;
-  }
-}
- 
-@media only screen and ( max-width: 400px ) {
-  ul.list-pagenation li.first,
-  ul.list-pagenation li.last {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-  }
- 
-  ul.list-pagenation li.prev a {
-  	border-left-width: 1px;
-  }
-}
- 
-@media only screen and ( max-width: 240px ) { 
-  ul.list-pagenation li { width: 50%;}
-  ul.list-pagenation li.current {
-    width: 100%;
-    border-left-width: 1px;
-  }
-}
 
 /*----------------------------------------------
  Button
