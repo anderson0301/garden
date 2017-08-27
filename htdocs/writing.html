@@ -3,24 +3,62 @@
 
 <!--======================================ここから記事用ソース======================================-->
 
-<p>WordPressに限った話ではないと思いますが、サイトのヘッダー上部に変な隙間があることに気づきました。Chromeのデベロッパーで確認すると「&amp;#65279」の文字列を発見。なんじゃこりゃと思って調べてみると、どうやらBOMが付いてしまっている模様。</p>
+<p>Web屋の芝生DIYでは、どんなデバイス環境やスクリーンサイズでもワンソースのhtmlで対応しているいわゆる「レスポンシブWebデザイン」で実装しています。基本的にはPCであれスマートフォンであれページを構成する要素は同じなのですが、先日記事ページのパンくずだけ、少しカスタマイズを加えました。</p>
 [adsense_top]
-<p>おそらく先日WordPressのfunctions.phpを更新した際に付いてしまったものと思われますが、備忘録も兼ねて対応方法をまとめました。</p>
-<h2 class="hdg-l2-01">header.phpが原因かと思ったけど違った</h2>
-<p>最初はヘッダー上部に隙間ができていたので、header.phpが原因かと思いました。ですが、header.phpをバイナリエディタで開いてもBOM（EF BB BF）は見当たらず、どうやら原因はheader.phpではない模様。</p>
-<ul class="list-notice-01">
-<li><span>※</span>ちなみにここで検証に使ったバイナリエディタは<a href="http://www.vector.co.jp/soft/winnt/util/se504539.html" target="_blank" class="blank">FavBinEdit</a>というフリーソフト</li>
-</ul>
-<p>そういえば数日前にfunction.phpをいじくったな。。。というのを思い出し、functions.phpを確かめることに。</p>
-<h2 class="hdg-l2-01">functions.phpを「BOMなし」で保存し直せばOK</h2>
-<p>バイナリエディタで確かめると、BOM（EF BB BF）を発見。</p>
-<p><img src="/images/blog/2017/10/06_01_02.png" alt="" width="660" height="350"></p>
-このまま修正してもよいですが何だか怖いので、サクラエディタを使ってBOMを削除することに。functions.phpをサクラエディタで開いて<strong>「名前を付けて保存」</strong>をしようとすると、<strong>「BOM」</strong>にチェックが付いていることがわかります。</p>
-<p><img src="/images/blog/2017/10/06_01_01.png" alt="" width="660" height="500"></p>
-<p>この<strong>「BOM」</strong>のチェックを外して保存しサーバーにアップしたところ、無事に隙間が消えました。Chromeのデベロッパーで確認しても<strong>「&amp;#65279」</strong>が無くなっており、ひと安心です。</p>
-<h2 class="hdg-l2-01">まとめ</h2>
-<p>functions.phpの編集はSublime Textで行ったので、通常BOMは付かないはずなんですけどね。。。どこで付いてしまったのかわかりませんが、とりあえず解消できたので良しとします。</p>
+<p>PCはこれまで通り<strong>「トップページ > マイホームブログ > 該当カテゴリ > 記事タイトル」</strong>と表示していますが、スマートフォン（正確にはスクリーンサイズ540px以下）での閲覧時は記事タイトルのみ非表示にしました。そこで本記事では、WordPressでスマートフォン閲覧時のみパンくずの記事タイトルのみを非表示にする方法をご紹介させていただきたいと思います。</p>
+<h2 class="hdg-l2-01">なぜスマートフォン閲覧時のパンくずから記事タイトルを非表示にしたか</h2>
+<p>パンくずの役目は言わずもがな、以下の2点に集約されるかなと思います。</p>
+<ol class="list-number-01">
+<li>SEO対策</li>
+<li>サイトにおける現在地の明示</li>
+</ol>
+<p>当然このWeb屋の芝生DIYでもパンくずは上記の役目を担っていますが、スマートフォンでの閲覧時、パンくず内の記事タイトルとH1の記事タイトルは密接した位置にありました。現在地の明示という観点で検討した結果、スマートフォン閲覧時において、パンくず内に記事タイトルがなくても、現在見ているページが何の記事であるかは、パンくずのすぐ下にあるH1で十分事足りると考えました。</p>
+<p>また、スマートフォンはPCに比べて当然画面のコンテンツ表示領域が狭いこともあり、パンくずの縦幅を減らすことでコンテンツ（H1以下）にユーザーが若干辿り着きやすくなります。PCでは記事タイトルを非表示にしようがしまいが1行の縦幅に収まりますが、スマートフォンではそうはいきません。</p>
+<p>そこでスマートフォン閲覧時のみパンくずの記事タイトルを非表示にしファーストビューの縦幅を減らしつつ、記事タイトル以外の上位階層のパンくずは残すという形にカスタマイズすることにしました。</p>
+[adsense_middle]
+<h2 class="hdg-l2-01">カスタマイズ内容</h2>
+<h3 class="hdg-l3-01">single.phpで記事タイトルのliのみにclassを付与</h3>
+<p>まずは記事ページのテンプレートであるsingle.phpのカスタマイズを行います。パンくず部分のマークアップを変更します。</p>
+<h4 class="hdg-l4-01">カスタマイズ前</h4>
+<pre><code>&lt;div id=&quot;breadcrumb&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/&quot;&gt;トップ&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/blog/&quot;&gt;マイホームブログ&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;?php $category = get_the_category();if ($category[0]) {echo '&lt;a href=&quot;'.get_category_link( $category[0]-&gt;term_id ).'&quot;&gt;'.$category[0]-&gt;cat_name.'&lt;/a&gt;';}?&gt;&lt;/li&gt;
+&lt;li&gt;&lt;?php the_title(); ?&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;&lt;!--/#breadcrumb&quot;--&gt;</code></pre>
+<h4 class="hdg-l4-01">カスタマイズ後</h4>
+<pre><code>&lt;div id=&quot;breadcrumb&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/&quot;&gt;トップ&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/blog/&quot;&gt;マイホームブログ&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;?php $category = get_the_category();if ($category[0]) {echo '&lt;a href=&quot;'.get_category_link( $category[0]-&gt;term_id ).'&quot;&gt;'.$category[0]-&gt;cat_name.'&lt;/a&gt;';}?&gt;&lt;/li&gt;
+&lt;li <strong>class=&quot;title&quot;</strong>&gt;&lt;?php the_title(); ?&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;&lt;!--/#breadcrumb&quot;--&gt;</code></pre>
+<p>記事タイトルのliに、「title」というclassを付与しました。</p>
+<h3 class="hdg-l3-01">cssでパンくずの記事タイトルのみを非表示に</h3>
+<p>single.phpで付与したセレクタに対し、スマートフォン閲覧時（スクリーンサイズ540px以下）のみ表示となるよう、以下のcssを追加します。</p>
+<pre><code>@media screen and (max-width:540px){
 
+#breadcrumb{
+	ul{
+		li.title{
+			display:none;
+		}
+	}
+}
+
+}</code></pre>
+<ul class="list-notice-01">
+<li><span>※</span>Web屋の芝生DIYの設計でブレイクポイントが元々540pxだったので、それに合わせて追加</li>
+<li><span>※</span>サイトに応じて適宜ブレイクポイントは変えてOKです</li>
+</ul>
+<h2 class="hdg-l2-01">まとめ</h2>
+<p>何となく設置しているパンくずですが、スマートフォンでクリックされることは少ないのではないでしょうか。少なくともWeb屋の芝生DIYではクリックイベント計測結果を見ると、1000PVあたり1回クリックされるかどうかです。それくらいしかクリックされない要素でテキスト2行分もファーストビューでとってしまうと、ちょっともったいない気がしますよね。</p>
+<p>かといって全部消すのも忍びないですし、逆にSEO上の評価が下がる可能性もあります。そこで、パンくずを設置するメリットを享受しつつもスマートフォンでのエリアを最小限にするべく、あくまでWeb屋の芝生DIYというサイトに限定しての話ですが、<strong>スマートフォン閲覧時のパンくずにおいて記事タイトルまでは必要ない</strong>、と判断して今回のカスタマイズを行いました。</p>
+<p>サイトの設計における非常に細かい部分にはなりますが、ブログのレスポンシブWebデザインの考え方において、1つのケーススタディとしてご参考になれば幸いです。</p>
 
 <!--======================================ここまで記事用ソース======================================-->
 
