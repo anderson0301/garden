@@ -3,62 +3,114 @@
 
 <!--======================================ここから記事用ソース======================================-->
 
-<p>Web屋の芝生DIYでは、どんなデバイス環境やスクリーンサイズでもワンソースのhtmlで対応しているいわゆる「レスポンシブWebデザイン」で実装しています。基本的にはPCであれスマートフォンであれページを構成する要素は同じなのですが、先日記事ページのパンくずだけ、少しカスタマイズを加えました。</p>
+<p>将来的にWebサイトの多くはさらにSSL化に加速していくであろう状況に備え、先日Web屋の芝生DIYも常時SSLに対応しました。本記事では備忘録も兼ねて、さうらレンタルサーバで独自ドメインを取得～常時SSL化までの流れをまとめてみました。</p>
 [adsense_top]
-<p>PCはこれまで通り<strong>「トップページ > マイホームブログ > 該当カテゴリ > 記事タイトル」</strong>と表示していますが、スマートフォン（正確にはスクリーンサイズ540px以下）での閲覧時は記事タイトルのみ非表示にしました。そこで本記事では、WordPressでスマートフォン閲覧時のみパンくずの記事タイトルのみを非表示にする方法をご紹介させていただきたいと思います。</p>
-<h2 class="hdg-l2-01">なぜスマートフォン閲覧時のパンくずから記事タイトルを非表示にしたか</h2>
-<p>パンくずの役目は言わずもがな、以下の2点に集約されるかなと思います。</p>
+<h2 class="hdg-l2-01">独自ドメイン取得～常時SSL化までの流れ</h2>
 <ol class="list-number-01">
-<li>SEO対策</li>
-<li>サイトにおける現在地の明示</li>
+<li>独自ドメインを取得</li>
+<li>ラピッドSSLでSSL証明書を発行</li>
+<li>SSL証明書をインストール</li>
+<li>旧サイトからサイトデータを全てダウンロード</li>
+<li>WordPressのデータをエクスポート</li>
+<li>旧ドメインを全て新ドメインに置換</li>
+<li>wp-config.phpを編集</li>
+<li>サイトデータを全て新ドメインにアップロード</li>
+<li>WordPressをインストール</li>
+<li>WordPressのデータをインポート</li>
+<li>アイキャッチを全て手動設定</li>
+<li>旧サイトから新サイトへ301リダイレクト</li>
+<li>Google Search Consoleで新しいサイトマップを送信</li>
 </ol>
-<p>当然このWeb屋の芝生DIYでもパンくずは上記の役目を担っていますが、スマートフォンでの閲覧時、パンくず内の記事タイトルとH1の記事タイトルは密接した位置にありました。現在地の明示という観点で検討した結果、スマートフォン閲覧時において、パンくず内に記事タイトルがなくても、現在見ているページが何の記事であるかは、パンくずのすぐ下にあるH1で十分事足りると考えました。</p>
-<p>また、スマートフォンはPCに比べて当然画面のコンテンツ表示領域が狭いこともあり、パンくずの縦幅を減らすことでコンテンツ（H1以下）にユーザーが若干辿り着きやすくなります。PCでは記事タイトルを非表示にしようがしまいが1行の縦幅に収まりますが、スマートフォンではそうはいきません。</p>
-<p>そこでスマートフォン閲覧時のみパンくずの記事タイトルを非表示にしファーストビューの縦幅を減らしつつ、記事タイトル以外の上位階層のパンくずは残すという形にカスタマイズすることにしました。</p>
-[adsense_middle]
-<h2 class="hdg-l2-01">カスタマイズ内容</h2>
-<h3 class="hdg-l3-01">single.phpで記事タイトルのliのみにclassを付与</h3>
-<p>まずは記事ページのテンプレートであるsingle.phpのカスタマイズを行います。パンくず部分のマークアップを変更します。</p>
-<h4 class="hdg-l4-01">カスタマイズ前</h4>
-<pre><code>&lt;div id=&quot;breadcrumb&quot;&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/&quot;&gt;トップ&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/blog/&quot;&gt;マイホームブログ&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;?php $category = get_the_category();if ($category[0]) {echo '&lt;a href=&quot;'.get_category_link( $category[0]-&gt;term_id ).'&quot;&gt;'.$category[0]-&gt;cat_name.'&lt;/a&gt;';}?&gt;&lt;/li&gt;
-&lt;li&gt;&lt;?php the_title(); ?&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;&lt;!--/#breadcrumb&quot;--&gt;</code></pre>
-<h4 class="hdg-l4-01">カスタマイズ後</h4>
-<pre><code>&lt;div id=&quot;breadcrumb&quot;&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/&quot;&gt;トップ&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/blog/&quot;&gt;マイホームブログ&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;?php $category = get_the_category();if ($category[0]) {echo '&lt;a href=&quot;'.get_category_link( $category[0]-&gt;term_id ).'&quot;&gt;'.$category[0]-&gt;cat_name.'&lt;/a&gt;';}?&gt;&lt;/li&gt;
-&lt;li <strong>class=&quot;title&quot;</strong>&gt;&lt;?php the_title(); ?&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;&lt;!--/#breadcrumb&quot;--&gt;</code></pre>
-<p>記事タイトルのliに、「title」というclassを付与しました。</p>
-<h3 class="hdg-l3-01">cssでパンくずの記事タイトルのみを非表示に</h3>
-<p>single.phpで付与したセレクタに対し、スマートフォン閲覧時（スクリーンサイズ540px以下）のみ表示となるよう、以下のcssを追加します。</p>
-<pre><code>@media screen and (max-width:540px){
-
-#breadcrumb{
-	ul{
-		li.title{
-			display:none;
-		}
-	}
-}
-
-}</code></pre>
-<ul class="list-notice-01">
-<li><span>※</span>Web屋の芝生DIYの設計でブレイクポイントが元々540pxだったので、それに合わせて追加</li>
-<li><span>※</span>サイトに応じて適宜ブレイクポイントは変えてOKです</li>
+<h3 class="hdg-l3-01">&#9312;独自ドメインを取得</h3>
+<p>開設以降公開していたドメイン（web-diy.rdy.jp）でSSL化は不可だったこと、また「rdy」などカッコわるい文字列も入っていたので、これを恒久的なドメインにするのはあまり望ましくありませんでした。そこでまずは思い切って、今回のSSL化に合わせて独自ドメインを取得することにしました。</p>
+<p>運よく<strong>「web-diy.jp」</strong>が取得可能だったのでドメインはこちらに決定。「.com、.org、.net、.info、.biz」などに比べて取得費用も更新費用も倍ほどかかります（取得・更新共に3,909円）が、ここは初期投資すべきところと割り切りました。</p>
+<p>.infoなども取得可能でしたが、スパムでも多く使われていますし、長い目で考えると信用のあるjpドメインのほうが絶対いいです。</p>
+<ul class="list-link-01">
+<li><a href="http://www.sakura.ne.jp/domain/" target="_blank">独自ドメイン取得・管理 - レンタルサーバーはさくらインターネット</a></li>
 </ul>
+<h3 class="hdg-l3-01">&#9313;ラピッドSSLでSSL証明書を発行</h3>
+<p>さくら経由で申し込むと、専門知識なしで簡単にSSL証明書を取得できます。とりあえず1年のプラン（1,620円）で申し込みました。</p>
+<ul class="list-link-01">
+<li><a href="https://ssl.sakura.ad.jp/rapid_ssl.html" target="_blank">ラピッドSSL | さくらのSSL</a></li>
+</ul>
+<h3 class="hdg-l3-01">&#9314;SSL証明書をインストール</h3>
+<p>ラピッドSSLを申し込んでしばらくすると、<strong>「[さくらインターネット]ジオトラスト SSLサーバ証明書発行のお知らせ」</strong>という件名のメールが届きます。<br>こちらの内容に沿って、SSL証明書のインストールを行います。</p>
+<p>とりあえずここまでのステップで、SSL証明書がインストールされた新ドメインの用意が出来ました。</p>
+[adsense_middle]
+<h3 class="hdg-l3-01">&#9315;旧サイトからサイトデータを全てダウンロード</h3>
+<p>ここからはいよいよサイトデータの引っ越しを行います。旧ドメイン（web-diy.rdy.jp）のサイトデータを全てFTPでローカルにダウンロードします。</p>
+<h3 class="hdg-l3-01">&#9316;WordPressのデータをエクスポート</h3>
+<p>続けて、旧ドメインのWordPressの管理画面からWordPressのデータをエクスポートします。エクスポートには特にプラグインは必要ありません。[ツール]-[エクスポート]から簡単にエクスポートすることが可能です。</p>
+<h3 class="hdg-l3-01">&#9317;旧ドメインを全て新ドメインに置換</h3>
+<p>先ほどFTPでローカルにダウンロードしたデータを、DreamWeaverを使って「web-diy.rdy.jp」を全て「web-diy.jp」に置換します。</p>
+<p>また、念のため「http」も検索し、web-diy.rd.jpに紐づいている箇所は全て「https」に書き換えておきます。</p>
+<h3 class="hdg-l3-01">&#9318;wp-config.phpを編集</h3>
+<p>今回、サイトデータは引っ越ししつつもデータテーブルは分けることにしました。wp-config-.php内にある以下の記述を変更しておきます。</p>
+<h4 class="hdg-l4-01">変更前</h4>
+<pre><code>$table_prefix  = 'wp_diy';</code></pre>
+<h4 class="hdg-l4-01">変更後</h4>
+<pre><code>$table_prefix  = 'wp_diy2';</code></pre>
+<h3 class="hdg-l3-01">&#9319;サイトデータを全て新ドメインにアップロード</h3>
+<p>新ドメイン用に準備したサイトデータを全て、新ドメインのサーバにアップロードします。</p>
+[adsense_middle]
+<h3 class="hdg-l3-01">&#9320;WordPressをインストール</h3>
+<p>新ドメインにアクセスすると、WordPressのインストールウィザードが表示されます。画面に従ってインストールを行います。</p>
+<h3 class="hdg-l3-01">&#9321;WordPressのデータをインポート</h3>
+<p>WordPressのインストールはできましたが、記事はゼロの状態です。先ほど旧サイトからエクスポートしておいたファイルを利用して、新ドメインのWordPresにインポートを行います。プラグインは<strong>「WordPress Importer」</strong>を使用しました。</p>
+<ul class="list-link-01">
+<li><a href="https://ja.wordpress.org/plugins/wordpress-importer/" target="_blank">WordPress Importer</a></li>
+</ul>
+<h3 class="hdg-l3-01">&#9322;諸々手動で設定</h3>
+<p>旧サイトの管理画面と照らし合わせながら、以下の箇所について個別に設定を反映しました。</p>
+<ul class="list-bullet-01">
+<li>[設定]-[一般設定]</li>
+<li>[設定]-[投稿設定]</li>
+<li>[設定]-[表示設定]</li>
+<li>[設定]-[ディスカッション]</li>
+<li>[設定]-[メディア]</li>
+<li>[設定]-[パーマリンク設定]</li>
+<li>[設定]-[Akismet]</li>
+<li>[設定]-[PostViews]</li>
+<li>[設定]-[PageNavi]</li>
+<li>[設定]-[XML-Sitemap]</li>
+</ul>
+<h4 class="hdg-l4-01">アイキャッチは泣く泣く全ての記事にて再度設定</h4>
+<p>どうやら「WordPress Importer」を使ってインポートを行うと、アイキャッチの設定はうまくいかず、投稿記事を見る全てアイキャッチは未設定の状態になってしまうようでした。</p>
+<p>調べてみると「WP CSV Exporter」と「Really Simple CSV Importer」を使ってエクスポートをインポートを行うと、アイキャッチを含め設定された状態で移行されるようですが、試したところ、メディアライブラリが重複した画像だらけになっちゃったんですよね。</p>
+<ul class="list-notice-01">
+<li><span>※</span>おそらく同じアイキャッチでも使いまわしている記事の分だけ別々の画像として認識されてしまう</li>
+</ul>
+<p>なので非常に手間ではありましたが、他の方法を調べている時間が逆にもったいないので、以下の手順で投稿記事のアイキャッチを個別に再設定しました。</p>
+<ol class="list-number-01">
+<li>FTPで/wp-content/uploads/以下のファイルを全て削除</li>
+<li>管理画面で必要な画像をメディアライブラリに手動インポート</li>
+<li>1つ1つ投稿記事のアイキャッチを再設定</li>
+</ol>
+<p>200記事以上ありましたが、一気にやれば2時間くらいで全て再設定することが出来ました。</p>
+<h3 class="hdg-l3-01">&#9323;旧サイトから新サイトへ301リダイレクト</h3>
+<p>これで新ドメインの内容が旧ドメインと全く同じ状態になりました。いよいよリダイレクトの設定です。旧サイトの.htaccessの最上部に以下の記述を加えます。</p>
+<pre><code>&lt;IfModule mod_rewrite.c&gt;
+RewriteCond %{http_host} ^web-diy.rdy.jp
+RewriteRule ^(.*) https://web-diy.jp/$1 [R=301,L]
+&lt;/IfModule&gt;</code></pre>
+<p>「R=301」というのがポイントで、301リダイレクトを行っています。これによりGoogleのSEO評価を引き継ぎつつ、ユーザーを新しいドメインに誘導することが可能になります。</p>
+<h4 class="hdg-l4-01">ついでに新ドメインでもhttp⇒httpsにリダイレクト</h4>
+<p>万が一httpで遷移してきたユーザーにも確実にhttpsに誘導できるよう、念のため新ドメインの.htaccessには以下の記述を最上部に記述しておきます。</p>
+<pre><code>&lt;IfModule mod_rewrite.c&gt;
+RewriteEngine On
+RewriteCond %{ENV:HTTPS} !^on$
+RewriteCond %{HTTP:X-Sakura-Forwarded-For} ^$
+RewriteCond %{REMOTE_ADDR} !=&lt;strong&gt;XXX.XX.XXX.XX&lt;/strong&gt;
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+&lt;/IfModule&gt;</code></pre>
+<p>「XXX.XX.XXX.XX」のIPアドレスは、さくらレンタルサーバのコントロールパネルで確認できます。</p>
+<h3 class="hdg-l3-01">&#9324;Google Search Consoleで新しいサイトマップを送信</h3>
+<p>長きにわたりましたが、これで最後です。新ドメインのサイトマップをGoogleにインデックスしてもらえるよう、Google Search Consoleでサイトマップを送信しておきます。</p>
 <h2 class="hdg-l2-01">まとめ</h2>
-<p>何となく設置しているパンくずですが、スマートフォンでクリックされることは少ないのではないでしょうか。少なくともWeb屋の芝生DIYではクリックイベント計測結果を見ると、1000PVあたり1回クリックされるかどうかです。それくらいしかクリックされない要素でテキスト2行分もファーストビューでとってしまうと、ちょっともったいない気がしますよね。</p>
-<p>かといって全部消すのも忍びないですし、逆にSEO上の評価が下がる可能性もあります。そこで、パンくずを設置するメリットを享受しつつもスマートフォンでのエリアを最小限にするべく、あくまでWeb屋の芝生DIYというサイトに限定しての話ですが、<strong>スマートフォン閲覧時のパンくずにおいて記事タイトルまでは必要ない</strong>、と判断して今回のカスタマイズを行いました。</p>
-<p>サイトの設計における非常に細かい部分にはなりますが、ブログのレスポンシブWebデザインの考え方において、1つのケーススタディとしてご参考になれば幸いです。</p>
+<p>Googleアナリティクスで計測を確認したところ、アクセスは途切れていないので正常に移行できたみたいです。若干微減しているような気もしますが、新ドメインのパワーがまだ弱いためなのか、キャッシュによる影響なのかは分からないですね。。。</p>
+<p>最後のタスクとして、新ドメインで全てのページがインデックスに登録され、逆に旧ドメインのインデックスが1つも無くなったら、旧サイトのリソースは破棄しようかなと思っています。</p>
+<p>以前から常時SSL化はやりたいと考えていたのですが、このままズルズル行けば行くほどサイトボリュームも増えて切り替えが大変になることが予想されたので、サイトを公開して1年賀過ぎたこともあり、重い腰を上げて無事に常時SSL化を実現することが出来ました。</p>
+<p>SSL化は初期コストもかかりますが、世の中の流れには逆らえないので、早めに移行できるに越したことはないでしょう。本記事がご参考になれば幸いです。</p>
 
 <!--======================================ここまで記事用ソース======================================-->
 
