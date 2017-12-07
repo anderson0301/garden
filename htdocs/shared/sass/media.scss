@@ -117,83 +117,107 @@ body.lyt-main-sub #content{
 	margin:0 auto 10px auto;
 }
 
+div#overlay{
+	display:none;
+	background-color:#000;
+	height:100%;
+	position:absolute;
+	top:0;
+	left:0;
+	opacity:.8;
+	width:100%;
+	z-index:99998;
+}
+
+div#overlay.open{
+	display:block;
+}
+
 header{
 	padding: 0 0;
 	#header-inner{
-		padding:20px 10px 0 10px;
-		text-align:center;
+		margin-bottom:0;
+		padding:15px 0 0 0;
 		h1#logo,
 		p#logo{
 			position:static;
+			margin-left:10px;
 			img{
-				width: 240px;
+				width:190px;
 			}
 		}
-		p#sp-search-btn{
+		p#sp-utility-btn{
 			cursor:pointer;
 			display:block;
-			width:36px;
-			height:36px;
+			width:23px;
+			height:21px;
 			position:absolute;
-			top:0;
-			right:0;
-			z-index: 9999;
-			background:url("/shared/images/menu_search.png") no-repeat left top;
-			background-size:36px 72px;
+			top:15px;
+			right:10px;
+			z-index: 99999;
+			background:url("/shared/images/sp_btn_utility.png") no-repeat left top;
+			background-size:23px 21px;
 			font-size: 0;
 			line-height: 0;
 		}
-		p#sp-search-btn.open{
-			background:url("/shared/images/menu_search.png") no-repeat left bottom;
-			background-size:36px 72px;
+		p#sp-utility-btn.open{
+			background:url("/shared/images/sp_btn_utility_close.png") no-repeat left top;
+			background-size:23px 21px;
 		}
-		form{
+
+		div#sp-drawer-utility{
 			display:none;
-			width:100%;
-			background:rgba(0,0,0,0.85);
-			padding:50px 0 60px 0;
-			top:0;
-			z-index:9998;
-			input#text{
-				width:200px!important;
-				float:none;
-				vertical-align:top;
-			}
-			input#btn{
-				float:none;
-			}
 		}
 
-		form.open{
+		div#sp-drawer-utility.open{
 			display:block;
-		}
+			position: absolute;
+			top:46px;
+			z-index: 99999;
+			width: 100%;
+			div#sp-drawer-utility-inner{
+				margin:0 10px;
+				background:#ecece0;
+				padding: 20px 20px 10px 20px;
+				border-radius:4px;
 
-		ul.utility{
-			position:static;
-			li{
-				margin-right:4px;
-				font-size: 0.67rem;
-				a{
-				    padding:4px 7px 4px 17px;
+				form{
+					margin-bottom: 20px;
+					position:static;
+					text-align: center;
+					input#text{
+						float:none;
+						vertical-align:top;
+						width:200px!important;
+					}
+					input#btn{
+						float:none;
+					}
 				}
-				a:before {
-				    left: 5px;
-				    width: 4px;
-				    height: 4px;
-				    border-right: 2px solid #387922;
-				    border-top: 2px solid #387922;
+
+				ul.utility{
+					position:static;
+					li{
+						margin:0 0 10px 0;
+						display:block;
+						a{
+						    display: block;
+						    padding:12px 10px 12px 26px;
+						}
+					}
 				}
 			}
 		}
 
 		p#tagline{
 			position:static;
-			padding:10px 0;
-			font-size:0.78rem;
+			padding:10px 0 10px 10px;
+			font-size:0.64rem;
 		}
 	}
 	nav{
 		border-bottom:none;
+		border-top:1px solid #ccc;
 		ul{
 			margin:0 0;
 			box-shadow: none;
