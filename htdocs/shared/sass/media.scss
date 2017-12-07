@@ -124,7 +124,7 @@ div#overlay{
 	position:absolute;
 	top:0;
 	left:0;
-	opacity:.8;
+	opacity:.85;
 	width:100%;
 	z-index:99998;
 }
@@ -170,7 +170,6 @@ header{
 		}
 
 		div#sp-drawer-utility.open{
-			display:block;
 			position: absolute;
 			top:46px;
 			z-index: 99999;
