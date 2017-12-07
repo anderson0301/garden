@@ -8,7 +8,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Web屋の芝生DIY">
 <meta property="og:url" content="<?php echo(empty($_SERVER['HTTPS']) ? 'http://' : 'https://').$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>">
-<meta property="og:image" content="http://web-diy.rdy.jp/shared/images/ogp.png">
+<meta property="og:image" content="https://web-diy.jp/shared/images/ogp.png">
 <meta property="og:title" content="カテゴリー「<?php $category = get_the_category();echo $category[0]->cat_name;?>」の記事一覧">
 <meta property="og:description" content="<? foreach((get_the_category()) as $cat) {echo $cat->category_description . '';} ?>">
 <link rel="stylesheet" href="/shared/css/basic.css" media="all">

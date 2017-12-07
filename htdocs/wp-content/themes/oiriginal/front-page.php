@@ -7,8 +7,8 @@
 <meta name="description" content="芝生やDIY等のライフハックやWeb制作情報を発信するメディア">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Web屋の芝生DIY">
-<meta property="og:url" content="http://web-diy.rdy.jp/">
-<meta property="og:image" content="http://web-diy.rdy.jp/shared/images/ogp.png">
+<meta property="og:url" content="https://web-diy.jp/">
+<meta property="og:image" content="https://web-diy.jp/shared/images/ogp.png">
 <meta property="og:title" content="芝生やDIY等のライフハックやWeb制作情報を発信するメディア | Web屋の芝生DIY">
 <meta property="og:description" content="芝生やDIY等のライフハックやWeb制作情報を発信するメディア">
 <link rel="stylesheet" href="/shared/css/basic.css" media="all">
@@ -18,8 +18,10 @@
 <div id="header-inner">
 <h1 id="logo"><a href="/"><img src="/shared/images/logo.png" alt="Web屋の芝生DIY"></a></h1>
 <p id="tagline">芝生やDIY等のライフハックやWeb制作情報を発信するメディア</p>
-<p id="sp-search-btn">検索窓を開く</p>
-<form method="get" action="<?php echo home_url('/'); ?>" >
+<p id="sp-utility-btn">メニューを開く</p>
+<div id="sp-drawer-utility">
+<div id="sp-drawer-utility-inner">
+<form method="get" action="https://web-diy.jp/" >
 <input id="text" type="text" value="" name="s" placeholder="キーワード">
 <input id="btn" type="image" src="/shared/images/btn_search.png" alt="検索する">
 </form>
@@ -28,6 +30,8 @@
 <li><a href="/contact/">お問い合わせ</a></li>
 <li><a href="/sitemap/">サイトマップ</a></li>
 </ul>
+</div>
+</div>
 </div>
 <nav>
 <ul>

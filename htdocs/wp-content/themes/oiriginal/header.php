@@ -8,7 +8,9 @@
 <?php endif; ?>
 <p id="tagline">芝生やDIY等のライフハックやWeb制作情報を発信するメディア</p>
 <?php if(!$myAmp): ?>
-<p id="sp-search-btn">検索窓を開く</p>
+<p id="sp-utility-btn">メニューを開く</p>
+<div id="sp-drawer-utility">
+<div id="sp-drawer-utility-inner">
 <form method="get" action="<?php echo home_url('/'); ?>" >
 <input id="text" type="text" value="" name="s" placeholder="キーワード">
 <input id="btn" type="image" src="/shared/images/btn_search.png" alt="検索する">
@@ -19,6 +21,10 @@
 <li><a href="/contact/">お問い合わせ</a></li>
 <li><a href="/sitemap/">サイトマップ</a></li>
 </ul>
+<?php if(!$myAmp): ?>
+</div>
+</div>
+<?php endif; ?>
 </div>
 <nav>
 <ul>

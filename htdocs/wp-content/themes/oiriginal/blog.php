@@ -10,8 +10,8 @@
 <meta name="description" content="マイホームブログでは芝生やDIY等のライフハックに加え、フロントエンドを中心としたWeb制作に関する記事を掲載しています。">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Web屋の芝生DIY">
-<meta property="og:url" content="http://web-diy.rdy.jp/blog/">
-<meta property="og:image" content="http://web-diy.rdy.jp/shared/images/ogp.png">
+<meta property="og:url" content="https://web-diy.jp/blog/">
+<meta property="og:image" content="https://web-diy.jp/shared/images/ogp.png">
 <meta property="og:title" content="<?php the_title(); ?> | Web屋の芝生DIY">
 <meta property="og:description" content="マイホームブログでは芝生やDIY等のライフハックに加え、フロントエンドを中心としたWeb制作に関する記事を掲載しています。">
 <link rel="stylesheet" href="/shared/css/basic.css" media="all">

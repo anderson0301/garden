@@ -18,7 +18,7 @@
 <meta name="description" content="<?php echo get_the_excerpt(); ?>">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Web屋の芝生DIY">
-<meta property="og:url" content="<?php echo(empty($_SERVER['HTTPS']) ? 'http://' : 'https://').$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>">
+<meta property="og:url" content="<?php echo(empty($_SERVER['HTTPS']) ? 'https://' : 'https://').$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>">
 <meta property="og:image" content="<?php if (has_post_thumbnail()){$image_id = get_post_thumbnail_id ();$image_url = wp_get_attachment_image_src ($image_id, true);echo $image_url[0];}?>">
 <meta property="og:title" content="<?php the_title(); ?>">
 <meta property="og:description" content="<?php echo get_the_excerpt(); ?>">
@@ -27,7 +27,7 @@
 <link rel="canonical" href="<?php echo $canonical_url; ?>">
 <?php endif;?>
 <?php if(!$myAmp): ?>
-<link rel="amphtml" href="<?php echo(empty($_SERVER['HTTPS']) ? 'http://' : 'https://').$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>?amp=1">
+<link rel="amphtml" href="<?php echo(empty($_SERVER['HTTPS']) ? 'https://' : 'https://').$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>?amp=1">
 <link rel="stylesheet" href="/shared/css/basic.css" media="all">
 <?php endif; ?>
 <?php if($myAmp): ?>
@@ -46,7 +46,7 @@
   "headline": "<?php the_title();?>",
   "image": {
     "@type": "ImageObject",
-    "url": "http://web-diy.rdy.jp/shared/images/schema.png",
+    "url": "https://web-diy.jp/shared/images/schema.png",
     "height": 420,
     "width": 800
   },
@@ -61,7 +61,7 @@
     "name": "Web屋の芝生DIY",
     "logo": {
       "@type": "ImageObject",
-      "url": "http://web-diy.rdy.jp/shared/images/logo.png",
+      "url": "https://web-diy.jp/shared/images/logo.png",
       "width": 240,
       "height": 28
     }
@@ -79,7 +79,7 @@
 <li><a href="/">トップ</a></li>
 <li><a href="/blog/">マイホームブログ</a></li>
 <li><?php $category = get_the_category();if ($category[0]) {echo '<a href="'.get_category_link( $category[0]->term_id ).'">'.$category[0]->cat_name.'</a>';}?></li>
-<li><?php the_title(); ?></li>
+<li class="title"><?php the_title(); ?></li>
 </ul>
 </div><!--/#breadcrumb"-->
 <main>

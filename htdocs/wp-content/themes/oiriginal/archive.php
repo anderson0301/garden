@@ -7,8 +7,8 @@
 <meta name="description" content="<?php if($monthnum||$year||$cat){?><?php if($cat){?><?php single_cat_title();?><?php }elseif($monthnum||$year){echo $year.'年';?><?php if($monthnum){echo $monthnum.'月';}}?><?php } ?>の記事一覧を掲載しています。">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Web屋の芝生DIY">
-<meta property="og:url" content="http://web-diy.rdy.jp">
-<meta property="og:image" content="http://web-diy.rdy.jp/shared/images/ogp.png">
+<meta property="og:url" content="https://web-diy.jp">
+<meta property="og:image" content="https://web-diy.jp/shared/images/ogp.png">
 <meta property="og:title" content="<?php if($monthnum||$year||$cat){?><?php if($cat){?><?php single_cat_title();?><?php }elseif($monthnum||$year){echo $year.'年';?><?php if($monthnum){echo $monthnum.'月';}}?><?php } ?>の記事一覧">
 <meta property="og:description" content="<?php if($monthnum||$year||$cat){?><?php if($cat){?><?php single_cat_title();?><?php }elseif($monthnum||$year){echo $year.'年';?><?php if($monthnum){echo $monthnum.'月';}}?><?php } ?>の記事一覧を掲載しています。">
 <link rel="stylesheet" href="/shared/css/basic.css" media="all">
