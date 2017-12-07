@@ -74,21 +74,17 @@ $(function(){
 });
 
 /* ==================================
-** ハンバーガーメニュー
+** スマートフォン検索窓
 ** =================================*/
 $(function(){
-    $('p#sp-utility-btn').one('click',function(){
-        $("body").append('<div id="overlay"></div>');
-    });
-    $('p#sp-utility-btn').click(function(){
+    $('p#sp-search-btn').click(function(){
         $(this).toggleClass('open');
-        $('#sp-drawer-utility').toggleClass('open');
-        $('#overlay').toggleClass('open');
+        $('#header-inner form').toggleClass('open');
     });
 });
 
 /* ==================================
-** サイドバートグルボタン
+** トグルボタン
 ** =================================*/
 $(function(){
 
