@@ -16,11 +16,9 @@ $(function(){
 ** ページスクロール
 ** =================================*/
 $(function(){
- 
     $("p.page_top").hide();
- 
-    $(window).on("scroll", function() {
-        if ($(this).scrollTop() > 100) {
+    $(window).on("scroll",function(){
+        if($(this).scrollTop() > 100){
             $('p.page_top').fadeIn();
         }else{
             $('p.page_top').fadeOut();
@@ -29,12 +27,12 @@ $(function(){
         scrollHeight = $(document).height(); 
         scrollPosition = $(window).height() + $(window).scrollTop(); 
         footHeight = $("footer").innerHeight();
-        if ( scrollHeight - scrollPosition <= footHeight ) {
+        if(scrollHeight - scrollPosition <= footHeight){
             $("p.page_top").css({
                 "position":"absolute",
                 "bottom": footHeight + 20
             });
-        } else {
+        }else{
             $("p.page_top").css({
                 "position":"fixed",
                 "bottom": "20px"
@@ -42,7 +40,7 @@ $(function(){
         }
     });
  
-    $('p.page_top').find('a').click(function () {
+    $('p.page_top').find('a').click(function(){
         $('body,html').animate({
         scrollTop: 0
         }, 500);
