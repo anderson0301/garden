@@ -221,22 +221,23 @@ header{
 			margin:0 0;
 			box-shadow: none;
 			li{
-				width:49.8%;
+				width:33.111111111%;
 				border-right:1px solid #ccc;
 				border-bottom:1px solid #ccc;
-				text-align: left;
+				text-align: center;
 				a,
 				a:link,
 				a:visited{
-					padding:8px 4px 6px 20px;
-					background:none;		
+					padding:7px 4px 7px 4px;
+					background:none;
+					font-size:0.66rem;
 				}
 				a:hover,
 				a:focus{
 					padding-bottom:3px;
 				}
 			}
-			li:nth-child(2n){
+			li:nth-child(3n){
 				border-right:none;
 			}
 		}
