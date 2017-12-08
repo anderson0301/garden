@@ -80,8 +80,8 @@ $(function(){
     });
     $('p#sp-utility-btn').click(function(){
         $(this).toggleClass('open');
-        $('#sp-drawer-utility').fadeToggle(300).toggleClass('open');
-        $('#overlay').fadeToggle(300);
+        $('#sp-drawer-utility').toggleClass('fadein');
+        $('#overlay').toggleClass('fadein');
     });
 });
 

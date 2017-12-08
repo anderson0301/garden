@@ -1074,6 +1074,21 @@ blockquote:after{
 }
 
 /*----------------------------------------------
+ CSS Animation
+----------------------------------------------*/
+@keyframes fade-in {
+	0% {display:none;opacity:0;}
+	1% {display:block;opacity:0;}
+	100% {display:block;opacity:1;}
+}
+
+@keyframes fade-in-overlay {
+	0% {opacity:0;}
+	1% {opacity:0;}
+	100% {opacity:0.85;}
+}
+
+/*----------------------------------------------
  Adjust
 ----------------------------------------------*/
 .mt0{margin-top:0!important;}

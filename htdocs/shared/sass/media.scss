@@ -118,19 +118,20 @@ body.lyt-main-sub #content{
 }
 
 div#overlay{
-	display:none;
+	opacity:0;
 	background-color:#000;
 	height:100%;
 	position:absolute;
 	top:0;
 	left:0;
-	opacity:.85;
 	width:100%;
 	z-index:99998;
 }
 
-div#overlay.open{
-	display:block;
+div#overlay.fadein{
+	opacity: 0.85;
+	animation-duration:0.3s;
+	animation-name:fade-in-overlay;
 }
 
 header{
@@ -169,17 +170,20 @@ header{
 			display:none;
 		}
 
-		div#sp-drawer-utility.open{
+		div#sp-drawer-utility.fadein{
+			display:block;
 			position: absolute;
 			top:46px;
 			z-index: 99999;
 			width: 100%;
+			animation-duration:0.5s;
+			animation-name:fade-in;
+
 			div#sp-drawer-utility-inner{
 				margin:0 10px;
 				background:#ecece0;
 				padding: 20px 20px 10px 20px;
 				border-radius:4px;
-
 				form{
 					margin-bottom: 20px;
 					position:static;
@@ -193,7 +197,6 @@ header{
 						float:none;
 					}
 				}
-
 				ul.utility{
 					position:static;
 					li{
