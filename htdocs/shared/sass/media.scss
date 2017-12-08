@@ -119,6 +119,7 @@ body.lyt-main-sub #content{
 
 div#overlay{
 	opacity:0;
+	display:none;
 	background-color:#000;
 	height:100%;
 	position:absolute;
@@ -130,6 +131,7 @@ div#overlay{
 
 div#overlay.fadein{
 	opacity: 0.85;
+	display: block;
 	animation-duration:0.3s;
 	animation-name:fade-in-overlay;
 }
