@@ -3,15 +3,161 @@
 
 <!--======================================ここから記事用ソース======================================-->
 
-<p></p>
+<p>サイト開設当初より、ヘッダーにハンバーガメニューは設置せず「あえて」全メニューを最初から表示するデザインにしていたのですが、Googleアナリティクスのデータを見ると「検索結果」「サイトについて」「お問い合わせ」「サイトマップ」はほとんどアクセスがありません。</p>
 [adsense_top]
+<p>ユーザーが必要としていない要素なのであればフッターに移動させようかなとも考えましたが、それだと芸がないので、これらの要素を格納するハンバーガーメニューを実装することにしました。本記事では、Web屋の芝生DIYにおけるハンバーガーメニューの実装方法についてご紹介させていただきたいと思います。</p>
+<h2 class="hdg-l2-01">これまでのヘッダー</h2>
+<p>リンク系のコンテンツは最初から全て表示し、検索窓だけヘッダー右上の<strong>「ひらく」</strong>ボタンの中に格納していました。</p>
+<p><img src="/images/blog/2018/01/26_01_01.png" alt="" width="660" height="290"></p>
+<h3 class="hdg-l3-01">このレイアウトのメリットとデメリット</h3>
+<p>メリットは何といっても最初からリンクが表示されているので、「ハンバーガーメニューをたたく」⇒「目当てのリンクを見つける」⇒「リンクをクリックする」の3ステップにおける最初の「ハンバーガーメニューをたたく」を省略することができます。</p>
+<p>デメリットは、ヘッダーの高さを取るので現在のページが何のページなのか、少し視線を下に落とさないとわからない、またはスクリーンサイズによってはスクロールしないと見えない、というところですかね。</p>
+<p>今回、「サイトについて」「お問い合わせ」「サイトマップ」を最初から表示しておくメリットとコンテンツの認識のしやすさを天秤にかけた結果、後者を優先することにしたというわけです。</p>
+<h2 class="hdg-l2-01">改修後のヘッダー</h2>
+<p>ハンバーガーメニューをヘッダー右上に設置しました。あわせてサイトロゴも左寄せにしつつ、タグラインのフォントサイズはスマートフォンでも1行で表示されるよう調整。さらに、グローバルメニューはこれまでの3段から2段に変更しました。だいぶすっきりしたヘッダーになりましたね。</p>
+<p><img src="/images/blog/2018/01/26_01_02.png" alt="" width="660" height="290"></p>
+<p>ハンバーガーメニューをタップすると、検索窓と3つのリンクテキストがモーダルで表示されます。</p>
+<p><img src="/images/blog/2018/01/26_01_03.png" alt="" width="660" height="320"></p>
+<h2 class="hdg-l2-01">実装方法</h2>
+<p>cssとjsで実装しましたが、以下のポイントを意識して実装を行いました。</p>
+<ul class="list-bullet-01">
+<li>HTMLはワンソース</li>
+<li>アニメーションはcss3</li>
+<li>jsの記述は最小限</li>
+</ul>
+<h3 class="hdg-l3-01">html</h3>
+<pre><code>&lt;p id=&quot;sp-utility-btn&quot;&gt;メニューを開く&lt;/p&gt;
+&lt;div id=&quot;sp-drawer-utility&quot;&gt;
+&lt;div id=&quot;sp-drawer-utility-inner&quot;&gt;
+&lt;form method=&quot;get&quot; action=&quot;https://web-diy.jp/&quot; &gt;
+&lt;input id=&quot;text&quot; type=&quot;text&quot; value=&quot;&quot; name=&quot;s&quot; placeholder=&quot;キーワード&quot;&gt;
+&lt;input id=&quot;btn&quot; type=&quot;image&quot; src=&quot;/shared/images/btn_search.png&quot; alt=&quot;検索する&quot;&gt;
+&lt;/form&gt;
+&lt;ul class=&quot;utility&quot;&gt;
+&lt;li&gt;&lt;a href=&quot;/about/&quot;&gt;サイトについて&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/contact/&quot;&gt;お問い合わせ&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/sitemap/&quot;&gt;サイトマップ&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<h3 class="hdg-l3-01">css</h3>
+<pre><code>/*----------------------------------------------
+ PCサイズではdisplay:block
+----------------------------------------------*/
+div#sp-drawer-utility{
+	display:block;
+}
+
+/*----------------------------------------------
+ モーダルのスタイル定義
+----------------------------------------------*/
+@media screen and (max-width:768px){
+
+    div#overlay{
+        opacity:0;
+        display:none;
+        background-color:#000;
+        height:100%;
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        z-index:99998;
+    }
+    
+    div#overlay.fadein{
+        opacity: 0.85;
+        display: block;
+        animation-duration:0.3s;
+        animation-name:fade-in-overlay;
+    }
+    
+    p#sp-utility-btn{
+        cursor:pointer;
+        display:block;
+        width:23px;//サイズは任意
+        height:21px;//サイズは任意
+        position:absolute;
+        top:15px;//位置は任意
+        right:10px;//位置は任意
+        z-index: 99999;
+        background:url("ハンバーガーメニューの画像パス") no-repeat left top;
+        background-size:23px 21px;//サイズは任意
+        font-size: 0;
+        line-height: 0;
+    }
+    p#sp-utility-btn.open{
+        background:url("閉じるボタンの画像パス") no-repeat left top;
+        background-size:23px 21px;//サイズは任意
+    }
+    
+    div#sp-drawer-utility{
+        display:none;
+    }
+    
+    div#sp-drawer-utility.fadein{
+        display:block;
+        position: absolute;
+        top:46px;//位置は任意
+        z-index: 99999;
+        width: 100%;
+        animation-duration:0.5s;
+        animation-name:fade-in;
+    
+        div#sp-drawer-utility-inner{
+            margin:0 10px;
+            background:#ecece0;
+            padding: 20px 20px 10px 20px;
+            border-radius:4px;
+            form{
+                //任意のスタイルを定義
+            }
+            ul.utility{
+                //任意のスタイルを定義
+            }
+        }
+    }
+
+}
+
+/*----------------------------------------------
+ CSS Animation
+----------------------------------------------*/
+@keyframes fade-in {
+	0% {display:none;opacity:0;}
+	1% {display:block;opacity:0;}
+	100% {display:block;opacity:1;}
+}
+
+@keyframes fade-in-overlay {
+	0% {opacity:0;}
+	1% {opacity:0;}
+	100% {opacity:0.85;}
+}</code></pre>
+<h3 class="hdg-l3-01">js</h3>
+
+<pre><code>$(function(){
+    'use scrict';
+    
+    $('p#sp-utility-btn').one('click',function(){
+        $("body").append('&lt;div id=&quot;overlay&quot;&gt;&lt;/div&gt;');
+    });
+    $('p#sp-utility-btn').click(function(){
+        $(this).toggleClass('open');
+        $('#sp-drawer-utility').toggleClass('fadein');
+        $('#overlay').toggleClass('fadein');
+    });
+});</code></pre>
+<h2 class="hdg-l2-01">解説</h2>
+<p>まず、ハンバーガーメニューと閉じるボタンは画像で用意します。最初はcssで描画しようかなと思いましたが、アニメーションを実装しようとするとマークアップを若干犠牲にすることになるので、今回はマークアップの清潔さを優先するために画像で実装しました。<strong>「p#sp-utility-btn」</strong>に背景置換でハンバーガーメニューを設置しています。</p>
+<p>ハンバーガーメニューをタップして表示されるコンテンツは1ソースで実装しています。スクリーンサイズの横幅が広いときは以前のデザインのままヘッダーに表示し、狭い時は隠しています。メニューのタップ⇒スクリーンサイズ変更時に要素が非表示とならないよう、<strong>「display:block;」</strong>を記述しておくのもポイントです。</p>
+<p>ハンバーガーメニューをタップすると、「p#sp-utility-btn」に<strong>「.open」</strong>が付与されます。.openには閉じるボタンの背景置換をスタイルで定義しておきます。.openを<strong>「.toggleClass('open');」</strong>で付け外しすることで、タップするたびに画像を入れ替えています。</p>
+<p>モーダルの後ろにはオーバーレイ<strong>「#overlay」</strong>をDOM生成します。.oneを使って一度だけDOM生成することで、パフォーマンスを最適化しています。<strong>「z-index:99998;</strong>」とし、閉じるボタンとモーダルの中身は<strong>「z-index:99999;」</strong>としておくのもポイントです。これでモーダルがオーバーレイの手前に表示されるようになります。</p>
+<p>ハンバーガーメニュータップ時のフェードインアニメーションはcss3で行っています。jsでは<strong>「.fadein」</strong>を<strong>「.toggleClass('fadein')」</strong>で付け外しする処理のみで、アニメーションはオーバーレイとモーダルそれぞれ、キーフレーム<strong>「fade-in」「fade-in-overlay」</strong>によって行われています。</p>
 <h2 class="hdg-l2-01">まとめ</h2>
-<p></p>
-<p><img src="/images/blog/2018/01/26_01_01.jpg" alt="" width="660" height="500"></p>
-<p><img src="/images/blog/2018/01/26_01_02.jpg" alt="" width="660" height="500"></p>
-
-
-
+<p>元々あまり使われていなかった要素をハンバーガーメニューで隠しただけっちゃだけなので、これで爆発的にアクセスが増えるとかそういうことはないです。ほとんどこのサイトはオーガニック検索から個別記事への流入がほとんどなので。</p>
+<p>ただ、1つ1つの記事を読むにあたってファーストビューが改善されたことは間違いないので、読みやすさ並びにユーザーの満足度向上につながればといいなと思います。</p>
+<p>簡単にハンバーガーメニューを実装したい場合、どうぞ本記事がご参考になれば幸いです。</p>
 
 
 
