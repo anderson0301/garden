@@ -70,6 +70,7 @@
 }
 </script>
 <?php endif; ?>
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"/","name":"Web屋の芝生DIY"}},{"@type":"ListItem","position":2,"item":{"@id":"/blog/","name":"マイホームブログ"}},{"@type":"ListItem","position":3,"item":{"@id":"<?php $category = get_the_category();if($category[0]){echo ''.get_category_link( $category[0]->term_id ).'';}?>","name":"<?php $category = get_the_category();echo $category[0]->cat_name;?>"}},{"@type":"ListItem","position":4,"item":{"@id":"<?php echo(empty($_SERVER['HTTPS']) ? 'https://':'https://').$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];?>","name":"<?php the_title();?>"}}]}</script>
 </head>
 <body class="lyt-main-sub <?php $cat = get_the_category();$cat = $cat[0];?><?php echo $cat->category_nicename; ?>">
 <?php get_header(); ?>
