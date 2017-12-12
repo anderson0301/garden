@@ -16,10 +16,13 @@
 <h3 class="hdg-l3-01">「構造化データ」記述後</h3>
 <p><strong>「https://web-diy.jp › マイホームブログ › DIY」</strong>と表示されています。このように、パンくずリストの構造化データをhtmlに記述しておくと、サイト構造（パンくずリスト）をGoogleに通知し、検索結果に反映させることが可能になります。</p>
 <p><img src="/images/blog/2018/02/05_01_02.png" alt="" width="660" height="120"></p>
+<h4 class="hdg-l4-01">Google Search Consoleにも反映される</h4>
+<p>正しく記述された構造化データをクローラーが検知してしばらくすると、Google Search Consoleで正しく認識されているURLリストや内容を確認することができます。</p>
+<p><img src="/images/blog/2018/02/05_01_03.png" alt="" width="660" height="300"></p>
 <h2 class="hdg-l2-01">マークアップ方法</h2>
-<p>今回WordPressの記事ページに対し構造化データのマークアップを記述したいと思います。</p>
+<p>今回は、WordPressの記事ページに対し構造化データのマークアップを記述したいと思います。</p>
 <h3 class="hdg-l3-01">single.php</h3>
-<p>html上のどこに記述しても動作しますが、&lt;/head&gt;の手前が良いかと思います。</p>
+<p>html上のどこに記述しても動作しますが、&lt;/head&gt;の手前が無難ですね。</p>
 <pre><code>&lt;script type=&quot;application/ld+json&quot;&gt;{
 	"@context":"http://schema.org",
 	"@type":"BreadcrumbList",
@@ -94,6 +97,7 @@
 <h3 class="hdg-l3-01">1行に圧縮すればソースもすっきり</h3>
 <p>Web屋の芝生DIYでは改行や半スペースはすべて削除し1行にすることで、容量の最小化および全体のソースの視認性を保つようにしています。</p>
 <pre><code>&lt;script type=&quot;application/ld+json&quot;&gt;{&quot;@context&quot;:&quot;http://schema.org&quot;,&quot;@type&quot;:&quot;BreadcrumbList&quot;,&quot;itemListElement&quot;:[{&quot;@type&quot;:&quot;ListItem&quot;,&quot;position&quot;:1,&quot;item&quot;:{&quot;@id&quot;:&quot;/&quot;,&quot;name&quot;:&quot;Web屋の芝生DIY&quot;}},{&quot;@type&quot;:&quot;ListItem&quot;,&quot;position&quot;:2,&quot;item&quot;:{&quot;@id&quot;:&quot;/blog/&quot;,&quot;name&quot;:&quot;マイホームブログ&quot;}},{&quot;@type&quot;:&quot;ListItem&quot;,&quot;position&quot;:3,&quot;item&quot;:{&quot;@id&quot;:&quot;&lt;?php $category = get_the_category();if($category[0]){echo ''.get_category_link( $category[0]-&gt;term_id ).'';}?&gt;&quot;,&quot;name&quot;:&quot;&lt;?php $category = get_the_category();echo $category[0]-&gt;cat_name;?&gt;&quot;}},{&quot;@type&quot;:&quot;ListItem&quot;,&quot;position&quot;:4,&quot;item&quot;:{&quot;@id&quot;:&quot;&lt;?php echo(empty($_SERVER['HTTPS']) ? 'https://':'https://').$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];?&gt;&quot;,&quot;name&quot;:&quot;&lt;?php the_title();?&gt;&quot;}}]}&lt;/script&gt;</code></pre>
+[adsense_middle]
 <h2 class="hdg-l2-01">解説</h2>
 <p>この記述はJSON-LDという形式となり、Javascriptとしてhtml上解釈されます。今回パンくずリストの構造化になるので、「@type」は「BreadcrumbList」とします。</p>
 <p>「itemListElement」以降は階層構造を記述していきます。「position」は階層を示しており、サイトトップは「1」とし、以降は階層が深くなるたびに「2」「3」「4」となっています。</p>
@@ -113,11 +117,16 @@
 	"name":"&lt;?php the_title();?&gt;"
 }</code></pre>
 <h2 class="hdg-l2-01">SEO効果について</h2>
-<p>2018年2月現在、構造化データのマークアップはあくまでもクローラーとの親和性と検索結果における情報の精度を高めるためのものであり、直接的検索結果の順位に影響するものではありません。</p>
-<p>しかし、検索結果にパンくずを表示できることでユーザーにとっては、属するカテゴリや親ページが「大まかに」把握できるようになるため、リンクをクリックする「きっかけ」になりやすいのではないでしょうか。</p>
+<p>2018年2月現在、構造化データのマークアップはあくまでもクローラーとの親和性と検索結果における情報の精度を高めるためのものであり、直接的に検索結果の順位に影響するものではありません。</p>
+<p>しかし、パンくずリストの構造化を例に取ると、ユーザーにとっては属するカテゴリや親ページが「大まかに」把握できるようになるため、リンクをクリックする「きっかけ」になりえると言えるでしょう。</p>
 <p>Googleから<strong>「構造化データのマークアップをランキングアルゴリズムに組み込むかもしれない」</strong>という発言もあったことから、将来的に検索結果のランキング反映の指標の1つになりえる可能性もあります。</p>
+<ul class="list-link-01">
+<li><a href="https://www.youtube.com/watch?v=QWL864VlW7I#action=share" target="_blank">「Google オフィスアワー」録画（YouTube、英語）</a></li>
+</ul>
 <h2 class="hdg-l2-01">まとめ</h2>
-<p></p>
+<p>JSON-LDで記述する構造化データであれば見た目に影響する心配はないので、既存のサイトに組み込むのは意外と簡単です。静的サイトの場合1ページ毎に記述しなければいけないのでとても大変ですが、WordPressをはじめ何かしらのCMSを積んでいれば一度組み込んでしまえばあとは自動的に構造化データを記述することが可能になります。</p>
+<p>既にコンテンツの改善や被リンクの獲得等、基本的なSEO対策は日々実現できているという状況であれば、一歩先を見据えた対策として、構造化データの組み込みを考えてみてはいかがでしょうか。本記事がご参考になれば幸いです。</p>
+
 
 
 
