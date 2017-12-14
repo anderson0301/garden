@@ -478,6 +478,30 @@ body.lyt-main-sub #content{
 			}
 		}
 
+		ol.rank{
+			li:before{
+				content:"";
+				position:absolute;
+				top:-6px;
+				left:-6px;
+				width:22px;
+				height:22px;
+				background:url("/shared/images/arrow_05.gif") no-repeat;
+				background-size:22px ;
+				z-index:9999;
+			}
+			li:nth-child(1):before{background-position:left top;}
+			li:nth-child(2):before{background-position:left -22px;}
+			li:nth-child(3):before{background-position:left -44px;}
+			li:nth-child(4):before{background-position:left -66px;}
+			li:nth-child(5):before{background-position:left -88px;}
+			li:nth-child(6):before{background-position:left -110px;}
+			li:nth-child(7):before{background-position:left -132px;}
+			li:nth-child(8):before{background-position:left -154px;}
+			li:nth-child(9):before{background-position:left -176px;}
+			li:nth-child(10):before{background-position:left -198px;}
+		}
+
 		dl.archive{
 			dt{
 				border-top:1px dotted #ccc;
