@@ -1050,7 +1050,7 @@ p.btn-01 a:focus{
 blockquote{
 	display:block;
 	background: #fff;
-	padding:15px 15px 0 50px;
+	padding:15px 15px 0 15px;
 	margin:0 0 10px;
 	position:relative;
 	border:1px solid #387922;
@@ -1058,19 +1058,26 @@ blockquote{
 	background:#f6f6f6;
 }
 
-blockquote:before{
+blockquote:before,
+blockquote:after{
 	content:"\201C";
 	font-family:Georgia, serif;
-	font-size:60px;
+	font-size:80px;
 	font-weight:bold;
 	position:absolute;
-	left:10px;
-	top:-16px;
 	color:#387922;
+	opacity:0.18;
+}
+
+blockquote:before{
+	left:10px;
+	top:-32px;
 }
 
 blockquote:after{
-	content:"";
+	right:10px;
+	bottom:-32px;
+	transform:rotate(180deg);
 }
 
 /*----------------------------------------------
