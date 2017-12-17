@@ -3,129 +3,74 @@
 
 <!--======================================ここから記事用ソース======================================-->
 
-<p>パンくずリストはもはや息を吸うのと同じくらい当たり前のものとしてWebサイトに設置していると思います。SEO対策としてGoogleにサイト好悪増を正しく伝えるために不可欠なものですが、よりこの構造を正しく伝えるために、今回パンくずリストの「構造化データ」をソース内に追加しました。</p>
+<p>先日<a href="2018/01/180103_01/ ">ふらっかーずシュシュのリアキャリアに子供載せシートを設置しました</a>が、息子がとても寒そうなので風よけにカバーを設置してあげることに。雨の日も濡れなくていいですしね。カバーはたくさん種類があるので迷いましたが、設置してあるシート「RBC-007DX3」と相性の良いハガビーのカバーを購入しました。</p>
 [adsense_top]
-<p>本記事では、WordPressにて簡単にパンくずリストの構造化データをマークアップする方法をご紹介させていただきたいと思います。</p>
-<h2 class="hdg-l2-01">「構造化データとは？」</h2>
-<p>簡単に言えば、リッチスニペット（画像、パンくず、評価、価格、イベント、検索窓など）を検索結果に表示させることができます。表示するためには検索エンジンのクローラーに情報を伝える必要がありますが、これをhtmlに記述したものが<strong>「構造化データ」</strong>です。</p>
-<h2 class="hdg-l2-01">パンくずの「構造化データ」を記述しておくとどうなるか</h2>
-<p>本記事ではパンくずリストの構造化データについて詳しく説明させていただきますが、<strong>「構造化データのマークアップ」</strong>を記述しておくことでどうなるのか、先に見せちゃいたいと思います。</p>
-<h3 class="hdg-l3-01">「構造化データ」記述前</h3>
-<p>以下はWeb屋の芝生DIYのとある記事の検索結果です。赤枠の場所に、URLが表示されています。</p>
-<p><img src="/images/blog/2018/02/05_01_01.png" alt="" width="660" height="120"></p>
-<h3 class="hdg-l3-01">「構造化データ」記述後</h3>
-<p><strong>「https://web-diy.jp › マイホームブログ › DIY」</strong>と表示されています。このように、パンくずリストの構造化データをhtmlに記述しておくと、サイト構造（パンくずリスト）をGoogleに通知し、検索結果に反映させることが可能になります。</p>
-<p><img src="/images/blog/2018/02/05_01_02.png" alt="" width="660" height="120"></p>
-<h4 class="hdg-l4-01">Google Search Consoleにも反映される</h4>
-<p>正しく記述された構造化データをクローラーが検知してしばらくすると、Google Search Consoleで正しく認識されているURLリストや内容を確認することができます。</p>
-<p><img src="/images/blog/2018/02/05_01_03.png" alt="" width="660" height="300"></p>
-<h2 class="hdg-l2-01">マークアップ方法</h2>
-<p>今回は、WordPressの記事ページに対し構造化データのマークアップを記述したいと思います。</p>
-<h3 class="hdg-l3-01">single.php</h3>
-<p>html上のどこに記述しても動作しますが、&lt;/head&gt;の手前が無難ですね。</p>
-<pre><code>&lt;script type=&quot;application/ld+json&quot;&gt;{
-	"@context":"http://schema.org",
-	"@type":"BreadcrumbList",
-	"itemListElement":[
-		{
-			"@type":"ListItem",
-			"position":1,
-			"item":{
-				"@id":"/",
-				"name":"Web屋の芝生DIY"
-			}
-		},{
-			"@type":"ListItem",
-			"position":2,
-			"item":{
-				"@id":"/blog/",
-				"name":"マイホームブログ"
-			}
-		},{
-			"@type":"ListItem",
-			"position":3,
-			"item":{
-				"@id":"&lt;?php $category = get_the_category();if($category[0]){echo ''.get_category_link( $category[0]-&gt;term_id ).'';}?&gt;",
-				"name":"&lt;?php $category = get_the_category();echo $category[0]-&gt;cat_name;?&gt;"
-			}
-		},{
-			"@type":"ListItem",
-			"position":4,
-			"item":{
-				"@id":"&lt;?php echo(empty($_SERVER['HTTPS']) ? 'https://':'https://').$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];?&gt;",
-				"name":"&lt;?php the_title();?&gt;"
-			}
-		}
-	]
-}&lt;/script&gt;</code></pre>
-<h3 class="hdg-l3-01">実際に出力されるソース</h3>
-<pre><code>&lt;script type=&quot;application/ld+json&quot;&gt;{
-	"@context":"http://schema.org",
-	"@type":"BreadcrumbList",
-	"itemListElement":[
-		{
-			"@type":"ListItem",
-			"position":1,
-			"item":{
-				"@id":"/",
-				"name":"Web屋の芝生DIY"
-			}
-		},{
-			"@type":"ListItem",
-			"position":2,
-			"item":{
-				"@id":"/blog/",
-				"name":"マイホームブログ"
-			}
-		},{
-			"@type":"ListItem",
-			"position":3,
-			"item":{
-				"@id":"https://web-diy.jp/category/diy/",
-				"name":"DIY"
-			}
-		},{
-			"@type":"ListItem",
-			"position":4,
-			"item":{
-				"@id":"https://web-diy.jp/2016/12/161205_01/",
-				"name":"【100均のみ！】ダイソーのワイヤーネットを使いテレビ周りのベビーフェンスをDIYで作成;"
-			}
-		}
-	]
-}&lt;/script&gt;</code></pre>
-<h3 class="hdg-l3-01">1行に圧縮すればソースもすっきり</h3>
-<p>Web屋の芝生DIYでは改行や半スペースはすべて削除し1行にすることで、容量の最小化および全体のソースの視認性を保つようにしています。</p>
-<pre><code>&lt;script type=&quot;application/ld+json&quot;&gt;{&quot;@context&quot;:&quot;http://schema.org&quot;,&quot;@type&quot;:&quot;BreadcrumbList&quot;,&quot;itemListElement&quot;:[{&quot;@type&quot;:&quot;ListItem&quot;,&quot;position&quot;:1,&quot;item&quot;:{&quot;@id&quot;:&quot;/&quot;,&quot;name&quot;:&quot;Web屋の芝生DIY&quot;}},{&quot;@type&quot;:&quot;ListItem&quot;,&quot;position&quot;:2,&quot;item&quot;:{&quot;@id&quot;:&quot;/blog/&quot;,&quot;name&quot;:&quot;マイホームブログ&quot;}},{&quot;@type&quot;:&quot;ListItem&quot;,&quot;position&quot;:3,&quot;item&quot;:{&quot;@id&quot;:&quot;&lt;?php $category = get_the_category();if($category[0]){echo ''.get_category_link( $category[0]-&gt;term_id ).'';}?&gt;&quot;,&quot;name&quot;:&quot;&lt;?php $category = get_the_category();echo $category[0]-&gt;cat_name;?&gt;&quot;}},{&quot;@type&quot;:&quot;ListItem&quot;,&quot;position&quot;:4,&quot;item&quot;:{&quot;@id&quot;:&quot;&lt;?php echo(empty($_SERVER['HTTPS']) ? 'https://':'https://').$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];?&gt;&quot;,&quot;name&quot;:&quot;&lt;?php the_title();?&gt;&quot;}}]}&lt;/script&gt;</code></pre>
-[adsense_middle]
-<h2 class="hdg-l2-01">解説</h2>
-<p>この記述はJSON-LDという形式となり、Javascriptとしてhtml上解釈されます。今回パンくずリストの構造化になるので、「@type」は「BreadcrumbList」とします。</p>
-<p>「itemListElement」以降は階層構造を記述していきます。「position」は階層を示しており、サイトトップは「1」とし、以降は階層が深くなるたびに「2」「3」「4」となっています。</p>
-<p>「@id」「name」にはそれぞれ該当する階層のページ名とURLを記述します。ここはフルパスでもルートパスでもどちらでもよいです。2階層目までは固定なので静的に記述し、3階層目と4階層前目は以下のように、WordPressで動的に生成するようにしました。</p>
-<h3 class="hdg-l3-01">3階層目</h3>
-<pre><code>"@type":"ListItem",
-"position":3,
-"item":{
-	"@id":"&lt;?php $category = get_the_category();if($category[0]){echo ''.get_category_link( $category[0]-&gt;term_id ).'';}?&gt;",
-	"name":"&lt;?php $category = get_the_category();echo $category[0]-&gt;cat_name;?&gt;"
-}</code></pre>
-<h3 class="hdg-l3-01">4階層目</h3>
-<pre><code>"@type":"ListItem",
-"position":4,
-"item":{
-	"@id":"&lt;?php echo(empty($_SERVER['HTTPS']) ? 'https://':'https://').$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];?&gt;",
-	"name":"&lt;?php the_title();?&gt;"
-}</code></pre>
-<h2 class="hdg-l2-01">SEO効果について</h2>
-<p>2018年2月現在、構造化データのマークアップはあくまでもクローラーとの親和性と検索結果における情報の精度を高めるためのものであり、直接的に検索結果の順位に影響するものではありません。</p>
-<p>しかし、パンくずリストの構造化を例に取ると、ユーザーにとっては属するカテゴリや親ページが「大まかに」把握できるようになるため、リンクをクリックする「きっかけ」になりえると言えるでしょう。</p>
-<p>Googleから<strong>「構造化データのマークアップをランキングアルゴリズムに組み込むかもしれない」</strong>という発言もあったことから、将来的に検索結果のランキング反映の指標の1つになりえる可能性もあります。</p>
-<ul class="list-link-01">
-<li><a href="https://www.youtube.com/watch?v=QWL864VlW7I#action=share" target="_blank">「Google オフィスアワー」録画（YouTube、英語）</a></li>
+<p>そこで本記事では、子供乗せシート（リア用）に最適なハガビーのレインカバーについてご紹介させていただきたいと思います。</p>
+<h2 class="hdg-l2-01">今回購入した子供乗せシートのカバー</h2>
+<p><img src="/images/blog/2018/02/09_01_01.jpg" alt="" width="660" height="500"></p>
+<table class="tbl-01 sp-lyt-on">
+<tbody>
+<tr>
+<th>商品名</th>
+<td><a href="http://amzn.to/2BmtyAg" target="_blank">ハガビー（Huggabee）自転車 チャイルドシート レインカバー 子供乗せ 後ろ用 ブルー</a></td>
+</tr>
+<tr>
+<th>値段</th>
+<td>6,980円</td>
+</tr>
+</tbody>
+</table>
+<p>6,980円と少しお高いですがAmazonのレビューでもかなり好評で、実際にシート「RBC-007DX3」を使用されている方もこれは良いとコメントされていることもあり、こちらの商品に決定。色はブルーとレッドが選択できます。</p>
+<h2 class="hdg-l2-01">ハガビーのレインカバーの特徴</h2>
+<ul class="list-bullet-01">
+<li>芯材が入っておりたるみにくい</li>
+<li>工具なしで簡単に装着可能</li>
+<li>視界が広い</li>
+<li>2パターンの乗り降りが可能</li>
+<li>メッシュの通気口で新鮮な空気を確保</li>
 </ul>
+<h3 class="hdg-l3-01">芯材が入っておりたるみにくい</h3>
+<p>上部とサイドには芯材が入っており、厚く作られており安物とくらべて非常にたるみにくいです。たるまないことでスペースが確保され頭にカバーがかぶさったりしないので、子供がストレスを感じることもないです。</p>
+<h3 class="hdg-l3-01">工具なしで簡単に装着可能</h3>
+<p>カバー自体はかぶせてからゴムで固定し、あとは足元のゴム紐でたるみを絞れば装着完了です。5分もあれば十分でしょう。女性でも簡単に装着することができます。</p>
+<h3 class="hdg-l3-01">視界が広い</h3>
+<p>前面の透明なカバーが非常に広い設計になっており、圧迫感がありません。子供も快適に乗ることができます。</p>
+<h3 class="hdg-l3-01">2パターンの乗り降りが可能</h3>
+<p>前面の窓だけでなくサイドにもファスナーが付いており、これによりで子ども自身で乗り降りすることも可能です。</p>
+<h3 class="hdg-l3-01">メッシュの通気口で新鮮な空気を確保</h3>
+<p>両サイドにはメッシュの通気口が設けられており、前面の窓を完全に閉めても息苦しくなることはありません。</p>
+<h2 class="hdg-l2-01">カバーの設置手順</h2>
+<p>設置は非常に簡単ですが、一応同梱されている以下の説明書に沿って設置いたしました。以下、設置手順になります。</p>
+<ul class="list-notice-01">
+<li><span>※</span>今回購入したのはリア用なので、下の行「後用」を参照</li>
+</ul>
+<p><img src="/images/blog/2018/02/09_01_02.jpg" alt="" width="660" height="500"></p>
+<p>まずはカバーをかぶせる前に、シートのヘッドレストを最上部まで上げておきます。</p>
+<p><img src="/images/blog/2018/02/09_01_03.jpg" alt="" width="660" height="500"></p>
+<p>とりあえずカバーを広げてかぶせます。</p>
+<p><img src="/images/blog/2018/02/09_01_04.jpg" alt="" width="660" height="500"></p>
+<p>ステップの部分までしっかりとかぶせます。</p>
+<p><img src="/images/blog/2018/02/09_01_05.jpg" alt="" width="660" height="500"></p>
+<p>前面の窓をめくり、裏側のゴムをヘッドレストに通して固定します。</p>
+<p><img src="/images/blog/2018/02/09_01_06.jpg" alt="" width="660" height="500"></p>
+<p>さらにハンドル付近の裏側にマジックテープのベルトがあるので、これをハンドルに通して固定します。</p>
+<p><img src="/images/blog/2018/02/09_01_07.jpg" alt="" width="660" height="500"></p>
+<p>両側の足元にゴム紐があるので、これを引くことで周辺のたるみを絞ります。絞ると結構ゴム紐がだらーんとなってしまいタイヤが巻き込んでしまう可能性があるので、</p>
+<p><img src="/images/blog/2018/02/09_01_08.jpg" alt="" width="660" height="500"></p>
+<p>こんな感じで結んでおけばタイヤに巻き込まれる心配もないです。反対サイドも同じように行います。</p>
+<p><img src="/images/blog/2018/02/09_01_09.jpg" alt="" width="660" height="500"></p>
+<p>これで設置完了です。あえて手順を紹介するほどでもなかったですかね（笑）非常に簡単です！ちなみに写真は撮り忘れましたが、ヘッドレストの後ろには小物入れも付いています。</p>
+<p><img src="/images/blog/2018/02/09_01_10.jpg" alt="" width="660" height="500"></p>
+<h2 class="hdg-l2-01">オープン時もボタンで固定可能</h2>
+<p>冬は基本的に雨の降っている降っていないにかかわらず閉めた状態で子供を載せることになりますが、夏は逆に開けておきたい日のほうが多いでしょう。そんな時、開けた窓をヘッドレストの上から後ろにめくりあげ、ボタンで固定しておくことが可能です。これは非常に助かりますね。オールシーズンでカバーをつけっぱなしにすることができます。</p>
+<p><img src="/images/blog/2018/02/09_01_11.jpg" alt="" width="660" height="500"></p>
+<h2 class="hdg-l2-01">実際に子供を載せてみた結果</h2>
+<p>特に嫌がることなく乗ってくれました。ここ最近、寒いこともあってか後ろではなくカバーのある前に乗りたい、と駄々をこねてしまうようになっていたのですが、後ろにカバーが装着されたことでそういったことも無くなりましたね。</p>
+<p>Amazonの紹介ページほどピーンと張ってはいませんが、芯材のおかげもあってか頭上周りの窮屈さもなさそうで一安心です。</p>
 <h2 class="hdg-l2-01">まとめ</h2>
-<p>JSON-LDで記述する構造化データであれば見た目に影響する心配はないので、既存のサイトに組み込むのは意外と簡単です。静的サイトの場合1ページ毎に記述しなければいけないのでとても大変ですが、WordPressをはじめ何かしらのCMSを積んでいれば一度組み込んでしまえばあとは自動的に構造化データを記述することが可能になります。</p>
-<p>既にコンテンツの改善や被リンクの獲得等、基本的なSEO対策は日々実現できているという状況であれば、一歩先を見据えた対策として、構造化データの組み込みを考えてみてはいかがでしょうか。本記事がご参考になれば幸いです。</p>
+<p>カバーの中ではこの商品は結構お高い方だと思いますが、Amazonのレビューにもあったとおり、OGKのヘッドレスト付きシートであればまず間違いありません。高いだけあって作りもしっかりしており、長く使える商品だと思います。</p>
+<p>唯一の心配は取り付けが簡単な分、盗難にあうというリスクもあるかもしれません。このカバーだからというわけではないと思いますが、そこまで気にされる場合は別途何か対策を立てる必要がありそうです。</p>
+<p>OGKのシートでなくとも、同じような形のヘッドレスト及びステップのあるシートであれば装着可能でしょう。すごくおすすめのカバーですので、ぜひ本記事をご参考にしていただければ幸いです。</p>
 
 
 
