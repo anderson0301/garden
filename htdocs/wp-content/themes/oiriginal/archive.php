@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title><?php if($monthnum||$year||$cat){?><?php if($cat){?><?php single_cat_title();?><?php }elseif($monthnum||$year){echo $year.'年';?><?php if($monthnum){echo $monthnum.'月';}}?><?php } ?>の記事一覧 | マイホームブログ | Web屋の芝生DIY</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="<?php if($monthnum||$year||$cat){?><?php if($cat){?><?php single_cat_title();?><?php }elseif($monthnum||$year){echo $year.'年';?><?php if($monthnum){echo $monthnum.'月';}}?><?php } ?>の記事一覧を掲載しています。">
+<meta name="description" content="マイホームブログ<?php if($monthnum||$year||$cat){?><?php if($cat){?><?php single_cat_title();?><?php }elseif($monthnum||$year){echo $year.'年';?><?php if($monthnum){echo $monthnum.'月';}}?><?php } ?>の記事一覧を掲載しています。">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Web屋の芝生DIY">
 <meta property="og:url" content="https://web-diy.jp">
