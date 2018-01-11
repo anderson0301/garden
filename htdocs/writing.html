@@ -3,98 +3,17 @@
 
 <!--======================================ここから記事用ソース======================================-->
 
-<p>ブログのサイドバーに表示する「人気記事一覧」に「1」「2」「3」など人気順にアイコンでナンバリングすることがあります。これらはafterやbeforeなどを使って実装することが可能で、Web屋の芝生DIYでも先日実装を行いました。</p>
+<p></p>
 [adsense_top]
-<p>cssだけで実装することも可能ですが、少し動き（アニメーション）を持たせつつ少しデザインにもこだわりたかったので、GIFアニメを併用して実装しました。これにより、画像は1枚増えますがcssの記述は簡略化することができます。本記事では、GIF画像1枚でランキングアイコンを実装する方法をご紹介させていただきたいと思います。</p>
-<h2 class="hdg-l2-01">サンプルコード</h2>
-<h3 class="hdg-l3-01">html</h3>
-<pre><code>&lt;ol class=&quot;rank&quot;&gt;
-&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img width=&quot;80&quot; height=&quot;80&quot; src=&quot;サムネイルの画像パス&quot; alt=&quot;&quot;&gt;&lt;span class=&quot;txt&quot;&gt;記事タイトル&lt;/span&gt;&lt;p&gt;&lt;span class=&quot;cat&quot;&gt;DIY&lt;/span&gt;yyyy年mm月dd日&lt;/p&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img width=&quot;80&quot; height=&quot;80&quot; src=&quot;サムネイルの画像パス&quot; alt=&quot;&quot;&gt;&lt;span class=&quot;txt&quot;&gt;記事タイトル&lt;/span&gt;&lt;p&gt;&lt;span class=&quot;cat&quot;&gt;DIY&lt;/span&gt;yyyy年mm月dd日&lt;/p&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img width=&quot;80&quot; height=&quot;80&quot; src=&quot;サムネイルの画像パス&quot; alt=&quot;&quot;&gt;&lt;span class=&quot;txt&quot;&gt;記事タイトル&lt;/span&gt;&lt;p&gt;&lt;span class=&quot;cat&quot;&gt;DIY&lt;/span&gt;yyyy年mm月dd日&lt;/p&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img width=&quot;80&quot; height=&quot;80&quot; src=&quot;サムネイルの画像パス&quot; alt=&quot;&quot;&gt;&lt;span class=&quot;txt&quot;&gt;記事タイトル&lt;/span&gt;&lt;p&gt;&lt;span class=&quot;cat&quot;&gt;DIY&lt;/span&gt;yyyy年mm月dd日&lt;/p&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img width=&quot;80&quot; height=&quot;80&quot; src=&quot;サムネイルの画像パス&quot; alt=&quot;&quot;&gt;&lt;span class=&quot;txt&quot;&gt;記事タイトル&lt;/span&gt;&lt;p&gt;&lt;span class=&quot;cat&quot;&gt;DIY&lt;/span&gt;yyyy年mm月dd日&lt;/p&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img width=&quot;80&quot; height=&quot;80&quot; src=&quot;サムネイルの画像パス&quot; alt=&quot;&quot;&gt;&lt;span class=&quot;txt&quot;&gt;記事タイトル&lt;/span&gt;&lt;p&gt;&lt;span class=&quot;cat&quot;&gt;DIY&lt;/span&gt;yyyy年mm月dd日&lt;/p&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img width=&quot;80&quot; height=&quot;80&quot; src=&quot;サムネイルの画像パス&quot; alt=&quot;&quot;&gt;&lt;span class=&quot;txt&quot;&gt;記事タイトル&lt;/span&gt;&lt;p&gt;&lt;span class=&quot;cat&quot;&gt;DIY&lt;/span&gt;yyyy年mm月dd日&lt;/p&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img width=&quot;80&quot; height=&quot;80&quot; src=&quot;サムネイルの画像パス&quot; alt=&quot;&quot;&gt;&lt;span class=&quot;txt&quot;&gt;記事タイトル&lt;/span&gt;&lt;p&gt;&lt;span class=&quot;cat&quot;&gt;DIY&lt;/span&gt;yyyy年mm月dd日&lt;/p&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img width=&quot;80&quot; height=&quot;80&quot; src=&quot;サムネイルの画像パス&quot; alt=&quot;&quot;&gt;&lt;span class=&quot;txt&quot;&gt;記事タイトル&lt;/span&gt;&lt;p&gt;&lt;span class=&quot;cat&quot;&gt;DIY&lt;/span&gt;yyyy年mm月dd日&lt;/p&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img width=&quot;80&quot; height=&quot;80&quot; src=&quot;サムネイルの画像パス&quot; alt=&quot;&quot;&gt;&lt;span class=&quot;txt&quot;&gt;記事タイトル&lt;/span&gt;&lt;p&gt;&lt;span class=&quot;cat&quot;&gt;DIY&lt;/span&gt;yyyy年mm月dd日&lt;/p&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</code></pre>
-<h3 class="hdg-l3-01">css</h3>
-<pre><code>/*サイドバーのベースレイアウトを構成*/
-ol.rank{
-    list-style-type:none;
-    margin-bottom:0;
-}
-
-ol.rank li{
-    margin:0 0 10px 0;
-    border-bottom:1px dotted #ccc;
-    background:#ecece0;
-    position:relative;
-}
-
-ol.rank li p{
-    padding:5px 0 0 0;
-}
-    
-ol.rank li a{
-    display:inline-block;
-    padding:0 0 10px 90px;
-    background:none;
-    min-height:100px;
-    text-decoration:none;
-    z-index:9999;
-}
-
-ol.rank li img{
-    position:absolute;
-    left:0;
-    top:0;
-    z-index:9998;
-}
-
-/*ここからランキングアイコンのcss*/
-ol.rank li:before{
-    content:"";
-    position:absolute;
-    top:-6px;
-    left:-6px;
-    width:22px;
-    height:22px;
-    background:url("/shared/images/arrow_05.gif");
-    background-size:22px;
-    z-index:9999;
-}
-ol.rank li:nth-child(1):before{background-position:left top;}
-ol.rank li:nth-child(2):before{background-position:left -22px;}
-ol.rank li:nth-child(3):before{background-position:left -44px;}
-ol.rank li:nth-child(4):before{background-position:left -66px;}
-ol.rank li:nth-child(5):before{background-position:left -88px;}
-ol.rank li:nth-child(6):before{background-position:left -110px;}
-ol.rank li:nth-child(7):before{background-position:left -132px;}
-ol.rank li:nth-child(8):before{background-position:left -154px;}
-ol.rank li:nth-child(9):before{background-position:left -176px;}
-ol.rank li:nth-child(10):before{background-position:left -198px;}</code></pre>
-<h2 class="hdg-l2-01">解説</h2>
-<p>サイドバーに表示されている「画像左＋テキスト右」のレイアウトを想定したものになります。あくまでもWeb屋の芝生DIYの設計をベースとしたサンプルソースとなりますので、どうかご容赦ください。</p>
-<ul class="list-notice-01">
-<li><span>※</span>流用すればある程度体裁は整いますが、各cssの詳細な値などはサイトにあわせてご調整ください</li>
-</ul>
-<p>まず、ランキングアイコンとして以下のようなGIF画像を用意します。スマートフォンも想定して、実際に表示するサイズの2倍サイズで作成しておくのがポイントです。「1」「2」「3」だけ色味の体裁を変えつつアニメーションを付け、「4」～「10」は汎用的なデザインにしています。</p>
-<ul class="list-link-01">
-<li><a href="https://web-diy.jp/shared/images/arrow_05.gif" target="_blank">ランキングアイコンの画像</a></li>
-</ul>
-<p>疑似要素beforeでGIF画像を背景置換で表示します。widthとheight、またbackground-sizeの値は作成した画像横幅の2分の1で設定します。</p>
-<p>あとは疑似要素:nth-child(n)でランキング「1」～「10」それぞれ、background-positionを設定すればOKです。</p>
-<h3 class="hdg-l3-01">余談：GIFアニメのフレーム間隔に注意</h3>
-<p>GIFアニメを作成する際、フレーム間隔に注意してください。ブラウザによって対応しているフレーム間隔は異なるため、<strong>「0.06秒（16.67fps）以上」</strong>で作成する必要があります。各ブラウザで対応しているフレームレートの限界を超えると、強制的に<strong>「0.10秒」</strong>で再生されてしまいます。</p>
-<p>GIFアニメを作るのは久々でこの特性をすっかり忘れており、最初アニメーションを滑らかにしたいがために0.01秒とか0.02秒で書き出して<strong>「あれー？なんかプレビューよりもブラウザで見るとめっちゃ遅く（速く）になってる。。。」</strong>という状況に陥りました。</p>
-<p>繰り返しになりますが、GIFアニメを作成する際は<strong>「0.06秒（16.67fps）以上で作成する」</strong>と覚えておきましょう。</p>
+<p><img src="/images/blog/2018/02/28_01_01.jpg" alt="" width="253" height="450"></p>
+<p><img src="/images/blog/2018/02/28_01_02.jpg" alt="" width="253" height="450"></p>
+<p><img src="/images/blog/2018/02/28_01_03.jpg" alt="" width="253" height="450"></p>
+<p><img src="/images/blog/2018/02/28_01_04.jpg" alt="" width="253" height="450"></p>
+<p><img src="/images/blog/2018/02/28_01_05.jpg" alt="" width="253" height="450"></p>
+<p><img src="/images/blog/2018/02/28_01_06.jpg" alt="" width="253" height="450"></p>
+<p><img src="/images/blog/2018/02/28_01_07.jpg" alt="" width="253" height="450"></p>
 <h2 class="hdg-l2-01">まとめ</h2>
-<p>無機質でシンプルな形状のランキングアイコンであればcssで事足りますが、ある程度こだわったデザインでさらに動きを付けたい、となると中々cssでの実装は難しかったり、出来たとしてもcssが冗長になりメンテナンス性が低くなってしまうこともあります。</p>
-<p>ご紹介させていただいた実装方法であれば、1枚画像のリクエスト数は増えるもののこの程度のGIF画像であればそんなに重くない（ご紹介した画像は64KB）ですし、デザインを変更したい場合もGIF画像1枚差し替えれば済むので、メンテナンス性も高いです。</p>
-<p>意外と同じような実装をしているサイトは少ないように感じますが、技術的なハードルもそんなに高くないので結構おすすめです。ランキングアイコンを際に実装する際の1つの選択してとしてご参考になれば幸いです。</p>
+<p></p>
 
 
 
