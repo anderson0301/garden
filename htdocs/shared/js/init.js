@@ -4,85 +4,85 @@
 ** 高さ揃え
 ** =================================*/
 $(function(){
-    $('.grid-3').find('.col').find('.bd-type-01').matchHeight();
-    $('.grid-2').find('.col').find('.bd-type-01').matchHeight();
-    $('.grid-3 > .col').matchHeight();
-    $('.grid-2 > .col').matchHeight();
-    $('ul.list-link-thum').find('li').matchHeight();
-    $('ul.list-prev-next').find('li').matchHeight();
+  $('.grid-3').find('.col').find('.bd-type-01').matchHeight();
+  $('.grid-2').find('.col').find('.bd-type-01').matchHeight();
+  $('.grid-3 > .col').matchHeight();
+  $('.grid-2 > .col').matchHeight();
+  $('ul.list-link-thum').find('li').matchHeight();
+  $('ul.list-prev-next').find('li').matchHeight();
 });
 
 /* ==================================
 ** ページスクロール
 ** =================================*/
 $(function(){
-    $("p.page_top").hide();
-    $(window).on("scroll",function(){
-        if($(this).scrollTop() > 100){
-            $('p.page_top').fadeIn();
-        }else{
-            $('p.page_top').fadeOut();
-        }
+  $("p.page_top").hide();
+  $(window).on("scroll",function(){
+    if($(this).scrollTop() > 100){
+      $('p.page_top').fadeIn();
+    }else{
+      $('p.page_top').fadeOut();
+    }
 
-        scrollHeight = $(document).height(); 
-        scrollPosition = $(window).height() + $(window).scrollTop(); 
-        footHeight = $("footer").innerHeight();
-        if(scrollHeight - scrollPosition <= footHeight){
-            $("p.page_top").css({
-                "position":"absolute",
-                "bottom": footHeight + 20
-            });
-        }else{
-            $("p.page_top").css({
-                "position":"fixed",
-                "bottom": "20px"
-            });
-        }
-    });
+    scrollHeight = $(document).height(); 
+    scrollPosition = $(window).height() + $(window).scrollTop(); 
+    footHeight = $("footer").innerHeight();
+    if(scrollHeight - scrollPosition <= footHeight){
+      $("p.page_top").css({
+        "position":"absolute",
+        "bottom": footHeight + 20
+      });
+    }else{
+      $("p.page_top").css({
+        "position":"fixed",
+        "bottom":"20px"
+      });
+    }
+  });
  
-    $('p.page_top').find('a').click(function(){
-        $('body,html').animate({
-        scrollTop: 0
-        }, 500);
-        return false;
-    });
+  $('p.page_top').find('a').click(function(){
+    $('body,html').animate({
+      scrollTop:0
+    },500);
+    return false;
+  });
 });
 
 /* ==================================
 ** グローバルナビカレント表示
 ** =================================*/
 $(function(){
-    var dir = location.href.split('/');
-    if(dir&&dir[3]){
-        $('body').addClass("g-"+dir[3]);
-    }
+  var dir = location.href.split('/');
+  if(dir&&dir[3]){
+    $('body').addClass("g-"+dir[3]);
+  }
 });
 
 /* ==================================
 ** サイドバーアーカイブリストカレント表示
 ** =================================*/
 $(function(){
-    var $pathName = location.pathname;
-    $('dl.archive dd ul').find('li').find('a').each(function(){
-        var $href = $(this).attr("href");
-        if ($pathName.indexOf($href) != -1) {
-            $(this).parent().addClass("current");
-        }
-    });
+  var $pathName = location.pathname;
+  $('dl.archive dd ul').find('li').find('a').each(function(){
+    var $href = $(this).attr("href");
+    if ($pathName.indexOf($href) != -1) {
+      $(this).parent().addClass("current");
+    }
+  });
 });
 
 /* ==================================
 ** ハンバーガーメニュー
 ** =================================*/
 $(function(){
-    $('p#sp-utility-btn').one('click',function(){
-        $("body").append('<div id="overlay"></div>');
-    });
-    $('p#sp-utility-btn').click(function(){
-        $(this).toggleClass('open');
-        $('#sp-drawer-utility').toggleClass('fadein');
-        $('#overlay').toggleClass('fadein');
-    });
+  $('p#sp-utility-btn').one('click',function(){
+    $("body").append('<div id="overlay"></div>');
+  });
+  $('p#sp-utility-btn').click(function(){
+    $(this).toggleClass('open');
+    $('#sp-drawer-utility').toggleClass('fadein');
+    $('#overlay').toggleClass('fadein');
+  });
 });
 
 /* ==================================
@@ -90,88 +90,82 @@ $(function(){
 ** =================================*/
 $(function(){
 
-    //新着情報、人気記事
-    $('p.more').on('click','a',function(event){
-        event.preventDefault();
-        var $className = 'open';
-        var $moreContents = $(this).parent().prev().find("li:gt(4)");
-        if($(this).hasClass($className)){
-            $(this).removeClass($className);
-            $(this).text("さらに見る");
-            $(this).parent().prev().find("li:eq(4)").removeClass("child-05");
-            $moreContents.stop().slideUp('fast');
-        }else{
-            $(this).addClass($className);
-            $(this).text("閉じる");
-            $(this).parent().prev().find("li:eq(4)").addClass("child-05");
-            $moreContents.stop().slideDown('fast');
-        }
-    });
+  //新着情報、人気記事
+  $('p.more').on('click','a',function(event){
+    event.preventDefault();
+    var $className = 'open';
+    var $moreContents = $(this).parent().prev().find("li:gt(4)");
+    if($(this).hasClass($className)){
+      $(this).removeClass($className).text("さらに見る").parent().prev().find("li:eq(4)").removeClass("child-05");
+      $moreContents.stop().slideUp('fast');
+    }else{
+      $(this).addClass($className).text("閉じる").parent().prev().find("li:eq(4)").addClass("child-05");
+      $moreContents.stop().slideDown('fast');
+    }
+  });
 
-    //アーカイブ
-    $('p.more2').on('click','a',function(event){
-        event.preventDefault();
-        var $className = 'open';
-        var $moreContentsTitle = $(this).parent().prev().find("dt:gt(0)");
-        var $moreContentsArticle = $(this).parent().prev().find("dd:gt(0)");
-        if($(this).hasClass($className)){
-            $(this).removeClass($className);
-            $(this).text("さらに見る");
-            $moreContentsTitle.stop().slideUp('fast');
-            $moreContentsArticle.stop().slideUp('fast');
-        }else{
-            $(this).addClass($className);
-            $(this).text("閉じる");
-            $moreContentsTitle.stop().slideDown('fast');
-            $moreContentsArticle.stop().slideDown('fast');
-        }
-    });
+  //アーカイブ
+  $('p.more2').on('click','a',function(event){
+    event.preventDefault();
+    var $className = 'open';
+    var $moreContentsTitle = $(this).parent().prev().find("dt:gt(0)");
+    var $moreContentsArticle = $(this).parent().prev().find("dd:gt(0)");
+    if($(this).hasClass($className)){
+      $(this).removeClass($className).text("さらに見る");
+      $moreContentsTitle.stop().slideUp('fast');
+      $moreContentsArticle.stop().slideUp('fast');
+    }else{
+      $(this).addClass($className).text("閉じる");
+      $moreContentsTitle.stop().slideDown('fast');
+      $moreContentsArticle.stop().slideDown('fast');
+    }
+  });
 });
 
 /* ==================================
 ** クリックイベント計測
 ** =================================*/
 $(function(){
-    
-    //芝生の選び方
-    $('header nav ul li.select a').click(function(){
-        ga('send','event','gnav','click','select');
-    });
+  
+  //芝生の選び方
+  $('header nav ul li.select a').click(function(){
+    ga('send','event','gnav','click','select');
+  });
 
-    //芝生の購入
-    $('header nav ul li.buy a').click(function(){
-        ga('send','event','gnav','click','buy');
-    });
+  //芝生の購入
+  $('header nav ul li.buy a').click(function(){
+    ga('send','event','gnav','click','buy');
+  });
 
-    //芝生の張り方
-    $('header nav ul li.plant a').click(function(){
-        ga('send','event','gnav','click','plant');
-    });
+  //芝生の張り方
+  $('header nav ul li.plant a').click(function(){
+    ga('send','event','gnav','click','plant');
+  });
 
-    //芝生の手入れ
-    $('header nav ul li.maintenance a').click(function(){
-        ga('send','event','gnav','click','maintenance');
-    });
+  //芝生の手入れ
+  $('header nav ul li.maintenance a').click(function(){
+    ga('send','event','gnav','click','maintenance');
+  });
 
-    //芝生の道具
-    $('header nav ul li.tool a').click(function(){
-        ga('send','event','gnav','click','tool');
-    });
+  //芝生の道具
+  $('header nav ul li.tool a').click(function(){
+    ga('send','event','gnav','click','tool');
+  });
 
-    //マイホームブログ
-    $('header nav ul li.blog a').click(function(){
-        ga('send','event','gnav','click','blog');
-    });
+  //マイホームブログ
+  $('header nav ul li.blog a').click(function(){
+    ga('send','event','gnav','click','blog');
+  });
 
-    //関連リンク
-    $('ul.js-related li a').click(function(){
-        ga('send','event','related','click','hoge');
-    });
+  //関連リンク
+  $('ul.js-related li a').click(function(){
+    ga('send','event','related','click','hoge');
+  });
 
-    //パンくず
-    $('div#breadcrumb ul li a').click(function(){
-        ga('send','event','breadcrumb','click','moge');
-    });
+  //パンくず
+  $('div#breadcrumb ul li a').click(function(){
+    ga('send','event','breadcrumb','click','moge');
+  });
 
 });
 
