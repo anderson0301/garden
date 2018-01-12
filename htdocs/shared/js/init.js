@@ -122,53 +122,6 @@ $(function(){
   });
 });
 
-/* ==================================
-** クリックイベント計測
-** =================================*/
-$(function(){
-  
-  //芝生の選び方
-  $('header nav ul li.select a').click(function(){
-    ga('send','event','gnav','click','select');
-  });
-
-  //芝生の購入
-  $('header nav ul li.buy a').click(function(){
-    ga('send','event','gnav','click','buy');
-  });
-
-  //芝生の張り方
-  $('header nav ul li.plant a').click(function(){
-    ga('send','event','gnav','click','plant');
-  });
-
-  //芝生の手入れ
-  $('header nav ul li.maintenance a').click(function(){
-    ga('send','event','gnav','click','maintenance');
-  });
-
-  //芝生の道具
-  $('header nav ul li.tool a').click(function(){
-    ga('send','event','gnav','click','tool');
-  });
-
-  //マイホームブログ
-  $('header nav ul li.blog a').click(function(){
-    ga('send','event','gnav','click','blog');
-  });
-
-  //関連リンク
-  $('ul.js-related li a').click(function(){
-    ga('send','event','related','click','hoge');
-  });
-
-  //パンくず
-  $('div#breadcrumb ul li a').click(function(){
-    ga('send','event','breadcrumb','click','moge');
-  });
-
-});
-
 })(jQuery);
 /* ==================================
 ** Plugin
