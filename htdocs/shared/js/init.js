@@ -1,4 +1,4 @@
-(function () {
+(function(){
 
 /* ==================================
 ** 高さ揃え
@@ -13,24 +13,118 @@ $(function(){
 });
 
 /* ==================================
+** サイドバートグル
+** =================================*/
+$(function(){
+  $('p.more').on('click','a',function(event){
+    event.preventDefault();
+    var $className = 'open';
+    var $moreContents = $(this).parent().prev().find("li:gt(4)");
+    if($(this).hasClass($className)){
+      $(this).removeClass($className).text("さらに見る").parent().prev().find("li:eq(4)").removeClass("child-05");
+      $moreContents.stop().slideUp('fast');
+    }else{
+      $(this).addClass($className).text("閉じる").parent().prev().find("li:eq(4)").addClass("child-05");
+      $moreContents.stop().slideDown('fast');
+    }
+  });
+});
+
+/* ==================================
+** サイドバー固定
+** =================================*/
+$(window).on("load scroll resize",function(){
+
+  var sidebarFix = function(){
+
+    //スクロールバー込みの画面幅
+    var w = window.innerWidth;
+
+    //サイドバー有無の境界幅
+    var x = 851;
+
+    if(w >= x){
+
+      //各要素の高さを取得 
+      var $winH = $(window).height();//ウィンドウの高さ
+      var $pageH = $('body').height();//bodyの高さ
+      var $headerH = $('header').outerHeight(true);//ヘッダーの高さ
+      var $mainH = $('#main-inner').outerHeight(true);//メインカラムの高さ
+      var $sideH = $('#nav-sidebar-inner').outerHeight(true);//サイドバーの高さ
+      var $footerH = $('footer').outerHeight(true);//フッターの高さ
+      var $paddingH = $('#content').outerHeight(true) - $('#content').height();//余白の高さ
+
+      //サイドバーの固定と解除条件を計算 
+      var $fixedSide = ($headerH + $paddingH + $sideH) - $winH;//サイドバーを固定するスクロール高さ
+      var $scrollBtm = $pageH - $winH - $footerH ;//フッターが画面に表示されるスクロール高さ
+
+      //スクロール値を取得 
+      var $scrollTop = $(this).scrollTop();
+
+      //記事がサイドバーより長い場合実行
+      if($mainH > $sideH){
+
+        //サイドバー下端までスクロールしたらサイドバー下端で追従
+        if($scrollTop > $fixedSide){
+
+          //サイドバー固定のクラス付与
+          $('#nav-sidebar-inner').addClass('fixed-side').css('bottom',0);
+
+          //サイドバー固定時のサイドバー幅を計算
+          var $sidebarW = $('#nav-sidebar').width();
+
+          //計算したサイドバー幅を付与
+          $('#nav-sidebar-inner').css("width",$sidebarW);
+
+        //条件から外れたら固定クラスを削除し幅をリセット
+        }else{
+
+          //サイドバー固定のクラス削除
+          $('#nav-sidebar-inner').removeClass('fixed-side');
+
+          //サイドバー幅リセット
+          $('#nav-sidebar-inner').css('width','auto');
+        }
+        //フッターまでスクロールしたらサイドバー下端をフッター上端に連結
+        if($scrollTop > $scrollBtm){
+          $('#nav-sidebar-inner').removeClass('fixed-side').css('bottom',0);
+          $('#nav-sidebar-inner').addClass('bottom-side').css('bottom',$footerH);
+
+        //条件から外れたらクラスを削除
+        }else{
+          $('#nav-sidebar-inner').removeClass('bottom-side').css('bottom',0);
+        }
+      }
+
+    //サイドバーがない場合に適用
+    }else{
+      $('#nav-sidebar-inner').css('width','auto');
+    }
+
+  };sidebarFix();
+
+});
+
+/* ==================================
 ** ページスクロール
 ** =================================*/
 $(function(){
   $("p.page_top").hide();
   $(window).on("scroll",function(){
+
     if($(this).scrollTop() > 100){
       $('p.page_top').fadeIn();
     }else{
       $('p.page_top').fadeOut();
     }
 
-    scrollHeight = $(document).height(); 
-    scrollPosition = $(window).height() + $(window).scrollTop(); 
-    footHeight = $("footer").innerHeight();
-    if(scrollHeight - scrollPosition <= footHeight){
+    var $scrollH = $(document).height(); 
+    var $scrollPosition = $(window).height() + $(window).scrollTop(); 
+    var $footerH = $("footer").innerHeight();
+    if($scrollH - $scrollPosition <= $footerH){
       $("p.page_top").css({
         "position":"absolute",
-        "bottom": footHeight + 20
+        "bottom":$footerH + 20
       });
     }else{
       $("p.page_top").css({
@@ -65,7 +159,7 @@ $(function(){
   var $pathName = location.pathname;
   $('dl.archive dd ul').find('li').find('a').each(function(){
     var $href = $(this).attr("href");
-    if ($pathName.indexOf($href) != -1) {
+    if($pathName.indexOf($href) != -1){
       $(this).parent().addClass("current");
     }
   });
@@ -86,40 +180,20 @@ $(function(){
 });
 
 /* ==================================
-** サイドバートグルボタン
+** クリックイベント計測
 ** =================================*/
 $(function(){
 
-  //新着情報、人気記事
-  $('p.more').on('click','a',function(event){
-    event.preventDefault();
-    var $className = 'open';
-    var $moreContents = $(this).parent().prev().find("li:gt(4)");
-    if($(this).hasClass($className)){
-      $(this).removeClass($className).text("さらに見る").parent().prev().find("li:eq(4)").removeClass("child-05");
-      $moreContents.stop().slideUp('fast');
-    }else{
-      $(this).addClass($className).text("閉じる").parent().prev().find("li:eq(4)").addClass("child-05");
-      $moreContents.stop().slideDown('fast');
-    }
+  //さらに見る（最新記事）
+  $('ul.whatsnew').next().find('a').click(function(){
+    ga('send','event','whatsnew','click','more');
+  });
+  
+  //さらに見る（人気記事）
+  $('ol.rank').next().click(function(){
+    ga('send','event','rank','click','more');
   });
 
-  //アーカイブ
-  $('p.more2').on('click','a',function(event){
-    event.preventDefault();
-    var $className = 'open';
-    var $moreContentsTitle = $(this).parent().prev().find("dt:gt(0)");
-    var $moreContentsArticle = $(this).parent().prev().find("dd:gt(0)");
-    if($(this).hasClass($className)){
-      $(this).removeClass($className).text("さらに見る");
-      $moreContentsTitle.stop().slideUp('fast');
-      $moreContentsArticle.stop().slideUp('fast');
-    }else{
-      $(this).addClass($className).text("閉じる");
-      $moreContentsTitle.stop().slideDown('fast');
-      $moreContentsArticle.stop().slideDown('fast');
-    }
-  });
 });
 
 })(jQuery);

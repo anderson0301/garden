@@ -88,6 +88,14 @@ body.lyt-main-sub #content{
 		width: 100%;
 		float:none;
 		margin-left:0;
+		
+		div#nav-sidebar-inner.fixed-side{
+			position:static;
+		}
+		div#nav-sidebar-inner.bottom-side{
+			position:static;
+		}
+		
 		ul,ol{
 			li{
 				p{

@@ -1,4 +1,5 @@
 <div id="nav-sidebar">
+<div id="nav-sidebar-inner">
 <p class="title-blog"><span>カテゴリー</span></p>
 <ul class="category">
 <?php $cat_info = get_categories('');
@@ -58,4 +59,5 @@ foreach ($cat_info as $category) { if($category->count != 0) : ?>
     echo $wrapper;
 ?>
 </dl>
+</div><!--/#nav-sidebar-inner-->
 </div><!--/#nav-sidebar-->

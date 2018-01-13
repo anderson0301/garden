@@ -347,6 +347,15 @@ body.lyt-main-sub #content{
 		width:$navLocalWidth;
 		margin-left:20px; 
 		float:right;
+		
+		div#nav-sidebar-inner.fixed-side{
+			position:fixed;
+			bottom:0;
+		}
+		div#nav-sidebar-inner.bottom-side{
+			position:absolute;
+		}
+		
 		p.title-blog{
 			font-size:1.0rem;
 			font-weight: bold;
@@ -551,8 +560,7 @@ body.lyt-main-sub #content{
 			}
 		}
 		
-		p.more,
-		p.more2{
+		p.more{
 			text-align:center;
 			a{
 				display: inline-block;
@@ -574,7 +582,6 @@ body.lyt-main-sub #content{
 				background-color:#fff;
 			}
 		}
-
 	}
 }
 
