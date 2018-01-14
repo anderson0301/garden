@@ -34,31 +34,6 @@ body.lyt-main-sub #content{
 
 }
 
-/*----------------------------------------------
- Max 960px
-----------------------------------------------*/
-@media screen and (max-width:960px){
-
-div.social{
-	dl{
-		
-		dd{
-			ul{
-			    li{
-				    width:33%;
-				}
-
-				li:nth-child(3n),
-				li:last-child{
-				    margin: 0 0 2px 0;
-				}
-			}
-		}
-	}
-}
-
-}
-
 
 /*----------------------------------------------
  Max 850px
@@ -234,7 +209,7 @@ header{
 			margin:0 0;
 			box-shadow: none;
 			li{
-				width:33.111111111%;
+				width:calc((100% - 2px) / 3);
 				border-right:1px solid #ccc;
 				border-bottom:1px solid #ccc;
 				text-align: center;
@@ -310,10 +285,9 @@ table.tbl-01.sp-lyt-on-02{
 
 ul.list-link-thum{
 	li {
-		width: 100%;
-		float: none;;
-		margin: 0 0 10px 0;
-		
+		width:100%;
+		float:none;;
+		margin:0 0 10px 0;
 	}
 }
 
@@ -391,17 +365,16 @@ div.social{
 		dd{
 			ul{
 			    li{
-				    width:49.6%;
+				    width:calc((100% - 2px) / 2);
 				}
 
-				li:nth-child(3n){
-				    margin: 0 2px 2px 0;
+				li:nth-child(1),
+				li:nth-child(2){
+				    margin-bottom:2px;
 				}
 
-				li:nth-child(2n),
-				li:nth-child(4n),
-				li:last-child{
-				    margin: 0 0 2px 0;
+				li:nth-child(2n){
+				    margin-right:0;
 				}
 			}
 		}

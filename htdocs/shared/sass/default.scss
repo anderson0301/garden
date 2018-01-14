@@ -61,7 +61,7 @@ textarea{
 	border-radius:4px;
 	border:1px solid #ccc;
 	box-shadow:1px 1px 1px 1px rgba(243, 243, 243, 0.9) inset;
-	width:95%!important;
+	width:calc((100% - 16px) / 1);
 }
 
 textarea{

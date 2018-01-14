@@ -133,8 +133,7 @@ $(function(){
       });
     }
   });
- 
-  $('p.page_top').find('a').click(function(){
+  $('p.page_top a').click(function(){
     $('body,html').animate({
       scrollTop:0
     },500);
