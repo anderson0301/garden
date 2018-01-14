@@ -131,9 +131,9 @@ header{
 			border-radius:4px;
 			@include clearfix;
 			li{
-				width:calc((100%) / 6);
+				width:16.6666666666%;
 				float:left;
-				text-align: center;
+				text-align:center;
 
 				a,
 				a:link,
