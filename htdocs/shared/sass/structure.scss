@@ -609,12 +609,7 @@ p.page_top{
 		font-size:0;
 		line-height:0;
 	}
-	a:hover{
-		display:block;
-		height:45px;
-		width:46px;
+	a.hover{
 		background:url("/shared/images/page_top.png") no-repeat left bottom;
-		font-size:0;
-		line-height:0;
 	}
 }

@@ -137,7 +137,14 @@ $(function(){
     $('body,html').animate({
       scrollTop:0
     },500);
+    $(this).removeClass('hover');
     return false;
+  });
+
+  $('p.page_top a').hover(function(){
+    $(this).addClass('hover');
+  },function(){
+    $(this).removeClass('hover');
   });
 });
 
