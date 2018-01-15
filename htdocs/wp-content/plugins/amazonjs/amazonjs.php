@@ -93,7 +93,7 @@ class Amazonjs
 				'label'              => __( 'Japan', $this->text_domain ),
 				'domain'             => 'Amazon.co.jp',
 				'baseUri'            => 'http://webservices.amazon.co.jp',
-				'linkTemplate'       => '<iframe src="http://rcm-jp.amazon.co.jp/e/cm?t=${t}&o=9&p=8&l=as1&asins=${asins}&fc1=${fc1}&IS2=${IS2}&lt1=${lt1}&m=amazon&lc1=${lc1}&bc1=${bc1}&bg1=${bg1}&f=ifr" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>',
+				'linkTemplate'       => '<iframe src="//rcm-jp.amazon.co.jp/e/cm?t=${t}&o=9&p=8&l=as1&asins=${asins}&fc1=${fc1}&IS2=${IS2}&lt1=${lt1}&m=amazon&lc1=${lc1}&bc1=${bc1}&bg1=${bg1}&f=ifr" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>',
 				'associateTagSuffix' => '-22',
 			),
 			'CA' => array(
