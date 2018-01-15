@@ -391,4 +391,22 @@ div.ad-toppage-top div.grid-2 > .col:nth-child(2){
 	display: none;
 }
 
+div.az-item{
+	a{
+		div.info{
+			p{
+				font-size:0.7rem;
+			}
+			ul{
+				font-size:0.7rem;
+				li{
+					span.price{
+						font-size:0.75rem;
+					}
+				}
+			}
+		}
+	}
+}
+
 }
