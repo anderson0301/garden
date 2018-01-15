@@ -1078,6 +1078,59 @@ blockquote:after{
 }
 
 /*----------------------------------------------
+ Amazon
+----------------------------------------------*/
+div.az-item{
+	transition:all 0.15s ease;
+	border:1px solid #ddd;
+	padding:10px;
+	a{
+		@include clearfix;
+		p.img{
+			width:21%;
+			float:left;
+		}
+		div.info{
+			width:76%;
+			float:right;
+			overflow:hidden;
+			p{
+				margin-bottom:5px;
+				text-decoration:underline;
+			}
+			:not(p){
+				color:#333;
+				text-decoration:none;
+			}
+			ul{
+				font-size:0.8rem;
+				li{
+					span.price{
+						margin-right:5px;
+						display:inline-block;
+						color:#900;
+						font-size:1rem;
+					}
+				}
+			}
+		}
+	}
+	a:hover{
+		div.info{
+			p{
+				text-decoration:none;
+			}
+		}
+	}
+}
+
+div.az-item:hover{
+	border:1px solid #387922;
+}
+
+
+
+/*----------------------------------------------
  CSS Animation
 ----------------------------------------------*/
 @keyframes fade-in {
