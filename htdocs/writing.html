@@ -3,31 +3,166 @@
 
 <!--======================================ここから記事用ソース======================================-->
 
-<p>先日<a href="/2018/02/180221_01/">鳩よけ対策としてダイソーでおもちゃのヘビを設置</a>したのですが、1週間ほど落ち着いたかと思いきや、やつらはこれがおもちゃであることにどうやら気づいたようで、また庭に糞をするようになってしまいました。。。</p>
+<p>よくブログで実装されているイメージですが、企業サイトなどでもページをある程度スクロールすると、サイドバーが固定されているのをご覧になったことがあるかと思います。サイトの基本設計やサイドバーを上下どちらに固定するかなどで実装方法は様々ですが、今回Web屋の芝生DIYでは<strong>「サイドバーを下に固定」</strong>する実装を行いました。</p>
 [adsense_top]
-<p>そこで鳩よけ対策第2弾として、今度は結束バンドを剣山的に設置することに。本記事では結束バンドによる鳩よけ方法をご紹介させていただきたいと思います。</p>
-<h2 class="hdg-l2-01">我が家の場合、ヘビのおもちゃではダメな模様</h2>
-<p><strong>「ヘビのおもちゃで鳩が来なくなった！」</strong>とネットではいくつか情報が見られたのですが、どうやら我が家に襲来する鳩はわりかし賢いようで、1週間ほど多少の効果は見られたものの、しばらくするとヘビを気にする様子もなく普通に飛来するようになってしまいました。</p>
-<p>結果、やつらは糞を<strong>「これでもか！」「これぐらいか！」</strong>とまき散らしていきます。</p>
-<p><img src="/images/blog/2018/03/05_01_01.jpg" alt="" width="660" height="500"></p>
-<ul class="list-notice-01">
-<li><span>※</span>糞をまき散らせている箇所は自主規制</li>
-</ul>
-<h2 class="hdg-l2-01">結束バンドで剣山を設置</h2>
-<p><a href="/2018/02/180221_01/">ヘビのおもちゃを設置した際にもご紹介</a>している通り、お隣さんとの境目が特にひどく、柵の一番上に停まって糞をする模様。ならばこの柵に停まりたくないと思わせればよいと思い、ここに結束バンドを巻き付けることに。</p>
-<p><img src="/images/blog/2018/03/05_01_02.jpg" alt="" width="660" height="500"></p>
-<p>ちなみに以下の記事でご紹介しているベビーフェンスを作る時に使用した結束バンドがいっぱい余っていたので、今回のコストは0円です。</p>
+<p>そこで本記事では、<strong>「プラグインを使用せずレスポンシブにサイドバーを下に固定する方法」</strong>についてご紹介させていただきたいと思います。</p>
+<h2 class="hdg-l2-01">サンプルソース</h2>
+<h3 class="hdg-l3-01">html</h3>
+<pre><code>&lt;header&gt;
+&lt;!--ヘッダー要素--&gt;
+&lt;/header&gt;
+&lt;div id=&quot;content&quot;&gt;
+
+&lt;main&gt;
+&lt;div id=&quot;main-inner&quot;&gt;
+&lt;!--メインコンテンツ要素--&gt;
+&lt;/div&gt;
+&lt;/main&gt;
+
+&lt;div id=&quot;nav-sidebar&quot;&gt;
+&lt;div id=&quot;nav-sidebar-inner&quot;&gt;
+&lt;!--サイドバー要素--&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;&lt;!--/#content--&gt;
+&lt;footer&gt;
+&lt;!--フッター要素--&gt;
+&lt;/footer&gt;</code></pre>
+
+<h3 class="hdg-l3-01">css</h3>
+<pre><code>//ヘッダーのcssを定義
+header{
+}
+
+//フッターのcssを定義
+footer{
+}
+
+//コンテンツ全体のcssを定義（max-widthなど）
+#content{
+}
+
+//メインカラムのcssを定義（float:left;やwidth:XXXなど）
+#content main{
+}
+
+//メインカラムのcssを定義（余白調整や角丸など）
+#content main #main-inner{
+}
+
+//サイドバー全体のcssを定義（float:right;やwidth:XXXなど）
+div#nav-sidebar{
+}
+
+//スクロール固定中のclass
+div#nav-sidebar-inner.fixed-side{
+　　position:fixed;
+　　bottom:0;
+}
+
+//フッターに到達時のclass
+div#nav-sidebar-inner.bottom-side{
+　　position:absolute;
+}
+
+//メディアクエリ（1カラム時はposition:static）
+@media screen and (max-width:850px){
+  div#nav-sidebar-inner.fixed-side{
+    position:static;
+  }
+  div#nav-sidebar-inner.bottom-side{
+    position:static;
+  }
+}</code></pre>
+<h3 class="hdg-l3-01">js</h3>
+<pre><code>(function(){
+
+$(window).on("load scroll resize",function(){
+  var sidebarFix = function(){
+
+    //スクロールバー込みの画面幅
+    var w = window.innerWidth;
+
+    //サイドバー有無の境界幅
+    var x = 851;
+
+    if(w >= x){
+
+      //各要素の高さを取得 
+      var $winH = $(window).height();//ウィンドウの高さ
+      var $pageH = $('body').height();//bodyの高さ
+      var $headerH = $('header').outerHeight(true);//ヘッダーの高さ
+      var $mainH = $('#main-inner').outerHeight(true);//メインカラムの高さ
+      var $sideH = $('#nav-sidebar-inner').outerHeight(true);//サイドバーの高さ
+      var $footerH = $('footer').outerHeight(true);//フッターの高さ
+      var $paddingH = $('#content').outerHeight(true) - $('#content').height();//余白の高さ
+
+      //サイドバーの固定と解除条件を計算 
+      var $fixedSide = ($headerH + $paddingH + $sideH) - $winH;//サイドバーを固定するスクロール高さ
+      var $scrollBtm = $pageH - $winH - $footerH ;//フッターが画面に表示されるスクロール高さ
+
+      //スクロール値を取得 
+      var $scrollTop = $(this).scrollTop();
+
+      //記事がサイドバーより長い場合実行
+      if($mainH > $sideH){
+
+        //サイドバー下端までスクロールしたらサイドバー下端で追従
+        if($scrollTop > $fixedSide){
+
+          //サイドバー固定のクラス付与
+          $('#nav-sidebar-inner').addClass('fixed-side').css('bottom',0);
+
+          //サイドバー固定時のサイドバー幅を計算
+          var $sidebarW = $('#nav-sidebar').width();
+
+          //計算したサイドバー幅を付与
+          $('#nav-sidebar-inner').css("width",$sidebarW);
+
+        //条件から外れたら固定クラスを削除し幅をリセット
+        }else{
+
+          //サイドバー固定のクラス削除
+          $('#nav-sidebar-inner').removeClass('fixed-side');
+
+          //サイドバー幅リセット
+          $('#nav-sidebar-inner').css('width','auto');
+        }
+        //フッターまでスクロールしたらサイドバー下端をフッター上端に連結
+        if($scrollTop > $scrollBtm){
+          $('#nav-sidebar-inner').removeClass('fixed-side').css('bottom',0);
+          $('#nav-sidebar-inner').addClass('bottom-side').css('bottom',$footerH);
+
+        //条件から外れたらクラスを削除
+        }else{
+          $('#nav-sidebar-inner').removeClass('bottom-side').css('bottom',0);
+        }
+      }
+
+    //サイドバーがない場合に適用
+    }else{
+      $('#nav-sidebar-inner').css('width','auto');
+    }
+  };sidebarFix();
+});
+})(jQuery);</code></pre>
+<h2 class="hdg-l2-01">解説</h2>
+<p>実装に当たって、以下の記事を参考にさせていただきました。</p>
 <ul class="list-link-01">
-<li><a href="/2017/08/170816_01/">【ベビーフェンス第3弾！】ダイソーのワイヤーネットを使い玄関前のベビーフェンスをDIYで作成</a></li>
-<li><a href="/2017/06/170605_01/">【ベビーフェンス第2弾！】ニトリの突っ張り棒とワイヤーネットで、頑丈なベビーフェンスをDIY</a></li>
-<li><a href="/2016/12/161205_01/">【100均のみ！】ダイソーのワイヤーネットを使いテレビ周りのベビーフェンスをDIYで作成</a></li>
+<li><a href="https://hm-solution.jp/web/post3105.html" target="_blank">サイドメニューが下まで行ったらそこで固定するJS（jQuery）</a></li>
+<li><a href="http://tsumaboku.com/fix-the-sidebar" target="_blank">レスポンシブ対応！幅が比率指定のサイドバーを下端で追従させる方法－WordPress（Twenty Seventeen）</a></li>
 </ul>
-<h3 class="hdg-l3-01">結束バンド設置後の様子</h3>
-<p>こちらが結束バンドを設置した後の様子です。上に向かってトゲトゲのように巻き付けるのがポイントです。私が鳩だったらこんなトゲトゲした場所に停まりたくないなあ。。。と思いますが、奴らは思った以上に図々しくふてぶてしいので油断できません。とりあえずは、これでしばらく今後の様子を見守りたいと思います。</p>
-<p><img src="/images/blog/2018/03/05_01_03.jpg" alt="" width="660" height="500"></p>
+<p>まずは変数wにスクロールバー込みの画面幅を格納し、変数xではサイドバー固定を実行するブレイクポイントを定義します。次に「if(w >= x){～」で、<strong>「ブレイクポイントよりも画面幅が大きい場合」</strong>のみ、サイドバー固定を実行する条件分岐を行います。</p>
+<p>if文の中で、サイドバー固定の計算に必要な各要素の値を変数に格納します。続けて、変数$fixedSideには<strong>「ヘッダー + コンテンツ全体の余白 + サイドバー」</strong>を足した値からウインドウの高さを引くことで、サイドバーを固定するスクロールの高さを定義します。さらに、変数$scrollBtmにはbodyからウインドウとフッターの高さを引くことで、フッター到達時にサイドバーがフッター上部で固定するスクロールの高さを定義しています。</p>
+<p>続けて、実際にサイドバーを固定する処理の記述になります。そもそもメインカラムがサイドバーより短い場合はサイドバー固定を実行する必要はないので、<strong>「if($mainH > $sideH){～」</strong>でさらに条件分岐し、処理を行います。</p>
+<p>if($scrollTop > $fixedSide){～にてフッター上部までサイドバー固定用のcssを付与します。ポイントは、<strong>#nav-sidebar-innerにwidthを設定する点</strong>です。#nav-sidebar-innerはposition:fixedになるため、<strong>包括している#nav-sidebarのwidthが適用されなくなり幅が変わってしまいます。</strong>そのため、#nav-sidebarのwidthを#nav-sidebar-innerにも適用してあげる必要があります。</p>
+<p>else{～では付与したclassを外し、widthの値もautoにリセットします。</p>
+<p>if($scrollTop > $scrollBtm){～にて、フッター到達時の処理を行います。サイドバー固定用のclassを外し、フッター到達時用のclassを付与します。ポイントは、レスポンシブでフッターの高さが可変になることを考慮し、<strong>固定値ではなく変数$footerHに格納しておいたフッターの高さをbottomに付与する点</strong>です。これにより、レスポンシブに対応したサイドバー固定が可能になります。</p>
+<p>最後に、条件から外れた場合はフッター到達時のclassを外します。</p>
 <h2 class="hdg-l2-01">まとめ</h2>
-<p>この結束バンドで鳩が来なくなれば万事解決なのですが、これでも襲来する場合はテグスを張る手段を検討しようと考えています。その際はまだ別記事でご紹介させていただきたいと思います。</p>
-<p>以上、結束バンドによる鳩除け対策についてご紹介させていただきました。鳩の襲来でお悩みの方は、ぜひ本記事をご参考にしていただければ幸いです。</p>
+<p>ブログ記事はそこまで内容が短いものでなければ、サイドバーよりメインコンテンツが長くなるケースが多いかと思いますが、ある程度スクロールすれば当然サイドバーには何もなくなります。そんな時、サイドバー固定を実装しておくことで、空いたスペースを有効活用することが可能になります。</p>
+<p>ご紹介した方法は、プラグインも使用せずレスポンシブにも対応しているので非常におすすめです。サイトの設計に応じてセレクタ指定やブレイクポイントは多少弄ぶ必要はありますが、なるべく汎用的なソースとしてご紹介させていただきましたので、ぜひご参考にしていただければ幸いです。</p>
 
 
 
