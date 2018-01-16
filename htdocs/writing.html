@@ -3,167 +3,115 @@
 
 <!--======================================ここから記事用ソース======================================-->
 
-<p>よくブログで実装されているイメージですが、企業サイトなどでもページをある程度スクロールすると、サイドバーが固定されているのをご覧になったことがあるかと思います。サイトの基本設計やサイドバーを上下どちらに固定するかなどで実装方法は様々ですが、今回Web屋の芝生DIYでは<strong>「サイドバーを下に固定」</strong>する実装を行いました。</p>
+<p>200記事達成から約9ヶ月、Web屋の芝生DIYのブログ記事は早くも300記事に到達しました。せっかくなので200記事以降にサイトを改修した箇所、200記事以降の月ごとのアクセス数の変化、サイト運営についての所感を記事にまとめてみました。</p>
 [adsense_top]
-<p>そこで本記事では、<strong>「プラグインを使用せずレスポンシブにサイドバーを下に固定する方法」</strong>についてご紹介させていただきたいと思います。</p>
-<h2 class="hdg-l2-01">サンプルソース</h2>
-<h3 class="hdg-l3-01">html</h3>
-<pre><code>&lt;header&gt;
-&lt;!--ヘッダー要素--&gt;
-&lt;/header&gt;
-&lt;div id=&quot;content&quot;&gt;
-
-&lt;main&gt;
-&lt;div id=&quot;main-inner&quot;&gt;
-&lt;!--メインコンテンツ要素--&gt;
-&lt;/div&gt;
-&lt;/main&gt;
-
-&lt;div id=&quot;nav-sidebar&quot;&gt;
-&lt;div id=&quot;nav-sidebar-inner&quot;&gt;
-&lt;!--サイドバー要素--&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;&lt;!--/#content--&gt;
-&lt;footer&gt;
-&lt;!--フッター要素--&gt;
-&lt;/footer&gt;</code></pre>
-
-<h3 class="hdg-l3-01">css</h3>
-<pre><code>//ヘッダーのcssを定義
-header{
-}
-
-//フッターのcssを定義
-footer{
-}
-
-//コンテンツ全体のcssを定義（max-widthなど）
-#content{
-}
-
-//メインカラムのcssを定義（float:left;やwidth:XXXなど）
-#content main{
-}
-
-//メインカラムのcssを定義（余白調整や角丸など）
-#content main #main-inner{
-}
-
-//サイドバー全体のcssを定義（float:right;やwidth:XXXなど）
-div#nav-sidebar{
-}
-
-//スクロール固定中のclass
-div#nav-sidebar-inner.fixed-side{
-　　position:fixed;
-　　bottom:0;
-}
-
-//フッターに到達時のclass
-div#nav-sidebar-inner.bottom-side{
-　　position:absolute;
-}
-
-//メディアクエリ（1カラム時はposition:static）
-@media screen and (max-width:850px){
-  div#nav-sidebar-inner.fixed-side{
-    position:static;
-  }
-  div#nav-sidebar-inner.bottom-side{
-    position:static;
-  }
-}</code></pre>
-<h3 class="hdg-l3-01">js</h3>
-<pre><code>(function(){
-
-$(window).on("load scroll resize",function(){
-  var sidebarFix = function(){
-
-    //スクロールバー込みの画面幅
-    var w = window.innerWidth;
-
-    //サイドバー有無の境界幅
-    var x = 851;
-
-    if(w >= x){
-
-      //各要素の高さを取得 
-      var $winH = $(window).height();//ウィンドウの高さ
-      var $pageH = $('body').height();//bodyの高さ
-      var $headerH = $('header').outerHeight(true);//ヘッダーの高さ
-      var $mainH = $('#main-inner').outerHeight(true);//メインカラムの高さ
-      var $sideH = $('#nav-sidebar-inner').outerHeight(true);//サイドバーの高さ
-      var $footerH = $('footer').outerHeight(true);//フッターの高さ
-      var $paddingH = $('#content').outerHeight(true) - $('#content').height();//余白の高さ
-
-      //サイドバーの固定と解除条件を計算 
-      var $fixedSide = ($headerH + $paddingH + $sideH) - $winH;//サイドバーを固定するスクロール高さ
-      var $scrollBtm = $pageH - $winH - $footerH ;//フッターが画面に表示されるスクロール高さ
-
-      //スクロール値を取得 
-      var $scrollTop = $(this).scrollTop();
-
-      //記事がサイドバーより長い場合実行
-      if($mainH > $sideH){
-
-        //サイドバー下端までスクロールしたらサイドバー下端で追従
-        if($scrollTop > $fixedSide){
-
-          //サイドバー固定のクラス付与
-          $('#nav-sidebar-inner').addClass('fixed-side').css('bottom',0);
-
-          //サイドバー固定時のサイドバー幅を計算
-          var $sidebarW = $('#nav-sidebar').width();
-
-          //計算したサイドバー幅を付与
-          $('#nav-sidebar-inner').css("width",$sidebarW);
-
-        //条件から外れたら固定クラスを削除し幅をリセット
-        }else{
-
-          //サイドバー固定のクラス削除
-          $('#nav-sidebar-inner').removeClass('fixed-side');
-
-          //サイドバー幅リセット
-          $('#nav-sidebar-inner').css('width','auto');
-        }
-        //フッターまでスクロールしたらサイドバー下端をフッター上端に連結
-        if($scrollTop > $scrollBtm){
-          $('#nav-sidebar-inner').removeClass('fixed-side').css('bottom',0);
-          $('#nav-sidebar-inner').addClass('bottom-side').css('bottom',$footerH);
-
-        //条件から外れたらクラスを削除
-        }else{
-          $('#nav-sidebar-inner').removeClass('bottom-side').css('bottom',0);
-        }
-      }
-
-    //サイドバーがない場合に適用
-    }else{
-      $('#nav-sidebar-inner').css('width','auto');
-    }
-  };sidebarFix();
-});
-})(jQuery);</code></pre>
-<h2 class="hdg-l2-01">解説</h2>
-<p>実装に当たって、以下の記事を参考にさせていただきました。</p>
-<ul class="list-link-01">
-<li><a href="https://hm-solution.jp/web/post3105.html" target="_blank">サイドメニューが下まで行ったらそこで固定するJS（jQuery）</a></li>
-<li><a href="http://tsumaboku.com/fix-the-sidebar" target="_blank">レスポンシブ対応！幅が比率指定のサイドバーを下端で追従させる方法－WordPress（Twenty Seventeen）</a></li>
+<h2 class="hdg-l2-01">200記事以降、サイト改修した内容</h2>
+<ul class="list-bullet-01">
+<li>常時SSL化</li>
+<li>スマートフォン閲覧時にパンくずの記事タイトルを非表示</li>
+<li>ヘッダーにハンバーガーメニューを実装</li>
+<li>パンくずリストを構造化データ（JSON-LD）で記述</li>
+<li>WordPressのプラグイン「Associates Link Builder」を導入</li>
+<li>レスポンシブにサイドバーを下で固定</li>
 </ul>
-<p>まずは変数wにスクロールバー込みの画面幅を格納し、変数xではサイドバー固定を実行するブレイクポイントを定義します。次に「if(w >= x){～」で、<strong>「ブレイクポイントよりも画面幅が大きい場合」</strong>のみ、サイドバー固定を実行する条件分岐を行います。</p>
-<p>if文の中で、サイドバー固定の計算に必要な各要素の値を変数に格納します。続けて、変数$fixedSideには<strong>「ヘッダー + コンテンツ全体の余白 + サイドバー」</strong>を足した値からウインドウの高さを引くことで、サイドバーを固定するスクロールの高さを定義します。さらに、変数$scrollBtmにはbodyからウインドウとフッターの高さを引くことで、フッター到達時にサイドバーがフッター上部で固定するスクロールの高さを定義しています。</p>
-<p>続けて、実際にサイドバーを固定する処理の記述になります。そもそもメインカラムがサイドバーより短い場合はサイドバー固定を実行する必要はないので、<strong>「if($mainH > $sideH){～」</strong>でさらに条件分岐し、処理を行います。</p>
-<p>if($scrollTop > $fixedSide){～にてフッター上部までサイドバー固定用のcssを付与します。ポイントは、<strong>#nav-sidebar-innerにwidthを設定する点</strong>です。#nav-sidebar-innerはposition:fixedになるため、<strong>包括している#nav-sidebarのwidthが適用されなくなり幅が変わってしまいます。</strong>そのため、#nav-sidebarのwidthを#nav-sidebar-innerにも適用してあげる必要があります。</p>
-<p>else{～では付与したclassを外し、widthの値もautoにリセットします。</p>
-<p>if($scrollTop > $scrollBtm){～にて、フッター到達時の処理を行います。サイドバー固定用のclassを外し、フッター到達時用のclassを付与します。ポイントは、レスポンシブでフッターの高さが可変になることを考慮し、<strong>固定値ではなく変数$footerHに格納しておいたフッターの高さをbottomに付与する点</strong>です。これにより、レスポンシブに対応したサイドバー固定が可能になります。</p>
-<p>最後に、条件から外れた場合はフッター到達時のclassを外します。</p>
-<h2 class="hdg-l2-01">まとめ</h2>
-<p>ブログ記事はそこまで内容が短いものでなければ、サイドバーよりメインコンテンツが長くなるケースが多いかと思いますが、ある程度スクロールすれば当然サイドバーには何もなくなります。そんな時、サイドバー固定を実装しておくことで、空いたスペースを有効活用することが可能になります。</p>
-<p>ご紹介した方法は、プラグインも使用せずレスポンシブにも対応しているので非常におすすめです。サイトの設計に応じてセレクタ指定やブレイクポイントは多少弄ぶ必要はありますが、なるべく汎用的なソースとしてご紹介させていただきましたので、ぜひご参考にしていただければ幸いです。</p>
-
+<h3 class="hdg-l3-01">常時SSL化</h3>
+<ul class="list-link-01">
+<li><a href="/2017/10/171004_01/">【常時SSL化】さくらレンタルサーバで独自ドメイン取得＋SSL化、サイト移行するまでの流れ</a></li>
+</ul>
+<p>何といっても一番の大がかりな改修はこれでした。独自ドメインの取得からSSL証明書のインストール、WordPress＋データベースの引っ越し等盛りだくさんの改修で大変でしたが、中長期的に見るとこのタイミングでやっておいてよかったです。記事が多くなればなるほど大変になりますからね。</p>
+<h3 class="hdg-l3-01">スマートフォン閲覧時にパンくずの記事タイトルを非表示</h3>
+<ul class="list-link-01">
+<li><a href="/2018/01/180108_01/">【WordPress】スマートフォン閲覧時にパンくずの記事タイトルを非表示にするcss</a></li>
+</ul>
+<p>スマートフォン時のファーストビューの視認性を改善すべく行った改修でした。効果測定は難しい部分ですが、H1のすぐ近くにこれが表示される必要はなかったので、多少見やすくなったのではないかと思います。</p>
+<h3 class="hdg-l3-01">ヘッダーにハンバーガーメニューを実装</h3>
+<ul class="list-link-01">
+<li><a href="/2018/01/180126_01/">【UI改修】Web屋の芝生DIYのヘッダーにハンバーガーメニューを実装した話</a></li>
+</ul>
+<p>Googleアナリティクスのデータから「検索結果」「サイトについて」「お問い合わせ」「サイトマップ」はほとんどこのサイトでは使われていないことが分かったため、ハンバーガーメニューを新たに設置しそこに格納することで、ページ全体にメリハリを付けました。</p>
+<p>パンくず同様これもヘッダーの高さを不用意に占めてしまう要素でもあったので、改修前と比べてスマートフォンで記事タイトルが確実に全て見えるようになりました。</p>
+<h3 class="hdg-l3-01">パンくずリストを構造化データ（JSON-LD）で記述</h3>
+<ul class="list-link-01">
+<li><a href="/2018/02/180205_01/">【WordPress】パンくずリストを構造化データ（JSON-LD）で記述する方法をご紹介</a></li>
+</ul>
+<p>SEO対策の1つの施策として行った改修です。パンくずの構造化データ（JSON-LD）を記述しておくことで、検索結果にカテゴリのスニペットが表示されるようになります。直接的に検索結果の順位に影響するものではありませんが、ユーザーにとってはページに辿り着かずとも、「何の類（カテゴリ）のページなのか」が大まかにわかるようにすることで、クリックするきっかけとなります。</p>
+<h3 class="hdg-l3-01">WordPressのプラグイン「Associates Link Builder」を導入</h3>
+<ul class="list-link-01">
+<li><a href="/2018/02/180223_01/">【カスタマイズも可能】WordPressのプラグイン「Associates Link Builder」でAmazonアソシエイトのリンクを設置する方法</a></li>
+</ul>
+<p>以前は管理画面のエディタから手動でtabel要素にてAmazonアソシエイトのリンクを設置していたのですが、このプラグインを導入したことで掲載する商品情報の価格などをリアルタイムで表示できるようになり、かつcssでデザインを整えることで洗練されたAmazonへのリンクを張ることができるようになりました。</p>
+<p>Amazon公式の信頼できるプラグインであり、同類のプラグインであるAmazonJSと比べてカスタマイズもしやすく、またAMPにも対応できるという点においてもWeb屋の芝生DIYとの親和性があったため、このプラグインを採用しました。</p>
+<h3 class="hdg-l3-01">レスポンシブにサイドバーを下で固定</h3>
+<ul class="list-link-01">
+<li><a href="/2018/03/180309_01/">【プラグインなし！】レスポンシブにサイドバーを下で固定する実装方法</a></li>
+</ul>
+<p>よくブログで見られるサイドバーを固定するアレです。Web屋の芝生DIYでも導入しました。特にプラグインなどを使わず、最小限のcssとjsで実装を行いました。</p>
+<h2 class="hdg-l2-01">月毎のPV数と投稿記事数</h2>
+<table class="tbl-01">
+<tbody>
+<tr>
+<th>投稿月</th>
+<th>投稿記事数</th>
+<th>PV数</th>
+</tr>
+<tr>
+<td>2017年7月</td>
+<td>13記事</td>
+<td>11,968</td>
+</tr>
+<tr>
+<td>2017年8月</td>
+<td>13記事</td>
+<td>13,451</td>
+</tr>
+<tr>
+<td>2017年9月</td>
+<td>13記事</td>
+<td>13,692</td>
+</tr>
+<tr>
+<td>2017年10月</td>
+<td>13記事</td>
+<td>20,644</td>
+</tr>
+<tr>
+<td>2017年11月</td>
+<td>13記事</td>
+<td>20,134</td>
+</tr>
+<tr>
+<td>2017年12月</td>
+<td>13記事</td>
+<td>20,208</td>
+</tr>
+<tr>
+<td>2018年1月</td>
+<td>14記事</td>
+<td></td>
+</tr>
+<tr>
+<td>2018年2月</td>
+<td>12記事</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 class="hdg-l3-01">常時SSLの恩恵は大きかった</h3>
+<p>以下の記事でも触れていますが、2017年9月以降のPVのジャンプアップは常時SSL化の効果が顕著に現れました。</p>
+<ul class="list-link-01">
+<li><a href="/2017/10/171004_01/">【常時SSL化】さくらレンタルサーバで独自ドメイン取得＋SSL化、サイト移行するまでの流れ</a></li>
+</ul>
+<p>ジャンプアップ以降はしばらく横ばいの状態が続いていますが、2018年1月あたりから平日は1日800PVを超える日も出てきており、徐々にアクセスの増加傾向が見られます。2月は単純に日数が少ないため、若干PVが少ないです。</p>
+<h3 class="hdg-l3-01">記事の投稿ペースは完全に固定化</h3>
+<p>投稿ペースを週3（月、水、金）にしてから早くも1年以上経ちましたが、このペースは完全に固定化されました。個人的には情報の鮮度も保ちつつ、忙しくて執筆できないときに備えストックする余力を残しておける最善のペースだと感じています、月⇒水⇒金と1日インターバールが設けられる分、1つ1つの記事にイイ感じに力を入れやすいです。</p>
+<p>もちろん人によっては<strong>「週5でもイケるぜ」</strong>という方もいらっしゃるかとは思いますが、普通に週5フルで働いているサラリーマンにとって、「週3」というペースはバランスを取りやすくおすすめです。</p>
+<h3 class="hdg-l3-01">特に300記事で劇的な変化があるわけではない</h3>
+<p>巷の記事で紹介されているような、<strong>「200記事でPVは5万超えた」「300記事を超えると爆発的にアクセスが増える」</strong>なんてことは一般的にはありません。あくまでも目安の1つに過ぎず、こういった内容を謡っているサイトも、本当はそういうことを言っているのだと思います。</p>
+<p>手前味噌ですが、普段Webサイト制作でご飯を食べている私でもこれくらい緩やかなペースでサイトは成長している感じなので、制作知識に疎い素人の方であれば、「サイト運営をしてアクセスを稼ぐ」というのは天才的な文章スキルもしくは芸能人でもない限り、なかなか難しいのではないでしょうか？</p>
+<h2 class="hdg-l2-01">まとめ（400記事に向けて）</h2>
+<p>今後もペースを変えるつもりはないので、順調にいけば400記事到達は2019年の初め頃でしょうか。さすがにこれだけ執筆を重ねると、プロのライターほどではないにせよだいぶ文章を書くこと自体に自信がついてきました（笑）</p>
+<p>これからもやることは変わりません。1つの1つの記事が<strong>「誰かの役に立つこと」</strong>を心がけて粛々と執筆をつづけるのみです。あわせて隙を見てサイト全体をマネタイズしつつ、フロントエンドの業界動向もウォッチしながら時代に合わせたサイト運営を行っていきたいと思います。</p>
+<p>引き続き、Web屋の芝生DIYをどうぞよろしくお願いいたします。</p>
 
 
 
