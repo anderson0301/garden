@@ -36,6 +36,118 @@
 <li>カスタマイズが可能（オリジナルテンプレートを作成可能）</li>
 <li>投稿画面からショートコードで簡単に設置できる</li>
 </ul>
+<h2 class="hdg-l2-01">ということで、以下導入手順です</h2>
+<p>前置きが長くなりましたが、以降はプラグイン「Associates Link Builder」の導入手順について説明させていただきます。</p>
+
+<h3 class="hdg-l3-01">テンプレートのサンプルコード</h3>
+<pre><code>{{#Items}}
+&lt;div class=&quot;az-item&quot;&gt;
+{{#Item}}
+{{#aalb}}
+&lt;a href=&quot;{{DetailPageURL}}&quot; target=&quot;_blank&quot;&gt;
+&lt;p class=&quot;img&quot;&gt;&lt;img width=&quot;250&quot; height=&quot;250&quot; src=&quot;{{MediumImageURL}}&quot;&gt;&lt;/p&gt;
+&lt;div class=&quot;info&quot;&gt;
+&lt;p&gt;{{Title}}&lt;/p&gt;
+&lt;ul&gt;
+{{#InStock}}
+{{#Saving}}
+&lt;li&gt;参考価格：{{StrikePrice}}&lt;/li&gt;
+{{/Saving}}
+&lt;li&gt;価格：&lt;span class=&quot;price&quot;&gt;{{CurrentPrice}}&lt;/span&gt;{{#Prime}}&lt;img width=&quot;52&quot; height=&quot;13&quot; src=&quot;/shared/images/arrow_prime.png&quot; alt=&quot;プライム&quot;&gt;{{/Prime}}&lt;/li&gt;
+{{/InStock}}
+{{#By}}
+&lt;li&gt;メーカー：{{By}}&lt;/li&gt;
+{{/By}}
+{{#Merchant}}
+&lt;li&gt;販売者：{{Merchant}}&lt;/li&gt;
+{{/Merchant}}
+&lt;/ul&gt;
+&lt;/div&gt;
+{{/aalb}}
+{{/Item}}
+&lt;/a&gt;
+&lt;/div&gt;
+{{/Items}}</code></pre>
+<h3 class="hdg-l3-01">css</h3>
+<pre><code>div.az-item{
+  transition:all 0.15s ease;
+  border:1px solid #ddd;
+  margin-bottom:20px;
+}
+
+div.az-item a{
+  padding:10px;
+  display:block;
+}
+
+div.az-item a:before,
+div.az-item a:after{
+  content:"";
+  display:table;
+}
+
+div.az-item a:after{
+  clear:both;
+}
+
+div.az-item a p.img{
+  width:21%;
+  float:left;
+  text-align:center;
+}
+
+div.az-item a div.info{
+  width:76%;
+  float:right;
+  overflow:hidden;
+}
+
+div.az-item a div.info p{
+  margin-bottom:5px;
+  text-decoration:underline;
+}
+
+div.az-item a div.info :not(p){
+  color:#333;
+  text-decoration:none;
+}
+
+div.az-item a div.info ul{
+  font-size:0.8rem;
+}
+
+div.az-item a div.info ul li span.price{
+  margin-right:5px;
+  display:inline-block;
+  color:#900;
+  font-size:1rem;
+}
+
+div.az-item a:hover div.info p{
+  text-decoration:none;
+}
+
+div.az-item:hover{
+  border:1px solid #387922;
+}
+
+@media screen and (max-width:540px){
+  div.az-item a div.info p{
+  	font-size:0.7rem;
+  }
+
+  div.az-item a div.info ul{
+  	font-size:0.7rem;
+  }
+
+  div.az-item a div.info ul li span.price{
+  	font-size:0.75rem;
+  }
+}
+
+</code></pre>
+
+
 <h2 class="hdg-l2-01">まとめ</h2>
 <p></p>
 
