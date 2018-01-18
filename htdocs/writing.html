@@ -37,8 +37,20 @@
 <li>投稿画面からショートコードで簡単に設置できる</li>
 </ul>
 <h2 class="hdg-l2-01">ということで、以下導入手順です</h2>
-<p>前置きが長くなりましたが、以降はプラグイン「Associates Link Builder」の導入手順について説明させていただきます。</p>
-<h3 class="hdg-l3-01">テンプレートのサンプルコード</h3>
+<p>前置きが長くなりましたが、プラグイン「Associates Link Builder」の導入手順について説明させていただきます。主に、以下のステップで説明させていただきます。</p>
+<ol class="list-number-01">
+<li>Amazonアソシエイトアカウント（アソシエイトID）を作成</li>
+<li>「Amazon Product Advertising API」に登録し、「アクセスキーID」「シークレットキー」を取得</li>
+<li>プラグイン「Associates Link Builder」をインストール</li>
+<li>「Associates Link Builder」に設定を行う</li>
+<li>デザインを整えるためにcssを追加</li>
+<li>投稿画面からショートコードでリンクを設置</li>
+</ol>
+<h3 class="hdg-l3-01">Amazonアソシエイトアカウント（アソシエイトID）を作成</h3>
+<h3 class="hdg-l3-01">「Amazon Product Advertising API」に登録し、「アクセスキーID」「シークレットキー」を取得</h3>
+<h3 class="hdg-l3-01">プラグイン「Associates Link Builder」をインストール</h3>
+<h3 class="hdg-l3-01">「Associates Link Builder」に設定を行う</h3>
+<h4 class="hdg-l4-01">テンプレートのソースコード</h4>
 <pre><code>{{#Items}}
 &lt;div class=&quot;az-item&quot;&gt;
 {{#Item}}
@@ -67,7 +79,8 @@
 &lt;/a&gt;
 &lt;/div&gt;
 {{/Items}}</code></pre>
-<h3 class="hdg-l3-01">css</h3>
+<h3 class="hdg-l3-01">デザインを整えるためにcssを追加</h3>
+<p>設定したテンプレートのマークアップにあわせ、以下のcssを追加します。</p>
 <pre><code>div.az-item{
   transition:all 0.15s ease;
   border:1px solid #ddd;
@@ -143,6 +156,8 @@ div.az-item:hover{
   	font-size:0.75rem;
   }
 }</code></pre>
+<h3 class="hdg-l3-01">投稿画面からショートコードでリンクを設置</h3>
+<p>これで全ての準備が整いました。あとは投稿画面からショートコードを設置するだけです。</p>
 <h2 class="hdg-l2-01">まとめ</h2>
 <p></p>
 
