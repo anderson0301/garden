@@ -3,252 +3,70 @@
 
 <!--======================================ここから記事用ソース======================================-->
 
-<p>これまでAmazonで購入した商品レビューの類の記事では、Amazonアソシエイトのリンクをtable要素にて手動で設置していたのですが、もっとAmazonらしいリンクかつ販売者や価格もリアルタイムで表示できるよう改修を試みることに。APIを使ったJavascriptベースでのフルスクラッチ開発は難しそうだったので、プラグイン<strong>「Associates Link Builder」</strong>を導入して対応することにしました。</p>
+<p>2018年1月下旬頃、一日中2歳の子供の面倒を見ていて、その影響か日中に<strong>「なんか腰に違和感があるな。。。」</strong>という気持ちを抱きつつも、夕方スーパーから自宅へ子供を抱っこして小走りした結果、<strong>帰宅してから腰に激痛が。</strong>数日後病院に行った結果、<strong>軽い椎間板ヘルニア</strong>だと診断されました。本記事では、椎間板ヘルニアの発症から完治（抱っこしてもいたダミがなくなる）までの全記録を記事にまとめてみました。</p>
 [adsense_top]
-<p>そこで本記事では、プラグイン「Associates Link Builder」を活用して、洗練されたデザインでAmazonアソシエイトのリンクを設置する方法についてご紹介させていただきたいと思います。</p>
-<h2 class="hdg-l2-01">アソシエイト管理画面で生成されるものはイマイチ</h2>
-<p>これまでtable要素で主に対応していた理由の1つでもあるのですが、Amazonアソシエイトの管理画面で「テキストと画像」にて商品リンクを作成すると、以下のように非常に簡素でちょっと一昔を思わせるようなデザインで表示することになってしまうんですよね。</p>
-<h3 class="hdg-l3-01">しかもiframeで設置することになる</h3>
-<p>iframeではサイトパフォーマンスも落ちますし、Web屋の芝生DIYは全てAMP対応していることもありそもそもiframeで設置することはできません。なので、静的リンクで以下のようにtableでせめてリンクと価格だけでも表示していたんですね。</p>
-<table class="tbl-01 sp-lyt-on">
+<p>あくまでも私個人のケースになりますが、同じヘルニアでお悩みの方へのご参考になればと思いますので、どうぞご参考になれば幸いです。</p>
+<h2 class="hdg-l2-01">0日目：ヘルニアの予兆は数日前からあった</h2>
+<p>あくまでも私の場合なので個人差はあると思いますが、数日前から腰に異常をきたす予兆はありました。年末年始に子供を見ていた影響か、変な姿勢でずっとスマートフォンを布団の中でいじっていたからかはわかりませんが、<strong>「なんか腰に違和感があるな」「なんか腰が重いな」</strong>という感覚が、ヘルニアを発症するまでの数日の間にありました。</p>
+<p>調べたところ椎間板ヘルニアになってしまう人は、少なからず発症前にこういった「予兆」を感じることは珍しくないようで、まったく予備知識がなかったこともあいまって、何も考えずに腰に負担をかけてしまっていました。</p>
+<p>また、子供を抱っこする際はずっと<strong>「左手」</strong>つまり<strong>「左腰」</strong>を使って抱っこするケースが多く、これも良くなかったようです。子供の抱っこに限りませんが、左→右→左→右と持ち替えることで、腰への負担をバランス良く分散せることが本来必要な動作とのこと。右利きの人は左で抱っこしやすい傾向にあり、私もついつい左ばかりで抱っこしてしまっていたのも、ヘルニアを引き起こした原因の一つでもあるようでした。</p>
+<h2 class="hdg-l2-01">1日目：椎間板ヘルニア発症</h2>
+<p>話は戻すと、スーパーから抱っこして帰ると既に腰には激痛が。少し腰を上げたり歩くだけでも腰に痛みがあり、とても抱っこできる状態ではありませんでした。</p>
+<p>これまで私は腰痛とは無縁で、腰の痛みに最初は戸惑いましたが、<strong>「まあ一晩経てば良くなっているだろう」</strong>と楽観視してその日は床につきました。</p>
+<h2 class="hdg-l2-01">2日目〜3日目：様子見しても痛みは引かず</h2>
+<p>しかし、寝ていても腰は痛く次の日の朝になっても痛みは引かず。少しヤバイなと思いましたが、仕事を休むわけにもいかず一旦会社へ行くことに。幸い歩くよりも自転車のほうが痛みは幾分マシだったので通勤はなんとか大丈夫でしたが、それでも腰に力がはいるたびに激痛が走ります。</p>
+<p>この時はよくわからなかったのですが、腰だけではなくお尻から太ももにかけても痛みがあり、思い返せばこの痛みはヘルニアから来る<strong>「坐骨神経痛」</strong>だったようです。</p>
+<h2 class="hdg-l2-01">4日目：整形外科で椎間板ヘルニアと診断される</h2>
+<p>会社でデスクに座っているだけでついに痛みがひどくなり、早退して整形外科に行くことにしました。仕事に集中できなくなるくらい痛みがひどくなっていたので、いよいよこれはヤバイなと。</p>
+<p>痛い腰を引きずりながらも病院へたどり着き、症状を伝えると、ある体勢を取ることで簡易的にヘルニアかどうかも確かめてもらいました。仰向けで寝っ転がり、痛いほうの腰の足を、足首を曲げて伸ばしたまま上げてもらうのですが、<strong>声を上げるほどの激しい激痛。</strong>これで椎間板ヘルニアの可能性が高いとのことで、レントゲンを取ることに。</p>
+<p>レントゲンを取った結果、<strong>「骨と骨の間が狭くなっている。おそらく椎間板ヘルニア」</strong>と診断されました。</p>
+<h3 class="hdg-l3-01">まずは保存療法で様子を見ることに</h3>
+<p>軽いヘルニアなので、当然いきなり手術なんてことにはなりません。とりあえずは1日に3回飲む痛み止めと、セットで飲む胃腸薬、加えて坐骨神経痛を和らげる薬を処方してもらいました。ちなみに処方されたのは以下の薬です。</p>
+<p><img src="/images/blog/2018/03/19_01_01.jpg" alt="" width="660" height="350"></p>
+<table class="tbl-01">
 <tbody>
 <tr>
-<th>商品名</th>
-<td><a href="http://amzn.to/2fpBKo5" target="_blank">マルト（MARUTO）レインカバー・前用・上下セット D-5FC+OP ブルー</a></td>
+<th>薬名</th>
+<th>効能</th>
 </tr>
 <tr>
-<th>値段</th>
-<td>約3,300円</td>
+<td>ロキソプロフェン</td>
+<td>痛み止め</td>
+</tr>
+<tr>
+<td>セルテプノン</td>
+<td>胃腸薬</td>
+</tr>
+<tr>
+<td>リリカ</td>
+<td>神経痛緩和</td>
 </tr>
 </tbody>
 </table>
-<h2 class="hdg-l2-01">「Associates Link Builder」を採用した理由</h2>
-<p>Amazonアソシエイトのリンクを設置するWordPressのプラグインといえば、<strong>「AmazonJS」</strong>が有名ですが、今回こちらの採用は見送りました。と言いますのも、非常に便利なプラグインですし、だから広く使われていると思うのですが、JavascriptベースでDOM生成するので、あんまりパフォーマンスがよくはないんですね。</p>
-<p>開発も停止しているらしく、中長期的にサイト運営を考えた時、<strong>「WordPressのバージョンアップに伴い使えなくなった」</strong>というリスクだけは避けるべきと考えました。また、WordPressのポピュラーなテーマであれば比較的導入の敷居は低くないようですが、試しに導入を試みたところどうにも正常に動かず。オリジナルテーマであるWeb屋の芝生DIYでは導入が難しそうであった点も、見送った理由の1つです。</p>
-<p>さらに、結局Javascriptを実行する必要があるのでAMP対応も不可です。</p>
-<p>「カエレバ」や「ヨメレバ」といった外部の商品紹介ツールも検討しましたが、Web屋の芝生DIYではAmazonへのリンクがあれば十分で、書籍紹介も少ないためこれらはやはりマッチしませんでした。</p>
-<h3 class="hdg-l3-01">「Associates Link Builder」はWeb屋の芝生DIYにマッチした</h3>
-<p>ということで消去法というわけではないんですが、以下の点を満たした<strong>「Associates Link Builder」</strong>はWeb屋の芝生DIYと非常に親和性が高かったんですね。</p>
-<ul class="list-bullet-01">
-<li>価格やメーカーをリアルタイムで取得できる</li>
-<li>AMP対応している（htmlで要素を出力できる）</li>
-<li>カスタマイズが可能（オリジナルテンプレートを作成可能）</li>
-<li>投稿画面からショートコードで簡単に設置できる</li>
+<ul class="list-notice-01">
+<li><span>※</span>写真のリリカは75mgですが、最初に処方されたのは25mgでした</li>
 </ul>
+<p>また、この日は電気治療も行って病院をあとにしました。</p>
 [adsense_middle]
-<h2 class="hdg-l2-01">ということで、以下導入手順です</h2>
-<p>前置きが長くなりましたが、プラグイン「Associates Link Builder」の導入手順について説明させていただきます。主に、以下のステップで説明させていただきます。</p>
-<ol class="list-number-01">
-<li>Amazonアソシエイトアカウント（アソシエイトID）を作成</li>
-<li>アクセスキー、シークレットキーを取得</li>
-<li>プラグイン「Associates Link Builder」をインストール</li>
-<li>「Associates Link Builder」に設定を行う</li>
-<li>体裁を整えるためにcssを追加</li>
-<li>投稿画面からショートコードでリンクを設置</li>
-<li>リンクが正しく動作していることを確認</li>
-</ol>
-<h3 class="hdg-l3-01">&#9312;Amazonアソシエイトアカウント（アソシエイトID）を作成</h3>
-<p>まずは以下のページにアクセスし、Amazonアソシエイトのアカウントを作成します。</p>
-<ul class="list-link-01">
-<li><a href="https://affiliate.amazon.co.jp/" target="_blank">Amazonアソシエイト（アフィリエイト）プログラムに参加しよう！</a></li>
-</ul>
-<p>既にアカウントを作成済みであれば<strong>「サインイン」</strong>を、新規登録する場合は<strong>「無料アカウントを作成する」</strong>をクリックします。</p>
-<p><img src="/images/blog/2018/02/23_01_01.jpg" alt="" width="660" height="200"></p>
-<p>名前、メールアドレス、パスワードを入力し、<strong>「Amazonアカウントを作成」</strong>をクリックします。</p>
-<p><img src="/images/blog/2018/02/23_01_02.jpg" alt="" width="660" height="500"></p>
-<p>画面に従って、アカウント情報を入力していきます。</p>
-<p><img src="/images/blog/2018/02/23_01_03.jpg" alt="" width="660" height="500"></p>
-<p>全て入力したら、<strong>「次へ」</strong>をクリックします。</p>
-<p><img src="/images/blog/2018/02/23_01_04.jpg" alt="" width="660" height="250"></p>
-<p>Amazonアソシエイトのリンクを貼るドメインを入力し、<strong>「追加」</strong>をクリックで追加後、<strong>「次へ」</strong>をクリックします。</p>
-<p><img src="/images/blog/2018/02/23_01_05.jpg" alt="" width="660" height="500"></p>
-<p>希望するアソシエイトIDおよびWebサイトの情報を入力します。</p>
-<p><img src="/images/blog/2018/02/23_01_06.jpg" alt="" width="660" height="500"></p>
-<p>情報を入力したら画像認証を入力後、<strong>「次へ」</strong>をクリックします。</p>
-<p><img src="/images/blog/2018/02/23_01_07.jpg" alt="" width="660" height="250"></p>
-<p>電話でアカウント情報の認証を行います。お手元にある電話の番号を入力し、<strong>「今すぐ電話する」</strong>を入力すると、電話がかかってきます。</p>
-<p><img src="/images/blog/2018/02/23_01_08.jpg" alt="" width="660" height="300"></p>
-<p>音声に従って操作を行うと、<strong>「お客様のご本人確認が完了しました〜」</strong>に変わります。運営規約を読んでチェックを入れ、<strong>「完了」</strong>をクリックします。</p>
-<p><img src="/images/blog/2018/02/23_01_09.jpg" alt="" width="660" height="400"></p>
-<p>これでAmazonアソシエイトの登録が完了しました。続けてお支払情報と税金情報を入力することもできますが、ここでは<strong>「あとで」</strong>をクリックします。</p>
-<p><img src="/images/blog/2018/02/23_01_10.jpg" alt="" width="660" height="400"></p>
-<p>Amazonアソシエイトの管理画面トップに移動します。画面右上に作成したID<strong>「hoge123405-22」</strong>が表示されていますね。これが後ほど「Associates Link Builder」で設定するアソシエイトIDになります。</p>
-<p><img src="/images/blog/2018/02/23_01_11.jpg" alt="" width="660" height="400"></p>
-[adsense_middle]
-<h3 class="hdg-l3-01">&#9313;アクセスキー、シークレットキーを取得</h3>
-<p>続けて、「Associates Link Builder」でリンクを表示するためには<strong>「Product Advertising API」</strong>に登録する必要があります。<strong>[ツール]-[Product Advertising API]</strong>をクリックします。</p>
-<p><img src="/images/blog/2018/02/23_01_12.jpg" alt="" width="660" height="400"></p>
-<p>Product Advertising APIのページに移動したら、画面中部にある<strong>「利用をはじめる」</strong>をクリックします。</p>
-<p><img src="/images/blog/2018/02/23_01_13.jpg" alt="" width="660" height="400"></p>
-<p>認証情報が発行されますので、この<strong>「アクセスキー」「シークレットキー」</strong>を控えておきましょう。また、「認証情報をダウンロードする」をクリックすると、認証情報が記載されたファイルをダウンローすることもできます。</p>
-<p><img src="/images/blog/2018/02/23_01_14.jpg" alt="" width="660" height="200"></p>
-<h3 class="hdg-l3-01">&#9314;プラグイン「Associates Link Builder」をインストール</h3>
-<p>続けて、WordPressにプラグイン「Associates Link Builder」をインストールします、以下のURLよりダウンロードすることができます。</p>
-<ul class="list-link-01">
-<li><a href="https://ja.wordpress.org/plugins/amazon-associates-link-builder/" target="_blank">Amazon Associates Link Builder &mdash; WordPress プラグイン</a></li>
-</ul>
-<p><img src="/images/blog/2018/02/23_01_15.jpg" alt="" width="660" height="300"></p>
-<p>ダウンロードしたファイルを解凍後、フォルダごとWordPressがインストールされているフォルダの<strong>「/wp-content/plugins/直下」</strong>にアップロードします。もしくは、管理画面の<strong>[プラグイン]-[新規追加]から</strong>検索してインストールしてもOKです。</p>
-<p><img src="/images/blog/2018/02/23_01_16.jpg" alt="" width="660" height="300"></p>
-<p>管理画面の<strong>[プラグイン]-[インストール済みプラグイン]</strong>より、有効化します。</p>
-<p><img src="/images/blog/2018/02/23_01_17.jpg" alt="" width="660" height="300"></p>
-<h3 class="hdg-l3-01">&#9315;「Associates Link Builder」に設定を行う</h3>
-<p>いよいよプラグインの設定を行っていきます。プラグインをインストールするとメニューに「Associates Link Builder」が追加されていますので、<strong>「Settings」</strong>をクリックします。</p>
-<p><img src="/images/blog/2018/02/23_01_18.jpg" alt="" width="660" height="300"></p>
-<p>先ほど登録した<strong>「アソシエイトID」「アクセスキー」「シークレットキー」</strong>をそれぞれを入力します。</p>
-<p><img src="/images/blog/2018/02/23_01_19.jpg" alt="" width="660" height="700"></p>
-<p>入力後、「Check here〜」にチェックを入れ、<strong>「Save Changes」</strong>をクリックして保存します。</p>
-<p><img src="/images/blog/2018/02/23_01_20.jpg" alt="" width="660" height="400"></p>
-<p>続けて、「Templates」に移動し、テンプレートの設定を行います。今回オリジナルデザインでリンク追加するため、新規でテンプレートを追加します。<strong>「Create new template」</strong>を選択し、<strong>「Original」</strong>というテンプレート名でテンプレートを作成します。</p>
-<p><img src="/images/blog/2018/02/23_01_21.jpg" alt="" width="660" height="500"></p>
-<p>ちなみに、テンプレートのソースは以下で設定します。「商品画像」「商品名」「参考価格」「価格」「メーカー」「販売者」を表示します。また、参考価格と価格は在庫がある場合のみ表示します。さらに、Amazonプライムの対象商品であれば「プライム」アイコンを表示するようにしています。</p>
-<ul class="list-notice-01">
-<li><span>※</span>「プライム」アイコンの画像は個別に用意する必要があります</li>
-<li><span>※</span>商品画像の「width」と「height」は250で決め打ちにしていますが、これはAMP対応のためです</li>
-</ul>
-<pre><code>{{#Items}}
-&lt;div class=&quot;az-item&quot;&gt;
-{{#Item}}
-{{#aalb}}
-&lt;a href=&quot;{{DetailPageURL}}&quot; target=&quot;_blank&quot;&gt;
-&lt;p class=&quot;img&quot;&gt;&lt;img width=&quot;250&quot; height=&quot;250&quot; src=&quot;{{MediumImageURL}}&quot;&gt;&lt;/p&gt;
-&lt;div class=&quot;info&quot;&gt;
-&lt;p&gt;{{Title}}&lt;/p&gt;
-&lt;ul&gt;
-{{#InStock}}
-{{#Saving}}
-&lt;li&gt;参考価格：{{StrikePrice}}&lt;/li&gt;
-{{/Saving}}
-&lt;li&gt;価格：&lt;span class=&quot;price&quot;&gt;{{CurrentPrice}}&lt;/span&gt;{{#Prime}}&lt;img width=&quot;52&quot; height=&quot;13&quot; src=&quot;/shared/images/arrow_prime.png&quot; alt=&quot;プライム&quot;&gt;{{/Prime}}&lt;/li&gt;
-{{/InStock}}
-{{#By}}
-&lt;li&gt;メーカー：{{By}}&lt;/li&gt;
-{{/By}}
-{{#Merchant}}
-&lt;li&gt;販売者：{{Merchant}}&lt;/li&gt;
-{{/Merchant}}
-&lt;/ul&gt;
-&lt;/div&gt;
-{{/aalb}}
-{{/Item}}
-&lt;/a&gt;
-&lt;/div&gt;
-{{/Items}}</code></pre>
-<p>オリジナルのテンプレートの情報を入力したら、<strong>「Save」</strong>で保存します。</p>
-<p><img src="/images/blog/2018/02/23_01_22.jpg" alt="" width="660" height="300"></p>
-<p>再び<strong>「Settings」</strong>に移動し、デフォルトのテンプレートを「Original」に変更します。「Default Template」のプルダウンにて<strong>「Original」</strong>を選択します。</p>
-<p><img src="/images/blog/2018/02/23_01_23.jpg" alt="" width="660" height="300"></p>
-<p>「Check here〜」にチェックを入れ、<strong>「Save Changes」</strong>をクリックして保存します。</p>
-<p><img src="/images/blog/2018/02/23_01_24.jpg" alt="" width="660" height="300"></p>
-<h3 class="hdg-l3-01">&#9316;体裁を整えるためにcssを追加</h3>
-<p>設定したテンプレートのマークアップにあわせ、以下のcssを追加します。使用しているテーマに合わせて、細かい箇所は弄んでください。</p>
-<ul class="list-notice-01">
-<li><span>※</span>レスポンシブにも対応しています</li>
-</ul>
-<pre><code>div.az-item{
-  transition:all 0.15s ease;
-  border:1px solid #ddd;
-  margin-bottom:20px;
-}
-
-div.az-item a{
-  padding:10px;
-  display:block;
-}
-
-div.az-item a:before,
-div.az-item a:after{
-  content:"";
-  display:table;
-}
-
-div.az-item a:after{
-  clear:both;
-}
-
-div.az-item a p.img{
-  width:21%;
-  float:left;
-  text-align:center;
-}
-
-div.az-item a div.info{
-  width:76%;
-  float:right;
-  overflow:hidden;
-}
-
-div.az-item a div.info p{
-  margin-bottom:5px;
-  text-decoration:underline;
-}
-
-div.az-item a div.info :not(p){
-  color:#333;
-  text-decoration:none;
-}
-
-div.az-item a div.info ul{
-  font-size:0.8rem;
-}
-
-div.az-item a div.info ul li span.price{
-  margin-right:5px;
-  display:inline-block;
-  color:#900;
-  font-size:1rem;
-}
-
-div.az-item a:hover div.info p{
-  text-decoration:none;
-}
-
-div.az-item:hover{
-  border:1px solid #387922;
-}
-
-@media screen and (max-width:540px){
-  div.az-item a div.info p{
-    font-size:0.7rem;
-  }
-
-  div.az-item a div.info ul{
-    font-size:0.7rem;
-  }
-
-  div.az-item a div.info ul li span.price{
-    font-size:0.75rem;
-  }
-}</code></pre>
-<h3 class="hdg-l3-01">&#9317;投稿画面からショートコードでリンクを設置</h3>
-<p>これでやっと全ての準備が整いました。いよいよ投稿画面から設置してみたいと思います。投稿画面には、Amazonアソシエイトのリンクを設置できるUIが追加されています。</p>
-<p><img src="/images/blog/2018/02/23_01_25.jpg" alt="" width="660" height="300"></p>
-<p>試しに、<a href="/2016/10/161031_01/">こちらの記事</a>で紹介している「マルト(MARUTO) レインカバー・前用・上下セット D-5FC+OP ブルー」へのリンクを設置してみたいと思います。キーワードを入力し、<strong>「Search」</strong>をクリックします。</p>
-<p><img src="/images/blog/2018/02/23_01_26.jpg" alt="" width="660" height="300"></p>
-<p>商品追加のダイアログが立ち上がります。お目当ての商品が表示されたら、商品をクリックします。</p>
-<ul class="list-notice-01">
-<li><span>※</span>しばしばエラーが起きることがあるので、商品がうまく表示されない時は再度「Search」をクリックしてみてください</li>
-</ul>
-<p><img src="/images/blog/2018/02/23_01_27.jpg" alt="" width="660" height="400"></p>
-<p>画面下の「List of Selected Products」に追加されたことを確認したら、<strong>「Add Shortcode」</strong>をクリックします。</p>
-<p><img src="/images/blog/2018/02/23_01_28.jpg" alt="" width="660" height="300"></p>
-<p>投稿画面のエディタにショートコードが追加されました。</p>
-<p><img src="/images/blog/2018/02/23_01_29.jpg" alt="" width="660" height="150"></p>
-<p>生成されたページを開くと、Amazonアソシエイトへのリンクが下の画像のような見た目で表示されている事が確認できます。</p>
-<p><img src="/images/blog/2018/02/23_01_30.jpg" alt="" width="660" height="250"></p>
-<h3 class="hdg-l3-01">&#9318;リンクが正しく動作していることを確認</h3>
-<p>設置されたリンクが正しくアカウントと紐付けされているかどうか確認するには、Amazonから提供されている以下のリンク動作確認ツールで確認することができます。</p>
-<ul class="list-link-01">
-<li><a href="https://affiliate.amazon.co.jp/home/textlink/general" target="_blank">アソシエイト・セントラル - テキストリンク</a></li>
-</ul>
-<p>リンクURLを入力し、<strong>「リンクを確認」</strong>をクリックします。</p>
-<p><img src="/images/blog/2018/02/23_01_31.jpg" alt="" width="660" height="250"></p>
-<p><strong>「有効〜」</strong>と表示されればOKです。設置したAmazonアソシエイトのリンクは正しくアカウントに紐付けされています。</p>
-<p><img src="/images/blog/2018/02/23_01_32.jpg" alt="" width="660" height="250"></p>
+<h2 class="hdg-l2-01">5日目〜11日目：痛みは収まらず</h2>
+<p>これで少しはマシになるのかなと思い薬を飲むも、腰の痛み特に坐骨神経痛はいっこうに収まりませんでした。歩くだけで痛い状況は変わらず、2回ほど病院へ電気治療だけのために赴くも改善は見られませんでした。</p>
+<h3 class="hdg-l3-01">自己流体操も良くなかったかもしれない</h3>
+<p>ネットで色々とヘルニアの対処方法についてググり、マッケンジー体操なるものや腰のストレッチを行うも、効果は見られませんでした。誰に教わったわけでもなくネットの情報だけで自己流でやってしまったことも、もしかしたら痛みがおさまらなかった原因の一つかもしれません。。。</p>
+<p>とにかくまったく腰の痛みが収まることはなく、<strong>「もしかしたらこのまま痛みと一生付き合っていかなきゃいけないんじゃないか。。。」</strong>と少し絶望しそうになった期間でしたね。</p>
+<h2 class="hdg-l2-01">12日目：リリカの容量アップ&amp;牽引に切り替え</h2>
+<p>このままではダメだと思い、再度診察を受けて先生に相談することに。体操をやっていたことを伝えると<strong>「痛みが収まるまではおすすめしない」</strong>とのことで、一旦止めることに。やっぱり良くなかったんですね。。。</p>
+<p>また、坐骨神経痛が収まらないため、神経痛を和らげるリリカの容量を<strong>25mgから75mg</strong>へと3倍の容量にアップすることになりました。薬に頼るとはいえ痛みが収まればだいぶ気分的には楽になるので、祈るような気持ちで処方いただきました。</p>
+<p>さらに電気治療ではなく、腰の牽引器具を使って腰のストレッチも行うことになりました。牽引を行うことで腰の骨と骨の間をストレッチさせ、椎間板が戻る手助けをするとのことです。この治療方法には賛否両論あるようですが、私の場合この治療があっていたようで、1回やるだけでだいぶ楽になりましたね。最初からこっちを勧めてくれればよかったのに。。。</p>
+<h2 class="hdg-l2-01">13日目〜16日目：痛みはかなり小さいものに</h2>
+<p>リリカの容量アップか、腰の牽引か、はたまた体操をやめたからかはわかりませんが、だいぶ痛みを感じないようになってきました。ほんの少し坐骨神経痛をお尻に感じることはありつつも、日常生活や仕事に支障をきたすほどではなく、ようやく明るい兆しが見えてきました。</p>
+<h2 class="hdg-l2-01">17日目〜23日目：薬はリリカのみに</h2>
+<p>痛みはかなり収まってきたので、1日3回の痛み止めは中止し、薬は就寝前に飲むリリカのみになりました。まだ牽引は何回か行ったほうがよいだろうとのことで、この間2回ほど牽引を行いましたね。試しにおそるおそる子供を抱っこしてみましたが、痛みを感じることはありませんでした。ただ、ほんの少しだけ腰に違和感を感じたため、妻とも相談しまだ抱っこは引き続き禁止しておくことに。</p>
+<h2 class="hdg-l2-01">18日目〜24日目：薬も終わりやっと普通の生活に</h2>
+<p>軽度のヘルニアだったこともあり、おそらくかなり治りは早い方だったと思います。通常3ヶ月間、ひどい場合何年もかかることも珍しくないようなので、今回運が良かったなと思いました。病院をたらいまわしにされるのが身体的にも経済的にも最悪のパターンですが、幸い自宅近くの整形外科で改善されたので本当に良かったです。</p>
+<h2 class="hdg-l2-01">25日目〜：再発しないよう防止策を徹底することに</h2>
+<p>軽いヘルニアとはいえ1ヶ月近く悩まされたので、二度となりたくないなと強く感じました。思えばこれまで腰を痛めたことがなかったので過信があり、日々の生活習慣でも全く腰を省みることがなかったなと思います。</p>
 <h2 class="hdg-l2-01">まとめ</h2>
-<p>Associates Link Builderはとてもよいプラグインですが、本語で解説されている記事が少ないのがたまにキズです。少し玄人向けのためか評価は低いようですが、使いこなせればシンプルな機能を備えたよいプラグインだと思います。</p>
-<p>プレーンなHTMLかつ自由なマークアップで生成できるだけでも、Amazonアソシエイトへのリンクを設置するという目的において、このプラグイン一択といってもいいくらい今のところ気に入っています。</p>
-<p>Associates Link Builder、とてもおすすめです。Amazonアソシエイトへのリンク設置の際、ぜひ本記事がご参考になれば幸いです。</p>
+<p></p>
 
 
 
