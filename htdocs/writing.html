@@ -3,78 +3,81 @@
 
 <!--======================================ここから記事用ソース======================================-->
 
-<p>jQueryでクリックイベントによる処理を行う際、click(function(){～のように記述することがよくあると思いますが、これがDOM生成した要素の場合うまく処理が効かないことがあります。そんな時、.on()メソッドを使うことで大体解決できますので、本記事ではこの.on()メソッドの使い方についてご紹介させていただきたいと思います。</p>
+<p>.load()メソッドを使った別ファイルのhtml取得はとても簡単ですが、「共通化や自動更新はしたいけどちょっとマークアップを変えたい」「同じ要素なんだけどもページごとに違う使い方をしたい」という場合、.load()メソッドだと限界があります。</p>
 [adsense_top]
+<p>そんな時、ajaxで別ページの要素を取得してDOM操作できると色々捗ります。本記事では、ajaxを活用した別ページのhtml取得方法についてご紹介させていただきたいと思います。</p>
 <h2 class="hdg-l2-01">サンプルコード</h2>
-<h3 class="hdg-l3-01">イベントが実行できないパターン</h3>
+<p>以下のようにdataType:'html'でajax通信することで、簡単に別ページのDOMが取得できます。</p>
+<ul class="list-notice-01">
+<li><span>※</span>ただし同ドメインのページに限ります（クロスドメイン不可）</li>
+</ul>
 <pre><code>$(function(){
   'use scrict';
 
-  //DOM生成した要素にイベントが実行できない
-  $('div.hoge').append('&lt;ul id=&quot;hoge-01&quot; class=&quot;list-link-01&quot;&gt;&lt;li&gt;&lt;a href=&quot;#&quot;&gt;jsでページ読み込み時にDOM生成されたリンク&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;');
-  $('div.hoge ul#hoge-01 li a').click(function(){
-    $('div.hoge ul#hoge-01').after('&lt;ul id=&quot;hoge-02&quot; class=&quot;list-link-01&quot;&gt;&lt;li&gt;&lt;a href=&quot;#&quot;&gt;クリックでDOM生成されたリンク&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;');
-    return false;
-  });
-  $('div.hoge ul#hoge-02 li a').click(function(){
-    alert('クリックしてもアラート表示されない');
-    return false;
-  });
+  $.ajax({
+    type:'GET',
+    url:'/about/',
+    dataType:'html'
+  })
+  .then(
 
-});</code></pre>
-<h2 class="hdg-l2-01">サンプルコード</h2>
-<h3 class="hdg-l3-01">イベントが実行できるパターン</h3>
-<pre><code>$(function(){
-  'use scrict';
-
-  //DOM生成した要素にイベントが実行できる
-  $('div.moge').append('&lt;ul id=&quot;moge-01&quot; class=&quot;list-link-01&quot;&gt;&lt;li&gt;&lt;a href=&quot;#&quot;&gt;jsでページ読み込み時にDOM生成されたリンク&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;');
-  $('div.moge ul#moge-01 li a').click(function(){
-    $('div.moge ul#moge-01').after('&lt;ul id=&quot;moge-02&quot; class=&quot;list-link-01&quot;&gt;&lt;li&gt;&lt;a href=&quot;#&quot;&gt;クリックでDOM生成されたリンク&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;');
-    return false;
-  });
-  $(document).on("click","div.moge ul#moge-02 li a",function(){
-    alert('クリックするとアラート表示される');
-    return false;
-  });
+    //通信成功時
+    function(data){
+      var contents = $(data).find('h1.hdg-l1-01').next();
+      $('.hoge').append(contents);
+    },
   
+    //通信失敗時
+    function(){
+      alert("読み込み失敗");
+  });
 });</code></pre>
-<h3 class="hdg-l3-01">イベントが実行できるパターン（第二引数を省略）</h3>
+<p>上記は単純に取得した要素を.hogeの中に放り込んでいるだけなので、.load()と対してやっていることは変わりませんが、DOM操作してからappendすることで、同じ要素でも全く違った見せ方にすることもできます。</p>
+<p>例えば以下のサンプルコードでは、<a href="/about/">/about/</a>のH1テキストを取得して文字列を置換し、さらにリンクリストモジュールの形式にDOM操作してからappendしています。</p>
 <pre><code>$(function(){
   'use scrict';
 
-  //DOM生成した要素にイベントが実行できる（第二引数を省略）
-  $('div.fuga').append('&lt;ul id=&quot;fuga-01&quot; class=&quot;list-link-01&quot;&gt;&lt;li&gt;&lt;a href=&quot;#&quot;&gt;jsでページ読み込み時にDOM生成されたリンク&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;');
-  $('div.fuga ul#fuga-01 li a').click(function(){
-    $('div.fuga ul#fuga-01').after('&lt;ul id=&quot;fuga-02&quot; class=&quot;list-link-01&quot;&gt;&lt;li&gt;&lt;a href=&quot;#&quot;&gt;クリックでDOM生成されたリンク&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;');
-    $('div.fuga ul#fuga-02 li a').on("click",function(){
-      alert('クリックするとアラート表示される');
-      return false;
-    });
-    return false;
-  });
+  $.ajax({
+    type:'GET',
+    url:'/about/',
+    dataType:'html'
+  })
+  .then(
 
+    //通信成功時
+    function (data) {
+      var contents = $(data).find('h1.hdg-l1-01').next().text();
+      contents = contents.replace(contents,'サイトについて');
+      contents = '&lt;ul class=&quot;list-link-01&quot;&gt;&lt;li&gt;&lt;a href=&quot;/about/&quot;&gt;' + contents + '&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;';
+      $('.moge').append(contents);
+    },
+  
+    //通信失敗時
+    function () {
+      alert("読み込み失敗");
+  });
 });</code></pre>
 <ul class="list-notice-01">
 <li><span>※</span><a href="https://jquery.com/" target="_blank" class="blank">jQuery</a>を読み込んでいる場合のスクリプトとなります</li>
 </ul>
 [adsense_middle]
 <h2 class="hdg-l2-01">解説</h2>
-<h3 class="hdg-l3-01">イベントが実行できないパターン</h3>
-<p>.click()は、ページ読み込み時に存在する要素にイベントを付与します。ページ読み込み後、クリック等何かしらのアクションにより動的に生成された要素には有効ではありません。そのため、動的に追加した「$('div.hoge ul#hoge-02 li a')」をクリックしてもアラートは表示されない、ということです。return falseも機能しません。</p>
-</p>
-<h3 class="hdg-l3-01">イベントが実行できるパターン</h3>
-<p>そこで、.on()メソッドの出番です。これを利用することで、ページ読み込み後に動的に追加された要素にもイベントが付与されます。.on()メソッドの第一引数にイベント名、第二引数にセレクタを指定することで動作します。ここでは$(document)により親要素に対するイベントハンドラを指定することで、子要素である「div.moge ul#moge-02 li a」をセレクタ指定しています。</p>
-<h3 class="hdg-l3-01">イベントが実行できるパターン（第二引数を省略）</h3>
-<p>.on()メソッドを使っている点は同じですが、こちらは第二引数を省略しかつセレクタに対して.on()を当てる方法です。これにより、対象の要素のみにイベントハンドラを追加することが可能です。サンプルコードでは、ページ読み込み時のリンク「$('div.fuga ul#fuga-01 li a').click(～」内に記述することで、DOM生成した要素にもイベントを付与しています。</p>
+<p>ajaxで取得したオブジェクトはdataに格納されます。あとは取得したい任意の要素に$(data)〜でアクセスするだけです。同ページ内にある要素と同じ感覚で扱うことができるようになります。</p>
+<p>わかりづらくなりそうだったのであえて用意しませんでしたが、例えばfor文やeach()を活用し、複数ある要素をAのページではリストで見せているんだけど、Bのページではセレクトボックスとして扱いたい、などの場合にこの手法は力を発揮します。</p>
+<p><strong>「Aのページをメンテナンスすれば体裁の違うBのページも勝手に更新される」</strong>という仕組みを、ちょっとしたスクリプトを書けば作り出すことができるわけです。</p>
+<p>まあ.load()を使っても似たようなことはできなくも無いですが、処理としては.load()後に要素を取得して一旦非表示にして、DOM操作してからまたappend、みたいなことをやらなきゃなのでコードも増えますし、処理としては美しくないんですよね。</p>
+<ul class="list-notice-01">
+<li><span>※</span>決して.load()をディスっているわけではない</li>
+</ul>
+<p>また、PCとSP用で別々にhtmlを用意しているサイトなどの場合、新着情報やお知らせにおいて、<strong>「PCサイトを更新すればSPも更新される」</strong>といった仕組みで運用工数を減らす活用方法もあります。</p>
 <h2 class="hdg-l2-01">デモ</h2>
 <p>実際に動作を確認できるデモページも公開しておりますのであわせてご確認ください。</p>
 <ul class="list-link-01">
-<li><a href="/demo/180321_01/" target="_blank">DOM生成した要素に対してクリックなどのイベントを実行する方法</a></li>
+<li><a href="/demo/180323_01/" target="_blank">jQueryで別ページのhtmlを取得してDOM操作する方法</a></li>
 </ul>
 <h2 class="hdg-l2-01">まとめ</h2>
-<p>昔のjQueryだとlive()とか使ってDOM生成した要素を弄んだ気がするんですが、今は.on()が汎用的に使えるのでとても便利ですね。</p>
-<p>セレクタが合っているのにDOM要素を操作できない場合は、.on()メソッドを試してみてください。大体のパターンはこれによる解決すると思います。ご参考になれば幸いです。</p>
+<p>以上、別ページのhtmlを取得してDOM操作する方法をご紹介させていただきました。実際、サイトの機能としてこういったものを実装するケースはあまりないかもしれません。</p>
+<p>しかし<strong>「ajaxを使って別ページのhtmlを簡単に扱うことができる」</strong>ということを知っておくと、いざという時に便利ですので、ご参考になれば幸いです。</p>
 
 
 
