@@ -3,67 +3,53 @@
 
 <!--======================================ここから記事用ソース======================================-->
 
-<h2 class="hdg-l2-01">完全な空要素もしくはコメントアウトのみ</h2>
-<ul class="list-notice-01">
-<li><span>※</span>完全な空要素はもちろん適用される</li>
-<li><span>※</span>コメントアウトのみであっても適用される</li>
+<p>空要素に対して適用できるcssの疑似要素<strong>「:empty」</strong>は、動的なページで要素の中身が出力された場合のみセレクタを表示させたい場合や、table要素で空要素のみ背景色を変えたい時など、使いどころによってはとても便利です。使用機会のあまり無い疑似要素ですが、使用する際は若干注意すべきポイントもあるので、本記事では疑似要素「:empty」の挙動についてまとめてみました。</p>
+[adsense_top]
+<h2 class="hdg-l2-01">サンプルコード</h2>
+<h3 class="hdg-l3-01">完全な空要素もしくはコメントアウトのみ適用される</h3>
+<p>実は見た目上空要素に見えても、改行や半角スペースなどが1つでもあると:emptyの対象とはなりません。以下の場合のみ、:emptyで指定したスタイルは適用されます。</p>
+<ul class="list-bullet-01">
+<li>完全な空要素</li>
+<li>コメントアウトのみ</li>
 </ul>
-<table class="tbl-01">
-<tbody>
-<tr>
-<td></td>
-<td><!--コメントアウト--></td>
-</tr>
-</tbody>
-</table>
+<h4 class="hdg-l4-01">疑似要素:emptyの対象となるパターン</h4>
 <pre><code>&lt;table class=&quot;tbl-01&quot;&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;!--コメントアウト--&gt;&lt;/td&gt;
+<strong>&lt;td&gt;&lt;/td&gt;</strong>
+<strong>&lt;td&gt;&lt;!--コメントアウト--&gt;&lt;/td&gt;</strong>
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;</code></pre>
 <pre><code>table.tbl-01 td:empty{
   background:#f00;
 }</code></pre>
-<h2 class="hdg-l2-01">改行や半角スペース</h2>
-<ul class="list-notice-01">
-<li><span>※</span>見た目上は空であっても、改行や半角スペース、改行を含んだコメントアウトは空要素とはみなされない</li>
-</ul>
-<table class="tbl-01">
-<tbody>
-<tr>
-<td>
-</td>
-<td> </td>
-<td>
-<!--コメントアウト-->
-</td>
-</tr>
-</tbody>
-</table>
+<h4 class="hdg-l4-01">疑似要素:emptyの対象とならないパターン</h4>
+<p>以下のように半角スペースや改行が入っていると、:emptyのスタイルは適用されません。</p>
 <pre><code>&lt;table class=&quot;tbl-01&quot;&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;
-&lt;/td&gt;
-&lt;td&gt; &lt;/td&gt;
-&lt;td&gt;
+<strong>&lt;td&gt;
+&lt;/td&gt;</strong>
+<strong>&lt;td&gt; &lt;/td&gt;</strong>
+<strong>&lt;td&gt;
 &lt;!--コメントアウト--&gt;
-&lt;/td&gt;
+&lt;/td&gt;</strong>
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;</code></pre>
 <pre><code>table.tbl-01 td:empty{
   background:#f00;
 }</code></pre>
-<style>
-table.tbl-01 td:empty{
-  background:#f00;
-}
-</style>
-<p class="btn-01 mt20"><a href="/2018/04/180404_01/">デモの解説記事に戻る</a></p>
+<h2 class="hdg-l2-01">デモ</h2>
+<p>実際に動作を確認できるデモページも公開しておりますのであわせてご確認ください。</p>
+<ul class="list-link-01">
+<li><a href="/demo/180409_01/" target="_blank">要素の中身が空の時に適用できる疑似要素:emptyの挙動についてまとめてみた</a></li>
+</ul>
+<h2 class="hdg-l2-01">まとめ</h2>
+<p>疑似要素:emptyは、システム上の制約でどうしても要素が空になってしまうケースを想定しなければならない場合など、条件や使い所によってはとても便利な疑似要素です。</p>
+<p>また、jsonやxmlで取得した情報をDOM生成する際に、<strong>「表示条件にマッチしなかった場合に要素ごとdisplay:none;にする」</strong>処理をjsで行うことがありますが、こういったケースでも:emptyを活用することで、非表示処理をcss側に行わせたりもできます。</p>
+<p>以上、疑似要素:emptyの挙動についてまとめてみました。どうぞ本記事がご参考になれば幸いです。</p>
 
 <!--======================================ここまで記事用ソース======================================-->
 
