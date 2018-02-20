@@ -224,7 +224,7 @@ function twentysixteen_widget_tag_cloud_args( $args ) {
 add_filter( 'widget_tag_cloud_args', 'twentysixteen_widget_tag_cloud_args' );
 
 /*====================================================
-title
+ titleタグ
 =====================================================*/
 function hierarchical_title( $separateText ){
     $separate = ' ' . $separateText . ' ';
@@ -309,7 +309,7 @@ class relative_URI {
 new relative_URI();
 
 /*====================================================
-パンくず（2カラム固定ページ用）
+ パンくず（2カラム固定ページ用）
 =====================================================*/
 function breadcrumb(){
 	global $post;
@@ -362,7 +362,7 @@ function breadcrumb(){
 }
 
 /*====================================================
-wp_headの不要な出力を停止
+ wp_headの不要な出力を停止
 =====================================================*/
 remove_action('wp_head','_wp_render_title_tag',1);
 remove_action('wp_head','wp_enqueue_scripts',1);
@@ -402,7 +402,7 @@ function mytheme_kill_admin_bar(){
 add_filter( 'show_admin_bar', 'mytheme_kill_admin_bar' , 1000 );
 
 /*====================================================
-ページャー
+ ページャー
 =====================================================*/
 function responsive_pagination($pages = '', $range = 2){
     $showitems = ($range * 2)+1;  
@@ -442,19 +442,19 @@ function responsive_pagination($pages = '', $range = 2){
     }
 }
 /*====================================================
-投稿記事内の文字列変換をオフ
+ 投稿記事内の文字列変換をオフ
 =====================================================*/
 remove_filter('the_content', 'wptexturize');	
 remove_filter('the_content', 'convert_chars');
 remove_filter('the_content', 'wpautop');
 
 /*====================================================
-アイキャッチを300×300にトリミング
+ アイキャッチを300×300にトリミング
 =====================================================*/
 add_image_size('thum300',300,300,true);
 
 /*====================================================
-固定ページの「抜粋」有効化
+ 固定ページの「抜粋」有効化
 =====================================================*/
 add_post_type_support( 'page', 'excerpt' );
 
@@ -522,3 +522,16 @@ function showads_top_1col(){
   }
 }
 add_shortcode('adsense_top_1col', 'showads_top_1col');
+
+/*====================================================
+　AMP対応
+=====================================================*/
+function amp($text){
+	$replace = array(
+		'localhost/pc/img' => 'hogehoge/gogo/images'		
+	);
+	$text = str_replace(array_keys($replace), $replace, $text);
+	return $text;
+}
+add_filter('the_content', 'amp');
+

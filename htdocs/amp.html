@@ -665,6 +665,89 @@ ol.list-number-01 li {
   zoom: 0;
 }
 
+ul.list-prev-next {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+ul.list-prev-next:before,
+ul.list-prev-next:after {
+  content: "";
+  display: table;
+}
+
+ul.list-prev-next:after {
+  clear: both;
+}
+
+ul.list-prev-next li {
+  width: calc((100% - 1px) / 2);
+  position: relative;
+}
+
+ul.list-prev-next li a {
+  display: block;
+  padding: 10px;
+}
+
+ul.list-prev-next li a:before,
+ul.list-prev-next li a:after {
+  content: "";
+  display: table;
+}
+
+ul.list-prev-next li a:after {
+  clear: both;
+}
+
+ul.list-prev-next li a span {
+  width: 60%;
+  float: right;
+  display: block;
+}
+
+ul.list-prev-next li a amp-img {
+  width: 35%;
+  float: left;
+  vertical-align: middle;
+}
+
+ul.list-prev-next li a:before {
+  background: url("/shared/images/arrow_01.png") no-repeat 0 0;
+  -webkit-background-size: 30px 30px;
+  background-size: 30px 30px;
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 37%;
+  font-size: 0;
+  line-height: 0;
+  z-index:100;
+}
+
+ul.list-prev-next li a:hover span,
+ul.list-prev-next li a:focus span {
+  text-decoration: underline ;
+}
+
+ul.list-prev-next li:first-child {
+  border-right: 1px solid #ccc;
+}
+
+ul.list-prev-next li:first-child a:before {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  left: -15px;
+}
+
+ul.list-prev-next li:last-child a:before {
+  right: -15px;
+}
+
 .img-layout-left,
 .img-layout-right {
   margin-bottom: 20px;
@@ -991,6 +1074,37 @@ div.add-post p.title {
   background: #fff;
   padding: 0 4px;
   font-weight: bold;
+}
+
+@media only screen and (max-width: 680px) {
+  ul.list-pagenation li.prev a {
+    border-left-width: 1px;
+  }
+
+  ul.list-prev-next li a span {
+    width: 100%;
+  }
+
+  ul.list-prev-next li a amp-img {
+    display: none;
+  }
+
+  ul.list-prev-next li a:before {
+    -webkit-background-size: 18px 18px;
+    background-size: 18px 18px;
+    width: 18px;
+    height: 18px;
+    top: 40%;
+    font-size: 0.85rem;
+  }
+
+  ul.list-prev-next li:first-child a:before {
+    left: -10px;
+  }
+
+  ul.list-prev-next li:last-child a:before {
+    right: -10px;
+  }
 }
 
 blockquote {
@@ -1572,8 +1686,13 @@ div.az-item:hover {
 <p>これだけの対策をしていっても、<strong>1時間立つ頃には少し心が折れそうになりました。。。</strong></p>
 <p>寒い中並ぶという状況は思った以上に時間が過ぎるのを遅く感じますので、出来る限りの準備をしていくことをおすすめします。隣で並んでいる女性なんかは割と軽装な様子だったので、ガタガタ震えていてかわいそうでした。。。（途中でコンビニにカイロを駆け足で購入しに行っていました）</p>
 <p>長時間並ぶ場合は当然おなかも空くので、チョコレートなど少し食べ物を持っていくのもアリだと思います。あとはこれだけ対策してもじっとしていると冷えるので、少し立ち上がって軽くストレッチしたりするだけでも少し体が温まります。</p>
-<p>以上、寒い中長時間並ぶにあたってのおすすめアイテムを6つご紹介させていただきました。まだまだ寒い日も続きますので、どうぞご参考になれば幸いです。</p><div class="ad-main-bottom mb20">
+<p>以上、寒い中長時間並ぶにあたってのおすすめアイテムを6つご紹介させていただきました。まだまだ寒い日も続きますので、どうぞご参考になれば幸いです。</p>
+<div class="ad-main-bottom mb20">
 </div>
+<ul class="list-prev-next">
+<li><a href="/2016/08/160811_02/"><span>【自転車通勤におすすめ！】クロスバイク[オルディナS5B]にカゴと泥除けを取り付け</span><amp-img src="/wp-content/uploads/thum-bike-02-300x300.jpg" alt="" width="107" height="107"></amp-img></a></li>
+<li><a href="/2016/09/160905_01/"><span>【超簡単！】シャワーヘッドを自分でホースごと交換</span><amp-img src="/wp-content/uploads/thum-diy-01-300x300.jpg" alt="" width="107" height="107"></amp-img></a></li>
+</ul>
 </div><!--/#main-inner-->
 </main>
 </div><!--/#content-->
