@@ -126,10 +126,10 @@ echo $result;
 <?php include( TEMPLATEPATH . '/ad-main-bottom-amp.php' ); ?>
 <ul class="list-prev-next">
 <?php $prevpost = get_adjacent_post(true, '', true); if ($prevpost) : ?>
-<li><a href="<?php echo get_permalink($prevpost->ID); ?>"><span><?php echo esc_attr($prevpost->post_title); ?></span><amp-img src="<?php echo get_the_post_thumbnail_url($prevpost->ID,'thum300');?>" alt="" width="107" height="107"></amp-img></a></li>
+<li><a href="<?php echo get_permalink($prevpost->ID); ?>"><span><?php echo esc_attr($prevpost->post_title); ?></span><amp-img src="<?php echo get_the_post_thumbnail_url($prevpost->ID,'thum300');?>" alt="" width="107" height="107" layout="responsive"></amp-img></a></li>
 <?php endif; ?>
 <?php $nextpost = get_adjacent_post(true, '', false); if ($nextpost) : ?>
-<li><a href="<?php echo get_permalink($nextpost->ID); ?>"><span><?php echo esc_attr($nextpost->post_title); ?></span><amp-img src="<?php echo get_the_post_thumbnail_url($nextpost->ID,'thum300');?>" alt="" width="107" height="107"></amp-img></a></li>
+<li><a href="<?php echo get_permalink($nextpost->ID); ?>"><span><?php echo esc_attr($nextpost->post_title); ?></span><amp-img src="<?php echo get_the_post_thumbnail_url($nextpost->ID,'thum300');?>" alt="" width="107" height="107" layout="responsive"></amp-img></a></li>
 <?php endif; ?>
 </ul>
 <?php endif;?>
