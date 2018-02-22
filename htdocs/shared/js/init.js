@@ -9,7 +9,6 @@ $(function(){
   $('.grid-3 > .col').matchHeight();
   $('.grid-2 > .col').matchHeight();
   $('ul.list-link-thum').find('li').matchHeight();
-  $('ul.list-prev-next').find('li').matchHeight();
 });
 
 /* ==================================

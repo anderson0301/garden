@@ -458,56 +458,65 @@ ol.list-number-01{
 }
 
 ul.list-prev-next{
-	border:1px solid #ccc;
-	border-radius:4px;
 	margin-bottom: 20px;
+	display:flex;
 	@include clearfix;
 	li{
-		float:left;
 		width:calc((100% - 1px) / 2);
 		position:relative;
+		display:flex;
+		border:1px solid #ccc;
 		a{
 			display:block;
-			padding:10px;
+			padding:10px 10px 10px 30px;
+			position: relative;
 			@include clearfix;
 			span{
-				width:60%;
+				width:65%;
 				float:right;
 				display:block;
 			}
 			img{
-				width:35%!important;
+				width:30%!important;
 				float:left;
 				vertical-align:middle;
 			}
 		}
 		a:before{
-			background:url("/shared/images/arrow_01.png") no-repeat 0 0;
-			background-size:30px 30px;
+			width:20px;
+			height:100%;
+			background:url("/shared/images/arrow_06.png") 6px center / 10px 16px no-repeat #387922;
 			content:"";
-			display:block;
-			width:30px;
-			height:30px;
 			position:absolute;
-			top:37%;
-			font-size:0;
-			line-height:0;
+			top:0;
+			color:#fff;
+			text-align:center;
+			display:flex;
+			align-items:center;
+			justify-content:center;
 		}
 		a:hover span,
 		a:focus span{
 			text-decoration:underline!important;
 		}
 	}
-	li:first-child{
-		border-right:1px solid #ccc;
+	li.prev{
+		border-radius:4px 0 0 4px;
 		a:before{
 			transform:rotateY(180deg);
-			left:-15px;
+			left:0;
+			border-radius:0 3px 3px 0;
 		}
 	}
-	li:last-child{
+	li.next{
+		border-left:none;
+		border-radius:0 4px 4px 0;
+		a{
+			padding:10px 30px 10px 10px;
+		}
 		a:before{
-			right:-15px;
+			right:0;
+			border-radius:0 3px 3px 0;
 		}
 	}
 }
@@ -980,37 +989,6 @@ ul.list-pagenation > li:last-child > a {
   }
  
   ul.list-pagenation li.prev a { border-left-width: 1px; }
-
-  ul.list-prev-next{
-	li{
-		a{
-			span{
-				width: 100%;
-			}
-			img{
-				display: none;
-			}
-		}
-
-		a:before{
-			background-size: 18px 18px;
-			width:18px;
-			height:18px;
-			top: 40%;
-			font-size: 0.85rem;
-		}
-	}
-	li:first-child{
-		a:before{
-			left: -10px;
-		}
-	}
-	li:last-child{
-		a:before{
-			right: -10px;
-		}
-	}
-  }
 }
 
 /*----------------------------------------------
