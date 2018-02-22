@@ -409,6 +409,109 @@ body.lyt-main-sub #content main #main-inner {
   border-radius: 4px;
 }
 
+body.lyt-main-sub #content div#nav-sidebar {
+  width: 300px;
+  margin-left: 20px;
+  float: right;
+}
+
+body.lyt-main-sub #content div#nav-sidebar p.title-blog {
+  font-size: 1.0rem;
+  font-weight: bold;
+  padding: 0 0 10px 0;
+  position: relative;
+  text-align: center;
+}
+
+body.lyt-main-sub #content div#nav-sidebar p.title-blog span {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  margin: 0 2.5em;
+  padding: 0 1em;
+  background: #ecece0;
+  text-align: left;
+}
+
+body.lyt-main-sub #content div#nav-sidebar p.title-blog:before {
+  position: absolute;
+  top: 37.5%;
+  z-index: 1;
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: #888;
+}
+
+body.lyt-main-sub #content div#nav-sidebar nav {
+  margin-bottom: 30px;
+}
+
+body.lyt-main-sub #content div#nav-sidebar nav ul,
+body.lyt-main-sub #content div#nav-sidebar ul.category {
+  margin-bottom: 30px;
+  -webkit-box-shadow: 0 2px 3px 0 #dedede;
+  box-shadow: 0 2px 3px 0 #dedede;
+}
+
+body.lyt-main-sub #content div#nav-sidebar nav ul li,
+body.lyt-main-sub #content div#nav-sidebar ul.category li {
+  border-bottom: 1px solid #ccc;
+  background: #f1f1f1;
+}
+
+body.lyt-main-sub #content div#nav-sidebar nav ul li p,
+body.lyt-main-sub #content div#nav-sidebar ul.category li p {
+  text-align: right;
+  font-size: 0.75rem;
+  padding: 10px 10px 0 0;
+  color: #333;
+}
+
+body.lyt-main-sub #content div#nav-sidebar nav ul li a,
+body.lyt-main-sub #content div#nav-sidebar ul.category li a {
+  display: block;
+  padding: 14px 14px 12px 28px;
+  background: url("/shared/images/arrow_02.png") no-repeat 14px 1.55em;
+  -webkit-background-size: 5px 8px;
+  background-size: 5px 8px;
+  text-decoration: none;
+}
+
+body.lyt-main-sub #content div#nav-sidebar nav ul li:first-child,
+body.lyt-main-sub #content div#nav-sidebar ul.category li:first-child {
+  border-radius: 4px 4px 0 0;
+}
+
+body.lyt-main-sub #content div#nav-sidebar nav ul li:last-child,
+body.lyt-main-sub #content div#nav-sidebar ul.category li:last-child {
+  border-bottom: none;
+  border-radius: 0 0 4px 4px;
+}
+
+body.lyt-main-sub #content div#nav-sidebar nav ul li:hover,
+body.lyt-main-sub #content div#nav-sidebar ul.category li:hover {
+  background: #fff;
+}
+
+body.lyt-main-sub #content div#nav-sidebar nav ul li.current,
+body.lyt-main-sub #content div#nav-sidebar ul.category li.current {
+  background: #fff;
+}
+
+body.lyt-main-sub #content div#nav-sidebar ul:last-child {
+  margin-bottom: 0;
+}
+
+body.lyt-main-sub.diy #content div#nav-sidebar ul.category li.cat-diy,
+body.lyt-main-sub.web #content div#nav-sidebar ul.category li.cat-web,
+body.lyt-main-sub.wp #content div#nav-sidebar ul.category li.cat-wp,
+body.lyt-main-sub.turf #content div#nav-sidebar ul.category li.cat-turf,
+body.lyt-main-sub.loan #content div#nav-sidebar ul.category li.cat-loan {
+  background: #fff;
+}
+
 p.page_top {
   text-align: right;
   position: relative;
@@ -1344,13 +1447,17 @@ div.az-item:hover {
     margin-right: 0;
   }
 
-  body.lyt-main-sub #content nav#nav-local,body.lyt-main-sub #content div#nav-sidebar {
+  body.lyt-main-sub #content nav#nav-local,
+  body.lyt-main-sub #content div#nav-sidebar {
     width: 100%;
     float: none;
     margin-left: 0;
   }
 
-  body.lyt-main-sub #content nav#nav-local ul li p,body.lyt-main-sub #content nav#nav-local ol li p,body.lyt-main-sub #content div#nav-sidebar ul li p,body.lyt-main-sub #content div#nav-sidebar ol li p {
+  body.lyt-main-sub #content nav#nav-local ul li p,
+  body.lyt-main-sub #content nav#nav-local ol li p,
+  body.lyt-main-sub #content div#nav-sidebar ul li p,
+  body.lyt-main-sub #content div#nav-sidebar ol li p {
     text-align: left;
   }
 
@@ -1694,6 +1801,20 @@ div.az-item:hover {
 </ul>
 </div><!--/#main-inner-->
 </main>
+
+<div id="nav-sidebar">
+<div id="nav-sidebar-inner">
+<p class="title-blog"><span>カテゴリー</span></p>
+<ul class="category">
+<li class="cat-diy"><a href="/category/diy/">DIY</a></li>
+<li class="cat-web"><a href="/category/web/">Web</a></li>
+<li class="cat-wp"><a href="/category/wp/">WordPress</a></li>
+<li class="cat-loan"><a href="/category/loan/">住宅ローン</a></li>
+<li class="cat-turf"><a href="/category/turf/">芝生</a></li>
+</ul>
+</div><!--/#nav-sidebar-inner-->
+</div><!--/#nav-sidebar-->
+
 </div><!--/#content-->
 <p class="page_top"><a href="#">ページの先頭に戻る</a></p>
 <footer>

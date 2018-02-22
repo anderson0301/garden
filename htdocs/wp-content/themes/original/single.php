@@ -138,5 +138,18 @@ echo $result;
 <?php if(!$myAmp): ?>
 <?php include( TEMPLATEPATH . '/sidebar-blog.php' ); ?>
 <?php endif; ?>
+<?php if($myAmp): ?>
+<div id="nav-sidebar">
+<div id="nav-sidebar-inner">
+<p class="title-blog"><span>カテゴリー</span></p>
+<ul class="category">
+<?php $cat_info = get_categories('');
+foreach ($cat_info as $category) { if($category->count != 0) : ?>
+<li class="cat-<?php echo $category->category_nicename; ?>"><a href="/category/<?php echo $category->category_nicename; ?>/"><?php echo $category->cat_name; ?></a></li>
+<?php endif; };?>
+</ul>
+</div><!--/#nav-sidebar-inner-->
+</div><!--/#nav-sidebar-->
+<?php endif; ?>
 </div><!--/#content-->
 <?php get_footer(); ?>
