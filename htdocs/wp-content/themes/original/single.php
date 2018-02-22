@@ -121,12 +121,8 @@ echo $result;
 <?php if($myAmp):?>
 <?php include( TEMPLATEPATH . '/ad-main-bottom-amp.php' ); ?>
 <ul class="list-prev-next">
-<?php $prevpost = get_adjacent_post(true, '', true); if ($prevpost) : ?>
-<li class="prev"><a href="<?php echo get_permalink($prevpost->ID); ?>"><span><?php echo esc_attr($prevpost->post_title); ?></span><amp-img src="<?php echo get_the_post_thumbnail_url($prevpost->ID,'thum300');?>" alt="" width="107" height="107" layout="responsive"></amp-img></a></li>
-<?php endif; ?>
-<?php $nextpost = get_adjacent_post(true, '', false); if ($nextpost) : ?>
-<li class="next"><a href="<?php echo get_permalink($nextpost->ID); ?>"><span><?php echo esc_attr($nextpost->post_title); ?></span><amp-img src="<?php echo get_the_post_thumbnail_url($nextpost->ID,'thum300');?>" alt="" width="107" height="107" layout="responsive"></amp-img></a></li>
-<?php endif; ?>
+<li class="prev"><?php $prevpost = get_adjacent_post(true, '', true); if ($prevpost) : ?><a href="<?php echo get_permalink($prevpost->ID); ?>"><span><?php echo esc_attr($prevpost->post_title); ?></span><amp-img src="<?php echo get_the_post_thumbnail_url($prevpost->ID,'thum300');?>" alt="" width="86" height="86" layout="responsive"></amp-img></a><?php endif; ?></li>
+<li class="next"><?php $nextpost = get_adjacent_post(true, '', false); if ($nextpost) : ?><a href="<?php echo get_permalink($nextpost->ID); ?>"><span><?php echo esc_attr($nextpost->post_title); ?></span><amp-img src="<?php echo get_the_post_thumbnail_url($nextpost->ID,'thum300');?>" alt="" width="86" height="86" layout="responsive"></amp-img></a><?php endif; ?></li>
 </ul>
 <?php endif;?>
 </div><!--/#main-inner-->

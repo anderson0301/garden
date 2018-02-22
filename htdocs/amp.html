@@ -769,9 +769,9 @@ ol.list-number-01 li {
 }
 
 ul.list-prev-next {
-  border: 1px solid #ccc;
-  border-radius: 4px;
   margin-bottom: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
@@ -788,11 +788,16 @@ ul.list-prev-next:after {
 ul.list-prev-next li {
   width: calc((100% - 1px) / 2);
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border: 1px solid #ccc;
 }
 
 ul.list-prev-next li a {
   display: block;
-  padding: 10px;
+  padding: 10px 10px 10px 30px;
+  position: relative;
 }
 
 ul.list-prev-next li a:before,
@@ -806,48 +811,64 @@ ul.list-prev-next li a:after {
 }
 
 ul.list-prev-next li a span {
-  width: 60%;
+  width: 65%;
   float: right;
   display: block;
 }
 
 ul.list-prev-next li a amp-img {
-  max-width:35%;
+  max-width:30%;
   vertical-align: middle;
 }
 
 ul.list-prev-next li a:before {
-  background: url("/shared/images/arrow_01.png") no-repeat 0 0;
-  -webkit-background-size: 30px 30px;
-  background-size: 30px 30px;
+  width: 20px;
+  height: 100%;
+  background: url("/shared/images/arrow_06.png") 6px center/10px 16px no-repeat #387922;
   content: "";
-  display: block;
-  width: 30px;
-  height: 30px;
   position: absolute;
-  top: 37%;
-  font-size: 0;
-  line-height: 0;
-  z-index:100;
+  top: 0;
+  color: #fff;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 ul.list-prev-next li a:hover span,
 ul.list-prev-next li a:focus span {
-  text-decoration: underline ;
+  text-decoration: underline;
 }
 
-ul.list-prev-next li:first-child {
-  border-right: 1px solid #ccc;
+ul.list-prev-next li.prev {
+  border-radius: 4px 0 0 4px;
 }
 
-ul.list-prev-next li:first-child a:before {
+ul.list-prev-next li.prev a:before {
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
-  left: -15px;
+  left: 0;
+  border-radius: 0 3px 3px 0;
 }
 
-ul.list-prev-next li:last-child a:before {
-  right: -15px;
+ul.list-prev-next li.next {
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+}
+
+ul.list-prev-next li.next a {
+  padding: 10px 30px 10px 10px;
+}
+
+ul.list-prev-next li.next a:before {
+  right: 0;
+  border-radius: 0 3px 3px 0;
 }
 
 .img-layout-left,
@@ -1181,31 +1202,6 @@ div.add-post p.title {
 @media only screen and (max-width: 680px) {
   ul.list-pagenation li.prev a {
     border-left-width: 1px;
-  }
-
-  ul.list-prev-next li a span {
-    width: 100%;
-  }
-
-  ul.list-prev-next li a amp-img {
-    display: none;
-  }
-
-  ul.list-prev-next li a:before {
-    -webkit-background-size: 18px 18px;
-    background-size: 18px 18px;
-    width: 18px;
-    height: 18px;
-    top: 40%;
-    font-size: 0.85rem;
-  }
-
-  ul.list-prev-next li:first-child a:before {
-    left: -10px;
-  }
-
-  ul.list-prev-next li:last-child a:before {
-    right: -10px;
   }
 }
 
@@ -1635,6 +1631,35 @@ div.az-item:hover {
     top: 35%;
   }
 
+  ul.list-prev-next {
+    display: block;
+  }
+
+  ul.list-prev-next li {
+    width: 100%;
+  }
+
+  ul.list-prev-next li a {
+    border-radius: 4px 4px 4px 4px;
+  }
+
+  ul.list-prev-next li.next {
+    margin-bottom: 0;
+  }
+
+  ul.list-prev-next li.next a {
+    border-left: 1px solid #ccc;
+    border-radius: 4px 4px 4px 4px;
+  }
+
+  ul.list-prev-next li:empty {
+    display: none;
+  }
+
+  ul.list-prev-next li:last-child {
+    margin-top: 20px;
+  }
+
   div.ad-main-top div.grid-2>.col:nth-child(2),div.ad-main-middle div.grid-2>.col:nth-child(2),div.ad-main-bottom div.grid-2>.col:nth-child(2) {
     display: none;
   }
@@ -1796,8 +1821,16 @@ div.az-item:hover {
 <div class="ad-main-bottom mb20">
 </div>
 <ul class="list-prev-next">
-<li><a href="/2016/08/160811_02/"><span>【自転車通勤におすすめ！】クロスバイク[オルディナS5B]にカゴと泥除けを取り付け</span><amp-img src="/wp-content/uploads/thum-bike-02-300x300.jpg" alt="" width="107" height="107" layout="responsive"></amp-img></a></li>
-<li><a href="/2016/09/160905_01/"><span>【超簡単！】シャワーヘッドを自分でホースごと交換</span><amp-img src="/wp-content/uploads/thum-diy-01-300x300.jpg" alt="" width="107" height="107" layout="responsive"></amp-img></a></li>
+<li class="prev"></li>
+<li class="next"><a href="/2016/09/160905_01/"><span>【超簡単！】シャワーヘッドを自分でホースごと交換</span><amp-img src="/wp-content/uploads/thum-diy-01-300x300.jpg" alt="" width="86" height="86" layout="responsive"></amp-img></a></li>
+</ul>
+<ul class="list-prev-next">
+<li class="prev"><a href="/2016/08/160811_02/"><span>【自転車通勤におすすめ！】クロスバイク[オルディナS5B]にカゴと泥除けを取り付け</span><amp-img src="/wp-content/uploads/thum-bike-02-300x300.jpg" alt="" width="86" height="86" layout="responsive"></amp-img></a></li>
+<li class="next"></li>
+</ul>
+<ul class="list-prev-next">
+<li class="prev"><a href="/2016/08/160811_02/"><span>【自転車通勤におすすめ！】クロスバイク[オルディナS5B]にカゴと泥除けを取り付け</span><amp-img src="/wp-content/uploads/thum-bike-02-300x300.jpg" alt="" width="86" height="86" layout="responsive"></amp-img></a></li>
+<li class="next"><a href="/2016/09/160905_01/"><span>【超簡単！】シャワーヘッドを自分でホースごと交換</span><amp-img src="/wp-content/uploads/thum-diy-01-300x300.jpg" alt="" width="86" height="86" layout="responsive"></amp-img></a></li>
 </ul>
 </div><!--/#main-inner-->
 </main>
