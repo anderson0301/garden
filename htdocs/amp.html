@@ -868,6 +868,71 @@ a.blank {
   background-size: 11px 9px;
 }
 
+ul.list-link-thum {
+  margin: 0 0 30px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+ul.list-link-thum:before,
+ul.list-link-thum:after {
+  content: "";
+  display: table;
+}
+
+ul.list-link-thum:after {
+  clear: both;
+}
+
+ul.list-link-thum li {
+  width: calc((100% - 20px) / 2);
+  position: relative;
+  min-height: 80px;
+  margin: 0 20px 10px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px dotted #ccc;
+  display: flex;
+}
+
+ul.list-link-thum li a {
+  display: block;
+  padding: 2px 0 0 14px;
+  -webkit-background-size: 5px 8px;
+  background-size: 5px 8px;
+}
+
+ul.list-link-thum li a amp-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+ul.list-link-thum li a span.txt {
+  display: block;
+  padding: 25px 0 0 76px;
+}
+
+ul.list-link-thum li a span.cat,
+ul.list-link-thum li a span.date {
+  position: absolute;
+  left: 90px;
+  top: 0;
+}
+
+ul.list-link-thum li a span.cat.double {
+  position: absolute;
+  left: 190px;
+  top: 0;
+}
+
+ul.list-link-thum li:nth-child(even) {
+  margin-right: 0;
+}
+
+ul.list-link-thum li.icon-double a span.date {
+  left: 180px;
+}
+
 ul.list-notice-01 {
   margin: 0 0 10px 0;
 }
@@ -1401,6 +1466,33 @@ div.add-post p.title {
   }
 }
 
+p.btn-01 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+p.btn-01 a {
+  padding: 10px 40px 10px 54px;
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid #000;
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  background: #fff url("/shared/images/arrow_02.png") no-repeat 38px 1.3em;
+  -webkit-background-size: 5px 8px;
+  background-size: 5px 8px;
+}
+
+p.btn-01 a:hover,p.btn-01 a:focus {
+  color: #fff;
+  background: #000 url("/shared/images/arrow_02.png") no-repeat 38px 1.3em;
+  -webkit-background-size: 5px 8px;
+  background-size: 5px 8px;
+  -webkit-transition: background-color 0.35s ease 0s, color 0.35s ease 0s;
+  transition: background-color 0.35s ease 0s, color 0.35s ease 0s;
+}
+
 blockquote {
   display: block;
   background: #fff;
@@ -1780,6 +1872,12 @@ div.az-item:hover {
   table.tbl-01.sp-lyt-on tr:last-child td {
     border-bottom: 1px solid #ccc;
   }
+
+  ul.list-link-thum li {
+    width: 100%;
+    float: none;
+    margin: 0 0 10px 0;
+  }
 }
 
 @media screen and (max-width: 540px) {
@@ -1836,6 +1934,7 @@ div.az-item:hover {
   }
 
   ul.list-prev-next li a {
+    width: 100%;
     border-radius: 4px 4px 4px 4px;
   }
 
@@ -2033,6 +2132,18 @@ div.az-item:hover {
 <li class="prev"><a href="/2016/08/160811_02/"><span>【自転車通勤におすすめ！】クロスバイク[オルディナS5B]にカゴと泥除けを取り付け</span><amp-img src="/wp-content/uploads/thum-bike-02-300x300.jpg" alt="" width="86" height="86" layout="responsive"></amp-img></a></li>
 <li class="next"><a href="/2016/09/160905_01/"><span>【超簡単！】シャワーヘッドを自分でホースごと交換</span><amp-img src="/wp-content/uploads/thum-diy-01-300x300.jpg" alt="" width="86" height="86" layout="responsive"></amp-img></a></li>
 </ul>
+
+<h2 class="hdg-l2-01">この記事を読んでいる方にオススメの記事</h2>
+<ul class="list-link-thum js-related">
+<li><a href="/2017/06/170605_01/"><span class="cat">DIY</span><span class="txt">【ベビーフェンス第2弾！】ニトリの突っ張り棒とワイヤーネットで、頑丈なベビーフェンスをDIY</span><amp-img width="80" height="80" src="/wp-content/uploads/thum-diy-03-300x300.jpg" alt=""></amp-img></a></li>
+<li><a href="/2017/06/170605_01/"><span class="cat">DIY</span><span class="txt">【ベビーフェンス第2弾！】ニトリの突っ張り棒とワイヤーネットで、頑丈なベビーフェンスをDIYあああああああああああああああああああああああああああああああ</span><amp-img width="80" height="80" src="/wp-content/uploads/thum-diy-03-300x300.jpg" alt=""></amp-img></a></li>
+<li><a href="/2017/06/170605_01/"><span class="cat">DIY</span><span class="txt">【ベビーフェンス第2弾！】ニトリの突っ張り棒とワイヤーネットで、頑丈なベビーフェンスをDIY</span><amp-img width="80" height="80" src="/wp-content/uploads/thum-diy-03-300x300.jpg" alt=""></amp-img></a></li>
+<li><a href="/2017/06/170605_01/"><span class="cat">DIY</span><span class="txt">【ベビーフェンス第2弾！】ニトリの突っ張り棒とワイヤーネットで、頑丈なベビーフェンスをDIY</span><amp-img width="80" height="80" src="/wp-content/uploads/thum-diy-03-300x300.jpg" alt=""></amp-img></a></li>
+<li><a href="/2017/06/170605_01/"><span class="cat">DIY</span><span class="txt">【ベビーフェンス第2弾！】ニトリの突っ張り棒とワイヤーネットで、頑丈なベビーフェンスをDIYあああああああああああああああああああああああああああああああ</span><amp-img width="80" height="80" src="/wp-content/uploads/thum-diy-03-300x300.jpg" alt=""></amp-img></a></li>
+<li><a href="/2017/06/170605_01/"><span class="cat">DIY</span><span class="txt">【ベビーフェンス第2弾！】ニトリの突っ張り棒とワイヤーネットで、頑丈なベビーフェンスをDIY</span><amp-img width="80" height="80" src="/wp-content/uploads/thum-diy-03-300x300.jpg" alt=""></amp-img></a></li>
+</ul>
+<p class="btn-01 mb40"><a href="/category/diy/">「DIY」の他の記事を読む</a></p>
+
 </div><!--/#main-inner-->
 </main>
 

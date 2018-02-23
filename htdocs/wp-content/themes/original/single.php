@@ -124,6 +124,19 @@ echo $result;
 <li class="prev"><?php $prevpost = get_adjacent_post(true, '', true); if ($prevpost) : ?><a href="<?php echo get_permalink($prevpost->ID); ?>"><span><?php echo esc_attr($prevpost->post_title); ?></span><amp-img src="<?php echo get_the_post_thumbnail_url($prevpost->ID,'thum300');?>" alt="" width="86" height="86" layout="responsive"></amp-img></a><?php endif; ?></li>
 <li class="next"><?php $nextpost = get_adjacent_post(true, '', false); if ($nextpost) : ?><a href="<?php echo get_permalink($nextpost->ID); ?>"><span><?php echo esc_attr($nextpost->post_title); ?></span><amp-img src="<?php echo get_the_post_thumbnail_url($nextpost->ID,'thum300');?>" alt="" width="86" height="86" layout="responsive"></amp-img></a><?php endif; ?></li>
 </ul>
+<?php $categories = get_the_category($post->ID);$category_ID = array();foreach($categories as $category):array_push( $category_ID, $category -> cat_ID);endforeach ;
+$args = array('post__not_in' => array($post -> ID),'posts_per_page'=> 6,'category__in' => $category_ID,'orderby' => 'rand',);
+$query = new WP_Query($args); ?>
+<h2 class="hdg-l2-01">この記事を読んでいる方にオススメの記事</h2>
+<ul class="list-link-thum js-related">
+<?php if( $query -> have_posts() ): ?>
+<?php while ($query -> have_posts()) : $query -> the_post(); ?>
+<li><a href="<?php the_permalink(); ?>"><span class="cat"><?php $category = get_the_category();echo $category[0]->cat_name;?></span><span class="txt"><?php the_title(); ?></span><?php if ( has_post_thumbnail() ) : ?><?php $img_id = get_post_thumbnail_id();$img_thumbnail = wp_get_attachment_image_src( $img_id , 'thum300' );echo '<amp-img width="80" height="80" src="'.$img_thumbnail[0].'" alt=""></amp-img>';?><?php else: ?><?php endif; ?></a></li>
+<?php endwhile;?>
+<?php else:?>
+<?php endif;wp_reset_postdata();?>
+</ul>
+<p class="btn-01 mb40"><?php $category = get_the_category();if ($category[0]) {echo '<a href="'.get_category_link( $category[0]->term_id ).'">「'.$category[0]->cat_name.'」の他の記事を読む</a>';}?></p>
 <?php endif;?>
 </div><!--/#main-inner-->
 </main>
