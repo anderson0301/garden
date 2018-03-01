@@ -1,5 +1,5 @@
 <div id="nav-sidebar">
-<div id="nav-sidebar-inner">
+<div id="nav-sidebar-inner" class="js-fix">
 <p class="title-blog"><span>カテゴリー</span></p>
 <ul class="category">
 <?php $cat_info = get_categories('');

@@ -1841,11 +1841,12 @@ div.az-item:hover {
   }
 
   h2.hdg-l2-01 {
-    font-size: 1.0rem;
+    font-size: 1.05rem;
+    padding:14px 14px 12px 14px;
   }
 
   h3.hdg-l3-01 {
-    font-size: 1.0rem;
+    font-size: 0.98rem;
   }
 
   h2.hdg-l2-01+h3.hdg-l3-01 {
@@ -1881,6 +1882,31 @@ div.az-item:hover {
 }
 
 @media screen and (max-width: 540px) {
+  #content{
+    padding:0 0;
+  }
+
+  body.lyt-main-sub #content main #main-inner{
+    border-radius:0;
+    padding:20px 10px;
+  }
+
+  body.lyt-main-sub #content div#nav-sidebar div#nav-sidebar-inner{
+    padding:0 10px; 
+  }
+
+  #breadcrumb ul{
+    padding:0 10px;
+  }
+
+  #breadcrumb ul li{
+    font-size:0.7rem;
+  }
+
+  #breadcrumb ul li:after {
+    font-size:0.65rem;
+  }
+
   #breadcrumb ul li.title {
     display: none;
   }

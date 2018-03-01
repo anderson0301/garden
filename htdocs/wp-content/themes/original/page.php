@@ -30,6 +30,7 @@
 </div><!--/#main-inner"-->
 </main>
 <div id="nav-sidebar">
+<div id="nav-sidebar-inner">
 <nav>
 <?php
 if (is_page()){
@@ -67,6 +68,7 @@ if (is_page()){
 <ul class="list-link-01 mb30">
 <li><a href="/about/">さらに詳しく知りたい方はこちら</a></li>
 </ul>
+</div><!--/#nav-sidebar-inner-->
 </div><!--/#nav-sidebar-->
 </div><!--/#content-->
 <?php get_footer(); ?>

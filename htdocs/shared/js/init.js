@@ -42,6 +42,9 @@ $(window).on("load scroll resize",function(){
     //サイドバー有無の境界幅
     var x = 851;
 
+    //対象のサイドバー
+    var $tgt = $('#nav-sidebar-inner.js-fix');
+
     if(w >= x){
 
       //各要素の高さを取得 
@@ -49,7 +52,7 @@ $(window).on("load scroll resize",function(){
       var $pageH = $('body').height();//bodyの高さ
       var $headerH = $('header').outerHeight(true);//ヘッダーの高さ
       var $mainH = $('#main-inner').outerHeight(true);//メインカラムの高さ
-      var $sideH = $('#nav-sidebar-inner').outerHeight(true);//サイドバーの高さ
+      var $sideH = $tgt.outerHeight(true);//サイドバーの高さ
       var $footerH = $('footer').outerHeight(true);//フッターの高さ
       var $paddingH = $('#content').outerHeight(true) - $('#content').height();//余白の高さ
 
@@ -57,7 +60,7 @@ $(window).on("load scroll resize",function(){
       var $fixedSide = ($headerH + $paddingH + $sideH) - $winH;//サイドバーを固定するスクロール高さ
       var $scrollBtm = $pageH - $winH - $footerH ;//フッターが画面に表示されるスクロール高さ
 
-      //スクロール値を取得 
+      //スクロール値を取得
       var $scrollTop = $(this).scrollTop();
 
       //記事がサイドバーより長い場合実行
@@ -67,37 +70,37 @@ $(window).on("load scroll resize",function(){
         if($scrollTop > $fixedSide){
 
           //サイドバー固定のクラス付与
-          $('#nav-sidebar-inner').addClass('fixed-side').css('bottom',0);
+          $tgt.addClass('fixed-side').css('bottom',0);
 
           //サイドバー固定時のサイドバー幅を計算
           var $sidebarW = $('#nav-sidebar').width();
 
           //計算したサイドバー幅を付与
-          $('#nav-sidebar-inner').css("width",$sidebarW);
+          $tgt.css("width",$sidebarW);
 
         //条件から外れたら固定クラスを削除し幅をリセット
         }else{
 
           //サイドバー固定のクラス削除
-          $('#nav-sidebar-inner').removeClass('fixed-side');
+          $tgt.removeClass('fixed-side');
 
           //サイドバー幅リセット
-          $('#nav-sidebar-inner').css('width','auto');
+          $tgt.css('width','auto');
         }
         //フッターまでスクロールしたらサイドバー下端をフッター上端に連結
         if($scrollTop > $scrollBtm){
-          $('#nav-sidebar-inner').removeClass('fixed-side').css('bottom',0);
-          $('#nav-sidebar-inner').addClass('bottom-side').css('bottom',$footerH);
+          $tgt.removeClass('fixed-side').css('bottom',0);
+          $tgt.addClass('bottom-side').css('bottom',$footerH);
 
         //条件から外れたらクラスを削除
         }else{
-          $('#nav-sidebar-inner').removeClass('bottom-side').css('bottom',0);
+          $tgt.removeClass('bottom-side').css('bottom',0);
         }
       }
 
     //サイドバーがない場合に適用
     }else{
-      $('#nav-sidebar-inner').css('width','auto');
+      $tgt.css('width','auto');
     }
 
   };sidebarFix();

@@ -15,7 +15,36 @@
 </head>
 <body class="lyt-main-sub">
 
-<!--#include virtual="/shared/inc/header.html" -->
+<header>
+<div id="header-inner">
+<p id="logo"><a href="/"><img src="/shared/images/logo.png" alt="Web屋の芝生DIY"></a></p> 
+<p id="tagline">芝生やDIY等のライフハックやWeb制作情報を発信するメディア</p>
+<p id="sp-utility-btn">メニューを開く</p>
+<div id="sp-drawer-utility">
+<div id="sp-drawer-utility-inner">
+<form method="get" action="/" >
+<input id="text" type="text" value="" name="s" placeholder="キーワード">
+<input id="btn" type="image" src="/shared/images/btn_search.png" alt="検索する">
+</form>
+<ul class="utility">
+<li><a href="/about/">サイトについて</a></li>
+<li><a href="/contact/">お問い合わせ</a></li>
+<li><a href="/sitemap/">サイトマップ</a></li>
+</ul>
+</div>
+</div>
+</div>
+<nav>
+<ul>
+<li class="select"><a href="/select/">芝生の選び方</a></li>
+<li class="buy"><a href="/buy/">芝生の購入</a></li>
+<li class="plant"><a href="/plant/">芝生の張り方</a></li>
+<li class="maintenance"><a href="/maintenance/">芝生の手入れ</a></li>
+<li class="tool"><a href="/tool/">芝生の道具</a></li>
+<li class="blog"><a href="/blog/">マイホームブログ</a></li>
+</ul>
+</nav>
+</header>
 
 <div id="content">
 <div id="breadcrumb">
@@ -65,21 +94,52 @@
 </tbody>
 </table>
 
+<div class="social">
+<dl>
+<dt><span>このページをシェアする！</span></dt>
+<dd>
+<ul>
+<li class="tw"><a href="http://twitter.com/intent/tweet?url=https%3A%2F%2Fweb-diy.jp%2F2018%2F01%2F180110_01%2F&text=%E3%80%901%E6%9E%9A30%E5%86%86%E3%81%A7%E7%B0%A1%E5%8D%98%EF%BC%81%E3%80%91%E3%82%BB%E3%83%96%E3%83%B3%E3%82%A4%E3%83%AC%E3%83%96%E3%83%B3%E3%81%AE%E3%83%9E%E3%83%AB%E3%83%81%E3%82%B3%E3%83%94%E3%83%BC%E6%A9%9F%E3%81%A7%E5%86%99%E7%9C%9F%E3%82%92%E3%83%87%E3%83%BC%E3%82%BF%E5%8C%96%E3%81%97%E3%81%A6%E3%82%B9%E3%83%9E%E3%83%9B%E3%81%AB%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95&tw_p=tweetbutton" target="_blank"><i class="fa fa-twitter"></i>Twitter<span class="sns_count">0</span></a></li><li class="fb"><a href="http://www.facebook.com/sharer.php?src=bm&u=https%3A%2F%2Fweb-diy.jp%2F2018%2F01%2F180110_01%2F&t=%E3%80%901%E6%9E%9A30%E5%86%86%E3%81%A7%E7%B0%A1%E5%8D%98%EF%BC%81%E3%80%91%E3%82%BB%E3%83%96%E3%83%B3%E3%82%A4%E3%83%AC%E3%83%96%E3%83%B3%E3%81%AE%E3%83%9E%E3%83%AB%E3%83%81%E3%82%B3%E3%83%94%E3%83%BC%E6%A9%9F%E3%81%A7%E5%86%99%E7%9C%9F%E3%82%92%E3%83%87%E3%83%BC%E3%82%BF%E5%8C%96%E3%81%97%E3%81%A6%E3%82%B9%E3%83%9E%E3%83%9B%E3%81%AB%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"><i class="fa fa-facebook-square"></i>Facebook<span class="sns_count">0</span></a></li><li class="ht"><a href="http://b.hatena.ne.jp/add?mode=confirm&url=https%3A%2F%2Fweb-diy.jp%2F2018%2F01%2F180110_01%2F" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=510');return false;"><i class="fa fa-hatena"></i>はてブ<span class="sns_count">0</span></a></li><li class="po"><a href="http://getpocket.com/edit?url=https%3A%2F%2Fweb-diy.jp%2F2018%2F01%2F180110_01%2F&title=%E3%80%901%E6%9E%9A30%E5%86%86%E3%81%A7%E7%B0%A1%E5%8D%98%EF%BC%81%E3%80%91%E3%82%BB%E3%83%96%E3%83%B3%E3%82%A4%E3%83%AC%E3%83%96%E3%83%B3%E3%81%AE%E3%83%9E%E3%83%AB%E3%83%81%E3%82%B3%E3%83%94%E3%83%BC%E6%A9%9F%E3%81%A7%E5%86%99%E7%9C%9F%E3%82%92%E3%83%87%E3%83%BC%E3%82%BF%E5%8C%96%E3%81%97%E3%81%A6%E3%82%B9%E3%83%9E%E3%83%9B%E3%81%AB%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;">Pocket<span class="sns_count">0</span></a></li>
+</ul>
+</dd>
+</dl>
+</div>
 
-<!--#include virtual="/shared/inc/social.html" -->
+
 
 </div><!--/#main-inner"-->
 </main>
 
-<nav id="nav-local">
-<p class="title"><a href="/select/">芝生の購入</a></p>
+<div id="nav-sidebar">
+<div id="nav-sidebar-inner">
+<nav>
+<p class="title-page"><a href="/buy/">芝生の購入</a></p>
 <ul>
-<li><a href="/buy/homecenter.html">ホームセンターで購入する</a></li>
-<li><a href="/buy/internet.html">インターネットで購入する</a></li>
+<li class="page_item page-item-34"><a href="/buy/homecenter/">ホームセンターで購入する</a></li>
+<li class="page_item page-item-36"><a href="/buy/internet/">インターネットで購入する</a></li>
 </ul>
 </nav>
+<p class="btn-01"><a href="/category/turf/">芝生のブログ記事を読む</a></p>
+<p class="title-blog mt30"><span>サイトを作っている人</span></p>
+<p class="align-C"><img src="/shared/images/profile.png" alt=""></p>
+<ul class="list-info">
+<li class="tw"><a href="//twitter.com/webTurfDiy" target="_blank">フォローする</a></li>
+<li class="rss"><a href="/feed/" target="_blank">RSSを購読する</a></li>
+</ul>
+<p>Webデザイナー／フロントエンド・エンジニアのMasaです。独学でWebデザインを勉強後Web業界へ就職し、今の会社に勤めて10年目になりました。<br>
+2016年4月にマイホームを購入し、休日は芝生いじりと育児に励んでいます。</p>
+<ul class="list-link-01 mb30">
+<li><a href="/about/">さらに詳しく知りたい方はこちら</a></li>
+</ul>
+</div><!--/#nav-sidebar-inner-->
+</div><!--/#nav-sidebar-->
 
 </div><!--/#content-->
-<!--#include virtual="/shared/inc/footer.html" -->
+<p class="page_top"><a href="#">ページの先頭に戻る</a></p>
+<footer>
+<p>&copy;2016 Web屋の芝生DIY All rights reserved.</p>
+</footer>
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="/shared/js/init.js"></script>
 </body>
 </html>
