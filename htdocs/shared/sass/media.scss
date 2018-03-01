@@ -299,7 +299,8 @@ ul.list-link-thum{
 ----------------------------------------------*/
 @media screen and (max-width:540px){
 
-#content{
+body.lyt-main #content,
+body.lyt-main-sub #content{
 	padding:0 0;
 }
 
