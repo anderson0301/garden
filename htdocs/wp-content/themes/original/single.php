@@ -19,7 +19,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Web屋の芝生DIY">
 <meta property="og:url" content="<?php echo(empty($_SERVER['HTTPS']) ? 'https://' : 'https://').$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>">
-<meta property="og:image" content="<?php if (has_post_thumbnail()){$image_id = get_post_thumbnail_id ();$image_url = wp_get_attachment_image_src ($image_id, true);echo $image_url[0];}?>">
+<meta property="og:image" content="<?php the_post_thumbnail_url(); ?>">
 <meta property="og:title" content="<?php the_title(); ?>">
 <meta property="og:description" content="<?php echo get_the_excerpt(); ?>">
 <?php if($myAmp):?>
