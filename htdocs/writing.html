@@ -3,30 +3,46 @@
 
 <!--======================================ここから記事用ソース======================================-->
 
-<p><a href="/2016/09/160909_01/">ずいぶん前にWordPressのアイキャッチ画像を取得するphp</a>をご紹介させていただいたことがありましたが、has_post_thumbnail()やwp_get_attachment_image_src()を駆使するなどしてかなり冗長なコードを記述するものでした。</p>
-<p>しかし、実はWordPress4.4からは画像のパスを取得できる<strong>the_post_thumbnail_url()</strong>関数が用意されているとのこと。そこで本記事では、アイキャッチ画像のパスのみを一発で取得できるthe_post_thumbnail_url()関数について使い方をまとめてみました。</p>
+<p>企業のイントラサイト閲覧や独自ドメインのテスト時において、DNSキャッシュの影響でWindows環境でうまく接続できないことがあります。そんな時はコマンドプロンプトでコマンドを実行することで解決に至ることがありますので、同事象に遭遇の際はぜひ試してみてください。</p>
 [adsense_top]
-<h2 class="hdg-l2-01">サンプルコード</h2>
-<h3 class="hdg-l3-01">the_post_thumbnail_url()</h3>
-<p>現在見ている投稿記事に設定されているアイキャッチ画像のパスを呼び出すことができる関数です。</p>
-<pre><code>&lt;img src=&quot;&lt;?php the_post_thumbnail_url(); ?&gt;&quot; alt=&quot;&quot;&gt;</code></pre>
-<p>imgタグの中に記述すればアイキャッチを表示することができます。og:imageなどにも使えますね。以下のようにして引数を指定し、任意のサイズを表示することも可能です。</p>
-<pre><code>&lt;img src=&quot;&lt;?php the_post_thumbnail_url(<strong>medium</strong>); ?&gt;&quot; alt=&quot;&quot;&gt;</code></pre>
-<h3 class="hdg-l3-01">get_the_post_thumbnail_url()</h3>
-<p>前述のthe_post_thumbnail_url()と違い、こちらはサイズに加えて投稿IDを引数に指定することができます。ただしget_the_post_thumbnail_url()単体ではソースにパスを出力しませんので、出力する際はechoと組み合わせて使用します。</p>
-<pre><code>&lt;img src=&quot;&lt;?php echo get_the_post_thumbnail_url(); ?&gt;&quot; alt=&quot;&quot;&gt;</code></pre>
-<p>使い所としては、例えば以下のように投稿IDを引数に指定し、閲覧している記事の前後の記事のアイキャッチ画像のパスを取得することができます。</p>
-<pre><code>&lt;?php $prevpost = get_adjacent_post(true, '', true); if ($prevpost) : ?&gt;
-&lt;img src=&quot;&lt;?php echo get_the_post_thumbnail_url($prevpost-&gt;ID,'medium');?&gt;&quot; alt=&quot;&quot;&gt;
-&lt;?php endif; ?&gt;
-&lt;?php $nextpost = get_adjacent_post(true, '', false); if ($nextpost) : ?&gt;
-&lt;img src=&quot;&lt;?php echo get_the_post_thumbnail_url($nextpost-&gt;ID,'tmedium');?&gt;&quot; alt=&quot;&quot;&gt;
-&lt;?php endif; ?&gt;</code></pre>
+<h2 class="hdg-l2-01">DNSキャッシュのクリア手順</h2>
+<p>Windowsキー+Rで「ファイル名を指定して実行」を呼び出し、「cmd」と入力して「OK」をクリックします。これでコマンドプロンプトが立ち上がります。</p>
+<p><img src="/images/blog/2018/04/20_01_01.jpg" alt="" width="660" height=""></p>
+<p>以下のコマンドを入力し、「Enter」を押します。</p>
+<pre><code>ipconfig/flushdns</code></pre>
+<p><img src="/images/blog/2018/04/20_01_02.jpg" alt="" width="660" height=""></p>
+<p><strong>「DNSリゾルバーキャッシュは正常にフラッシュされました。」</strong>と表示されればOKです。</p>
+<p><img src="/images/blog/2018/04/20_01_03.jpg" alt="" width="660" height=""></p>
+<p>キャッシュが削除されたかどうか確認するには、以下のコマンドを実行します。</p>
+<pre><code>ipconfig/displaydns</code></pre>
+<p>XAMPPなどでローカルサーバを構築している場合は、ローカルサーバのみの情報が表示されます。</p>
+<p><img src="/images/blog/2018/04/20_01_04.jpg" alt="" width="660" height=""></p>
+<p>ローカルサーバを何も構築していない場合は、</p>
+<pre><code>DNSリゾルバーキャッシュを表示できませんでした。</code></pre>
+<p>と表示されます。</p>
+<h2 class="hdg-l2-01">DNSキャッシュをクリアしても接続できない時</h2>
+<p>上記の手順を実行しても正常に閲覧できない、また他の人は閲覧できているなどの場合は原因特定が難しいと思いますので、hostで名前解決してしまいましょう。これで接続が確実に安定します。</p>
+<pre><code>xxx.xxx.xxx.xxx www.hoge.co.jp</code></pre>
+<h3 class="hdg-l3-01">hostファイルの場所</h3>
+<table class="tbl-01">
+<tbody>
+<tr>
+<th>Windows</th>
+<td>C:\Windows\System32\drivers\etc\hosts</td>
+</tr>
+<tr>
+<th>Mac</th>
+<td>/private/etc/hosts
+<ul class="list-notice-01 mb0">
+<li><span>※</span>root権限必須</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <h2 class="hdg-l2-01">まとめ</h2>
-<p>Web屋の芝生DIYを構築した時はWordPress4.6だったので、既にその時からこの関数は使えたんですね。。。恥ずかしながら知らなかったです。<a href="/2016/09/160909_01/">こちらの記事で紹介している方法</a>でも相変わらずパスのみを取得することは可能ですが、the_post_thumbnail_url()関数を使えばかなりコードがスッキリしますね。</p>
-<p>手間もかかるので既存のテンプレートソースをわざわざ置き換えるまではしませんが、今後Webサイトの改修でアイキャッチ部分を弄ぶ際は、積極的にこちらの関数を使っていこうと思います。</p>
-<p>アイキャッチ画像のパスの取得したい際は、どうぞ本記事をご参考にしていただければ幸いです。</p>
-
+<p>「これまで接続できていたサイトが見れない」「サーバへの接続テストをしたいがうまくいかない」という場合は、ご紹介したDNSキャッシュのクリアを試してみましょう。DNS自体が正しく設定されてさえいれば、正常に接続できるようになるはずです。</p>
+<p>それでもダメな場合は、hostで名前解決すると安定して接続が可能になります。</p>
 
 
 <!--======================================ここまで記事用ソース======================================-->
