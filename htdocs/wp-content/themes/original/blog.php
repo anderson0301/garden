@@ -31,27 +31,17 @@
 <p>マイホームブログでは芝生やDIY等のライフハックに加え、フロントエンドを中心としたWeb制作に関する記事を掲載しています。</p>
 <h2 class="hdg-l2-01"><span>最新の記事</span></h2>
 <ul class="list-link-thum">
-<?php
-global $post;
-$args = array( 'posts_per_page' => 12 );
-$myposts = get_posts( $args );
-foreach( $myposts as $post ) {
-setup_postdata($post);
-?>
+<?php $postslist = get_posts('numberposts=1');foreach ($postslist as $post) : setup_postdata($post);?>
+<li class="single"><a href="<?php the_permalink(); ?>"><span class="date"><?php the_time('Y年n月j日'); ?></span><span class="cat double"><?php $category = get_the_category();echo $category[0]->cat_name;?></span><span class="txt"><?php the_title(); ?></span><img width="80" height="80" src="<?php echo get_the_post_thumbnail_url(get_the_ID(),'thum300');?>" alt=""></a></li>
+<?php endforeach; ?>
+<?php $postslist = get_posts('numberposts=11&offset=1');foreach ($postslist as $post) : setup_postdata($post);?>
 <li><a href="<?php the_permalink(); ?>"><span class="date"><?php the_time('Y年n月j日'); ?></span><span class="cat double"><?php $category = get_the_category();echo $category[0]->cat_name;?></span><span class="txt"><?php the_title(); ?></span><img width="80" height="80" src="<?php echo get_the_post_thumbnail_url(get_the_ID(),'thum300');?>" alt=""></a></li>
-<?php
-}
-wp_reset_postdata();
-?>
+<?php endforeach; ?>
 </ul>
 <?php include( TEMPLATEPATH . '/ad-main-bottom.php' ); ?>
 <h2 class="hdg-l2-01"><span>人気の記事</span></h2>
 <ul class="list-link-thum">
-<?php $posts = get_posts(array(
-    'posts_per_page' => 12,
-    'meta_key' => 'views',
-    'orderby' => 'meta_value_num',
-)); ?>
+<?php $posts = get_posts(array('posts_per_page' => 12,'meta_key' => 'views','orderby' => 'meta_value_num')); ?>
 <?php foreach($posts as $post) : ?>
 <li><a href="<?php the_permalink(); ?>"><span class="date"><?php the_time('Y年n月j日'); ?></span><span class="cat double"><?php $category = get_the_category();echo $category[0]->cat_name;?></span><span class="txt"><?php the_title(); ?></span><img width="80" height="80" src="<?php echo get_the_post_thumbnail_url(get_the_ID(),'thum300');?>" alt=""></a></li>
 <?php endforeach;wp_reset_postdata(); ?>
