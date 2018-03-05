@@ -7,16 +7,15 @@
 [adsense_top]
 <h2 class="hdg-l2-01">DNSキャッシュのクリア手順</h2>
 <p>Windowsキー+Rで「ファイル名を指定して実行」を呼び出し、「cmd」と入力して「OK」をクリックします。これでコマンドプロンプトが立ち上がります。</p>
-<p><img src="/images/blog/2018/04/20_01_01.jpg" alt="" width="660" height=""></p>
+<p><img src="/images/blog/2018/04/20_01_01.png" alt="" width="660" height="150"></p>
 <p>以下のコマンドを入力し、「Enter」を押します。</p>
 <pre><code>ipconfig/flushdns</code></pre>
-<p><img src="/images/blog/2018/04/20_01_02.jpg" alt="" width="660" height=""></p>
 <p><strong>「DNSリゾルバーキャッシュは正常にフラッシュされました。」</strong>と表示されればOKです。</p>
-<p><img src="/images/blog/2018/04/20_01_03.jpg" alt="" width="660" height=""></p>
+<p><img src="/images/blog/2018/04/20_01_02.png" alt="" width="660" height="300"></p>
 <p>キャッシュが削除されたかどうか確認するには、以下のコマンドを実行します。</p>
 <pre><code>ipconfig/displaydns</code></pre>
 <p>XAMPPなどでローカルサーバを構築している場合は、ローカルサーバのみの情報が表示されます。</p>
-<p><img src="/images/blog/2018/04/20_01_04.jpg" alt="" width="660" height=""></p>
+<p><img src="/images/blog/2018/04/20_01_03.png" alt="" width="660" height="300"></p>
 <p>ローカルサーバを何も構築していない場合は、</p>
 <pre><code>DNSリゾルバーキャッシュを表示できませんでした。</code></pre>
 <p>と表示されます。</p>
