@@ -88,7 +88,7 @@
 <h1 class="hdg-l1-01"><span><?php the_title(); ?></span></h1>
 <p class="mb20"><span class="cat"><?php $category = get_the_category();echo $category[0]->cat_name;?></span><?php the_time('Y年n月j日'); ?></p>
 <?php if(!$myAmp): ?>
-<p class="main-visual"><img src="<?php if (has_post_thumbnail()){$image_id = get_post_thumbnail_id ();$image_url = wp_get_attachment_image_src ($image_id, true);echo $image_url[0];}?>" alt=""></p>
+<p class="main-visual"><img src="<?php echo get_the_post_thumbnail_url(get_the_ID(),'');?>" alt=""></p>
 <?php endif; ?>
 <?php if (is_home()) query_posts('showposts=1');?>
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
