@@ -3,29 +3,52 @@
 
 <!--======================================ここから記事用ソース======================================-->
 
-<p>WordPressで構築したブログにて最新記事を表示することはよくあると思いますが、最初の記事だけ大きく見せているサイトを見たことがあるかと思います。アレはWordPressに一工夫加えることで実装が可能なのですが、今回Web屋の芝生DIYでも実装してみました。本記事では、WordPressで最新の記事の<strong>「1つ目だけ」</strong>表示を変更する方法をご紹介させていただきたいと思います。</p>
+<p>WordPressで構築したブログにて最新記事を表示することはよくあると思いますが、最初の記事だけ大きく見せているサイトを見たことがあるかと思います。アレはWordPressに一工夫加えることで実装が可能なのですが、今回Web屋の芝生DIYでも実装してみました。本記事では、WordPressで最新の記事の<strong>「1件目だけ」</strong>表示を変更する方法をご紹介させていただきたいと思います。</p>
 [adsense_top]
+<h2 class="hdg-l2-01">やりたかった事</h2>
+<ul class="list-bullet-01">
+<li><a href="/blog/">固定ページ（/blog/）</a>で実装</li>
+<li>1件目の記事だけ&lt;li class=&quot;single&quot;&gt;</li>
+<li>2件目以降は&lt;li&gt;</li>
+<li>2件目以降は10件表示</li>
+<li>1件目の記事のアイキャッチはデフォルトサイズ</li>
+</ul>
+<h3 class="hdg-l3-01">ちなみに実装したページはこちら</h3>
+<ul class="list-link-01">
+<li><a href="/blog/">マイホームブログ | Web屋の芝生DIY</a></li>
+</ul>
 <h2 class="hdg-l2-01">サンプルコード</h2>
-<pre><code></code></pre>
-<?php $postslist = get_posts('numberposts=1');
-foreach ($postslist as $post) : setup_postdata($post);?>
-<li class="single">
-//リンクや記事タイトル、アイキャッチを適宜表示
-<a href="<?php the_permalink(); ?>">
-<img width="80" height="80" src="<?php echo get_the_post_thumbnail_url(get_the_ID(),'');?>" alt="">
-<?php the_title(); ?></a>
-</li>
-<?php endforeach; ?>
-<?php $postslist = get_posts('numberposts=10&offset=1');
-<li>
-//リンクや記事タイトル、アイキャッチを適宜表示
-<a href="<?php the_permalink(); ?>">
-<img width="80" height="80" src="<?php echo get_the_post_thumbnail_url(get_the_ID(),'thum300');?>" alt="">
-<?php the_title(); ?></a>
-</li>
-<?php endforeach; ?>
-<h2 class="hdg-l2-01"></h2>
-<p></p>
+<pre><code>//1件目の記事
+&lt;?php $postslist = get_posts('numberposts=1');
+foreach ($postslist as $post) : setup_postdata($post);?&gt;
+&lt;li class=&quot;single&quot;&gt;
+&lt;a href=&quot;&lt;?php the_permalink(); ?&gt;&quot;&gt;
+&lt;img src=&quot;&lt;?php echo get_the_post_thumbnail_url(get_the_ID(),'');?&gt;&quot; alt=&quot;&quot;&gt;
+&lt;?php the_title(); ?&gt;&lt;/a&gt;
+&lt;/li&gt;
+&lt;?php endforeach; ?&gt;
+
+//2件目の記事
+&lt;?php $postslist = get_posts('numberposts=10&amp;offset=1');
+&lt;li&gt;
+&lt;a href=&quot;&lt;?php the_permalink(); ?&gt;&quot;&gt;
+&lt;img width=&quot;80&quot; height=&quot;80&quot; src=&quot;&lt;?php echo get_the_post_thumbnail_url(get_the_ID(),'thum300');?&gt;&quot; alt=&quot;&quot;&gt;
+&lt;?php the_title(); ?&gt;&lt;/a&gt;
+&lt;/li&gt;
+&lt;?php endforeach; ?&gt;</code></pre>
+[adsense_middle]
+<h2 class="hdg-l2-01">解説</h2>
+<h3 class="hdg-l3-01">1件目</h3>
+<p>get_posts()関数を使い、foreach文を回して最新記事を取得します。パラメータに<strong>「'numberposts=1'」</strong>を指定することで1件のみ取得します。あとはリンクは記事タイトル、画像などを任意のマークアップで表示すればOKです。要は普通に複数件の最新記事を表示する方法と大きな違いはないです。1件表示にしているだけですね。</p>
+<h3 class="hdg-l3-01">2件目以降</h3>
+<p>基本的な記述は1件目と変わりありません。ただこちらは2件目～11件目を表示するためにパラメータに<strong>「'numberposts=10&amp;offset=1'」</strong>と指定するのがポイントです。「offset=1」で1件目を除外した10件を表示します。</p>
+<h2 class="hdg-l2-01">まとめ</h2>
+<p>1件目のビジュアルの見せ方を変えることで、単なる最新記事一覧でもメリハリが利き、直感的に最新記事がどれなのかユーザーに認識させることが可能になります。名のあるブログメディアを見るとこの見せ方を採用しているところは多いです。<a href="https://liginc.co.jp/" target="_blank">LIG</a>とか<a href="https://allabout.co.jp/" target="_blank">All About</a>とか。</p>
+<p>この手の実装方法を調べると様々な記事が出てくるのですが、ページネーションも合わせて組み込むと、少し一工夫加える必要がある模。</p>
+<ul class="list-notice-01">
+<li><span>※</span>2ページ目以降は1件目を大きくしないようにする、など</li>
+</ul>
+<p>元々Web屋の芝生DIYでは<a href="/category/diy/">カテゴリページ</a>と<a href="/2018/">年月アーカイブページ</a>にしかページネーションは組み込んでいないのですが、せっかくなのでいずれ最新記事一覧にもページネーションを組み込んでみようかと考え中です。その際は少し実装方法が変わりそうなので、組み込んだ際は改めて別記事でご紹介させていただこうと思います。</p>
 
 
 <!--======================================ここまで記事用ソース======================================-->
