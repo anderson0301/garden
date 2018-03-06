@@ -336,6 +336,33 @@ ul.list-link-thum{
 		margin-right:0;
 	}
 
+	li.single{
+		float:none;
+		width:auto;
+		a{
+			padding:2px 0 0 0;
+			img{
+				width: auto!important;
+				height: auto!important;
+				position: static;
+			}
+			span.txt{
+				display:block;
+				padding:0 0 0 0;
+			}
+			span.cat,
+			span.date{
+				position:static;
+				left:0;
+			}
+			span.cat.double{
+				position:static;
+				left:0;
+				top:0;
+			}
+		}
+	}
+
 	li.icon-double {
 		a{
 			span.date{

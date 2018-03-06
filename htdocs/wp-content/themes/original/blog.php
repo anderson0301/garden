@@ -32,9 +32,9 @@
 <h2 class="hdg-l2-01"><span>最新の記事</span></h2>
 <ul class="list-link-thum">
 <?php $postslist = get_posts('numberposts=1');foreach ($postslist as $post) : setup_postdata($post);?>
-<li class="single"><a href="<?php the_permalink(); ?>"><span class="date"><?php the_time('Y年n月j日'); ?></span><span class="cat double"><?php $category = get_the_category();echo $category[0]->cat_name;?></span><span class="txt"><?php the_title(); ?></span><img width="80" height="80" src="<?php echo get_the_post_thumbnail_url(get_the_ID(),'thum300');?>" alt=""></a></li>
+<li class="single"><a href="<?php the_permalink(); ?>"><img width="80" height="80" src="<?php echo get_the_post_thumbnail_url(get_the_ID(),'');?>" alt=""><span class="date"><?php the_time('Y年n月j日'); ?></span><span class="cat double"><?php $category = get_the_category();echo $category[0]->cat_name;?></span><span class="txt"><?php the_title(); ?></span></a></li>
 <?php endforeach; ?>
-<?php $postslist = get_posts('numberposts=11&offset=1');foreach ($postslist as $post) : setup_postdata($post);?>
+<?php $postslist = get_posts('numberposts=10&offset=1');foreach ($postslist as $post) : setup_postdata($post);?>
 <li><a href="<?php the_permalink(); ?>"><span class="date"><?php the_time('Y年n月j日'); ?></span><span class="cat double"><?php $category = get_the_category();echo $category[0]->cat_name;?></span><span class="txt"><?php the_title(); ?></span><img width="80" height="80" src="<?php echo get_the_post_thumbnail_url(get_the_ID(),'thum300');?>" alt=""></a></li>
 <?php endforeach; ?>
 </ul>
