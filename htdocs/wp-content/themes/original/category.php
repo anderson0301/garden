@@ -29,7 +29,7 @@
 <p><? foreach((get_the_category()) as $cat) {echo $cat->category_description . '';} ?></p>
 <ul class="list-link-thum">
 <?php if(have_posts()) : ?><?php while(have_posts()) : the_post(); ?>
-<li><a href="<?php the_permalink(); ?>"><span class="date"><?php the_time('Y年n月j日'); ?></span><span class="txt"><?php the_title(); ?></span><?php if ( has_post_thumbnail() ) : ?><?php $img_id = get_post_thumbnail_id();$img_thumbnail = wp_get_attachment_image_src( $img_id , 'thum300' );echo '<img width="80" height="80" src="'.$img_thumbnail[0].'" alt="">';?><?php else: ?><?php endif; ?></a></li>
+<li><a href="<?php the_permalink(); ?>"><span class="date"><?php the_time('Y年n月j日'); ?></span><span class="txt"><?php the_title(); ?></span><img width="80" height="80" src="<?php echo get_the_post_thumbnail_url(get_the_ID(),'thum300');?>" alt=""></a></li>
 <?php endwhile; ?>
 </ul>
 <?php else : ?>
@@ -48,7 +48,7 @@ $posts = get_posts(array(
 'category' => $catids,
 ));?>
 <?php foreach($posts as $post) : ?>
-<li><a href="<?php the_permalink(); ?>"><span class="date"><?php the_time('Y年n月j日'); ?></span><span class="txt"><?php the_title(); ?></span><?php if ( has_post_thumbnail() ) : ?><?php $img_id = get_post_thumbnail_id();$img_thumbnail = wp_get_attachment_image_src( $img_id , 'thum300' );echo '<img width="80" height="80" src="'.$img_thumbnail[0].'" alt="">';?><?php else: ?><?php endif; ?></a></li>
+<li><a href="<?php the_permalink(); ?>"><span class="date"><?php the_time('Y年n月j日'); ?></span><span class="txt"><?php the_title(); ?></span><img width="80" height="80" src="<?php echo get_the_post_thumbnail_url(get_the_ID(),'thum300');?>" alt=""></a></li>
 <?php endforeach;wp_reset_postdata(); ?>
 </ul>
 <?php include( TEMPLATEPATH . '/ad-main-bottom.php' ); ?>
