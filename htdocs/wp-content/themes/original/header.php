@@ -2,7 +2,7 @@
 <header>
 <div id="header-inner">
 <?php if($myAmp): ?>
-<p id="logo"><a href="/"><amp-img media="(min-width:769px)" src="/shared/images/logo.png" width="349" height="41" alt="Web屋の芝生DIY"></amp-img><amp-img media="(max-width:768px)" src="/shared/images/logo.png" width="190" height="22" alt="Web屋の芝生DIY"></amp-img></a></p>
+<p id="logo"><a href="/"><amp-img media="(min-width:769px)" src="/shared/images/logo.png" width="349" height="42" alt="Web屋の芝生DIY"></amp-img><amp-img media="(max-width:768px)" src="/shared/images/logo.png" width="190" height="23" alt="Web屋の芝生DIY"></amp-img></a></p>
 <?php else: ?>
 <p id="logo"><a href="/"><img src="/shared/images/logo.png" alt="Web屋の芝生DIY"></a></p> 
 <?php endif; ?>
