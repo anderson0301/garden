@@ -47,8 +47,8 @@
   "image": {
     "@type": "ImageObject",
     "url": "https://web-diy.jp/shared/images/schema.png",
-    "height": 420,
-    "width": 800
+    "height": 800,
+    "width": 1200
   },
   "datePublished": "<?php the_time('c') ;?>",
   "dateModified": "<?php echo max( get_the_modified_time('c'), get_the_time('c') ); ?>",
@@ -63,7 +63,7 @@
       "@type": "ImageObject",
       "url": "https://web-diy.jp/shared/images/logo.png",
       "width": 240,
-      "height": 28
+      "height": 29
     }
   },
   "description": "<?php echo get_the_excerpt(); ?>"
