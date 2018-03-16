@@ -3,149 +3,73 @@
 
 <!--======================================ここから記事用ソース======================================-->
 
-<p><a href="/2018/03/180328_01/">先日外出用のルーターをNUROからDMMに乗り換えた</a>のですが、とある事情でSIMカードを1枚追加することに。ところがDMMモバイルは1人で複数契約はできないため、容量1GBから2GBに増やしつつSIMを1枚追加できるシェアコースを検討しました。</p>
+<p>Chromeが警告を出すように立ったことをきっかけに、世界的に急速に進んでいるWebサイトのSSL化ですが、<strong>「httpsからhttpへの遷移ではリファラを渡せない」</strong>という問題があります。そこで本記事ではhtmlにmetaタグを1行追加するだけで、リファラを渡すようにすることができる方法をご紹介させていただきたいと思います。</p>
 [adsense_top]
-<p>しかし月額料金が増えるのは当然ながら1GB〜7GBの低容量の契約では毎月300円の追加SIM利用料が発生してしまうため、若干割高です。そこで本記事では本来はできない<strong>「一人で実質複数契約する」</strong>方法についてご紹介させていただきたいと思います。</p>
-<h2 class="hdg-l2-01">2GBのシェアコースと1GB×2の複数契約の料金を比較</h2>
-<p>複数契約したいと思ったのは、私の場合明らかにそのほうが料金が安くなると判断したためです。</p>
-<table class="tbl-01">
+<h2 class="hdg-l2-01">本来はリファラを渡すべきではない</h2>
+<p><a href="https://triple-underscore.github.io/RFC2616-ja.html" target="_blank">RFC2616</a>では以下のように記載があります。</p>
+<blockquote>
+<p>クライアントは、参照されるページがセキュアプロトコルで転送された場合は、（セキュアで無い）HTTPリクエストにRefererヘッダフィールドを含むべきではない。</p>
+</blockquote>
+<h2 class="hdg-l2-01">新仕様「meta="referrer"」を使う</h2>
+<p>httpsからhttpの際に渡せないリファラですが、以下のmetaタグによりクライアント側でリファラポリシーを制御することができます。</p>
+<pre><code>&lt;meta name="referrer" content="任意の値を記述"&gt;</code></pre>
+<h3 class="hdg-l3-01">設定できる値</h3>
+<table class="tbl-01 sp-lyt-on">
 <tbody>
 <tr>
-<th>契約方法</th>
-<th>月額利用料</th>
-<th>追加SIM利用料</th>
-<th>合計</th>
+<th class="w-40">none</th>
+<td>記述したページからリファラを渡さない</td>
 </tr>
 <tr>
-<th>2GBシェアコース</th>
-<td>770円</td>
-<td>300円</td>
-<td>1070円</td>
+<th>origin</th>
+<td>記述したページからドメイン名のみのリファラを渡す
+<ul class="list-notice-01 mb0">
+<li><span>※</span>https://hoge.jp/hoge.htmからは「https://hoge.jp/」のみを渡す</li>
+</ul></td>
 </tr>
 <tr>
-<th>1GB×2の複数契約</th>
-<td>480円×2</td>
-<td>0円</td>
-<td><strong>960円</strong></td>
+<th>none-when-downgrade</th>
+<td>現在の動作と同じ
+<ul class="list-notice-01 mb0">
+<li><span>※</span>HTTPS→HTTPではリファラを渡さない</li>
+<li><span>※</span>HTTPS→HTTP以外の遷移は全URLをリファラとして渡す</li>
+</ul></td>
+</tr>
+<tr>
+<th>origin-when-crossorigin</th>
+<td>同ドメインによるHTTP/HTTPSの種類も同じURLへの移動であれば全URLをリファラとして渡す
+<ul class="list-notice-01 mb0">
+<li><span>※</span>それ以外はドメイン名のみのリファラを渡す</li>
+</ul></td>
+</tr>
+<tr>
+<th>unsafe-url</th>
+<td>HTTPS、HTTP関係なく全URLをリファラとして渡す</td>
 </tr>
 </tbody>
 </table>
-<p>ほぼ同じ使い方をするにしても90円の差が出てきます。上記の料金は税抜きなので、税込みだと100円以上差が出てきます。これなら1GBで複数契約できたほうがお得ですよね。</p>
-<p>しかもシェアコースによるSIMカード追加は、<strong>手数料及び準備料で合計3,394円かかる</strong>ため、新規契約事務手数料無料のキャンペーンなどのタイミングで新規契約すれば、トータルではかなり割安になるというもくろみもありました。</p>
-<h2 class="hdg-l2-01">家族で複数アカウント作れば複数契約は実質可能</h2>
-<p>前置きが長くなりましたが、<strong>家族でそれぞれが契約</strong>すれば、実質複数契約をすることが可能です。</p>
-<p>あくまでも<strong>「1人1契約」</strong>というルールなので、要はアカウントが複数用意できればいいわけです。今回私が取った方法を例に取ると、夫婦それぞれの名前で契約し、実際は片方がSIMを2つとも利用するというパターンです。</p>
-<p>メールアドレスの重複登録はできないため複数用意する必要はありますが、クレジットカードは同じものを登録できるので、家計の管理が煩雑になることはありません。</p>
- [adsense_middle]
-<h2 class="hdg-l2-01">場合によってはシェアコースのほうがお得</h2>
-<p>今回、私の場合は低容量かつルーターを使い分けたいという特殊な事情があったので夫婦それぞれで契約する、という方法を取りましたが、そもそも以下のようなパターンであれば複数契約するよりもシェアコースで契約することをおすすめします。</p>
+<p>つまり、記事タイトルの「httpsからhttpにリファラを渡す方法」を実現するには、以下のように値を「unsafe-url」とすればOKです。</p>
+<pre><code>&lt;meta name="referrer" content="unsafe-url"&gt;</code></pre>
+[adsense_middle]
+<h2 class="hdg-l2-01">実装されているのは一部のブラウザのみ</h2>
+<p>ただしこのmetaを記述すればリファラ問題が完全に解決するかといえばそうでもなく、一部のブラウザでの実装に留まっています。</p>
+<h3 class="hdg-l3-01">meta name="referrer"が実装されているブラウザ</h3>
 <ul class="list-bullet-01">
-<li>複数のSIMで合計8GB以上利用（追加SIM利用料がかからない）</li>
-<li>合計8GB未満でも3枚以上のSIMを利用（追加SIM利用料×2を考えるとシェアコースのほうが安い）</li>
+<li>Firefox</li>
+<li>Chrome</li>
 </ul>
-<p>実際に利用したいSIMの数と容量でどちらが安く済むか計算してみると良いです。いくつかのパターンを表にしてみたので参考にしてみてください。</p>
 <ul class="list-notice-01">
-<li><span>※</span>全てデータSIMの料金で計算しています</li>
+<li><span>※</span>2018年4月30日時点</li>
 </ul>
-<h3 class="hdg-l3-01">3枚のSIMで6〜8GB</h3>
-<table class="tbl-01">
-<tbody>
-<tr>
-<th rowspan="2">2GB×3の複数契約</th>
-<th>月額利用料</th>
-<th>追加SIM利用料</th>
-<th>合計</th>
-</tr>
-<tr>
-<td>770円×3</td>
-<td>0円</td>
-<td>2,310円</td>
-</tr>
-<tr>
-<th rowspan="2">7GBのシェアコース契約</th>
-<th>月額利用料</th>
-<th>追加SIM利用料</th>
-<th>合計</th>
-</tr>
-<tr>
-<td>1,860円</td>
-<td>300円×2</td>
-<td>2,460円</td>
-</tr>
-<tr>
-<th rowspan="2">8GBのシェアコース契約</th>
-<th>月額利用料</th>
-<th>追加SIM利用料</th>
-<th>合計</th>
-</tr>
-<tr>
-<td>1,980円</td>
-<td>0円</td>
-<td><strong>1,980円</strong></td>
-</tr>
-</tbody>
-</table>
-<p>7GBのシェアコースだと複数契約よりも1GB多く使えますが追加SIM利用料かかるため若干割高です。しかし、8GBのシェアコースにすればさらに容量が多く使えてかつ追加SIM利用料がかからないので最もお得になります。</p>
-<h3 class="hdg-l3-01">3枚のSIMで9〜10GB</h3>
-<table class="tbl-01">
-<tbody>
-<tr>
-<th rowspan="2">3GB×3の複数契約</th>
-<th>月額利用料</th>
-<th>追加SIM利用料</th>
-<th>合計</th>
-</tr>
-<tr>
-<td>850円×3</td>
-<td>0円</td>
-<td>2,550円</td>
-</tr>
-<tr>
-<th rowspan="2">10GBのシェアコース契約</th>
-<th>月額利用料</th>
-<th>追加SIM利用料</th>
-<th>合計</th>
-</tr>
-<tr>
-<td>2,190円</td>
-<td>0円</td>
-<td><strong>2,190円</strong></td>
-</tr>
-</tbody>
-</table>
-<p>10GBのシェアコースにしたほうが1GB多く使えて、かつ複数契約するよりも割安になります。</p>
-<h3 class="hdg-l3-01">2枚のSIMで6〜7GB</h3>
-<table class="tbl-01">
-<tbody>
-<tr>
-<th rowspan="2">3GB×2の複数契約</th>
-<th>月額利用料</th>
-<th>追加SIM利用料</th>
-<th>合計</th>
-</tr>
-<tr>
-<td>850円×2</td>
-<td>0円</td>
-<td>1,700円</td>
-</tr>
-<tr>
-<th rowspan="2">7GBのシェアコース契約</th>
-<th>月額利用料</th>
-<th>追加SIM利用料</th>
-<th>合計</th>
-</tr>
-<tr>
-<td>1,860円</td>
-<td>300円</td>
-<td><strong>2,160円</strong></td>
-</tr>
-</tbody>
-</table>
-<p>7GBシェアコースのほうが1GB多く使えますが、460円も差が出てくるためこの場合は複数契約のほうが割安と言えるでしょう。</p>
+<p>Safariで実装されていないのが痛いですね。iPhoneでも渡せるようになれば、かなり精緻な値が期待できるのですが。</p>
+<h2 class="hdg-l2-01">サーバ側で同様の設定をすることも可能</h2>
+<p>以下のページで詳しく解説されていますが、サーバ側でReferrer-Policyヘッダーにてmetaタグ同様の値を指定することもできるようです。</p>
+<ul class="list-link-01">
+<li><a href="https://qiita.com/wakaba@github/items/707d72f97f2862cd8000" target="_blank">Referrerを制御する</a></li>
+</ul>
 <h2 class="hdg-l2-01">まとめ</h2>
-<p>DMM mobile（DMMモバイル）で複数のSIMを使いたい場合、利用シーンや必要な容量、また必要な枚数を考慮しどの契約の仕方が一番お得なのか、しっかりシミュレーションすると良いです。</p>
-<p>1人での複数契約はできませんが、家族それぞれで契約すれば実質的に複数契約を行うことが可能です。一人暮らしの方は。。。複数契約は諦めてください（笑）そもそも一人暮らしで複数のSIMを使いたいケースって基本的に無いと思いますが。</p>
-<p>判断が難しい場合は公式サイトのチャットサポートで聞いてみてしまうのも一つの手です。ご自分にあった契約をよく検討してみましょう。本記事がご参考になれば幸いです。</p>
+<p>meta name="referrer"は一部のブラウザでしか実装されていないのが難点ですが、htmlに記述するだけでhttpsからhttpへの遷移でもリファラが渡せるようになるのはありがたいことですね。</p>
+<p>SSL化に合わせてSafari含め他のブラウザが追随することを期待して<strong>「とりあえず記述しておく」</strong>という考え方でも良いと思います。どうぞ本記事がご参考になれば幸いです。</p>
 
 
 
