@@ -3,73 +3,61 @@
 
 <!--======================================ここから記事用ソース======================================-->
 
-<p>Chromeが警告を出すように立ったことをきっかけに、世界的に急速に進んでいるWebサイトのSSL化ですが、<strong>「httpsからhttpへの遷移ではリファラを渡せない」</strong>という問題があります。そこで本記事ではhtmlにmetaタグを1行追加するだけで、リファラを渡すようにすることができる方法をご紹介させていただきたいと思います。</p>
+<p><a href="/2018/04/180423_01/">先日の記事</a>でも書きました通りヘルニアを患ってしまいまして、腰の痛い数ヶ月を過ごしつつも少しでも症状が和らげようと、eSPORTS（イースポーツ）のバランスディスク（クッション）を購入しました。</p>
 [adsense_top]
-<h2 class="hdg-l2-01">本来はリファラを渡すべきではない</h2>
-<p><a href="https://triple-underscore.github.io/RFC2616-ja.html" target="_blank">RFC2616</a>では以下のように記載があります。</p>
-<blockquote>
-<p>クライアントは、参照されるページがセキュアプロトコルで転送された場合は、（セキュアで無い）HTTPリクエストにRefererヘッダフィールドを含むべきではない。</p>
-</blockquote>
-<h2 class="hdg-l2-01">新仕様「meta="referrer"」を使う</h2>
-<p>httpsからhttpの際に渡せないリファラですが、以下のmetaタグによりクライアント側でリファラポリシーを制御することができます。</p>
-<pre><code>&lt;meta name="referrer" content="任意の値を記述"&gt;</code></pre>
-<h3 class="hdg-l3-01">設定できる値</h3>
-<table class="tbl-01 sp-lyt-on">
-<tbody>
-<tr>
-<th class="w-40">none</th>
-<td>記述したページからリファラを渡さない</td>
-</tr>
-<tr>
-<th>origin</th>
-<td>記述したページからドメイン名のみのリファラを渡す
-<ul class="list-notice-01 mb0">
-<li><span>※</span>https://hoge.jp/hoge.htmからは「https://hoge.jp/」のみを渡す</li>
-</ul></td>
-</tr>
-<tr>
-<th>none-when-downgrade</th>
-<td>現在の動作と同じ
-<ul class="list-notice-01 mb0">
-<li><span>※</span>HTTPS→HTTPではリファラを渡さない</li>
-<li><span>※</span>HTTPS→HTTP以外の遷移は全URLをリファラとして渡す</li>
-</ul></td>
-</tr>
-<tr>
-<th>origin-when-crossorigin</th>
-<td>同ドメインによるHTTP/HTTPSの種類も同じURLへの移動であれば全URLをリファラとして渡す
-<ul class="list-notice-01 mb0">
-<li><span>※</span>それ以外はドメイン名のみのリファラを渡す</li>
-</ul></td>
-</tr>
-<tr>
-<th>unsafe-url</th>
-<td>HTTPS、HTTP関係なく全URLをリファラとして渡す</td>
-</tr>
-</tbody>
-</table>
-<p>つまり、記事タイトルの「httpsからhttpにリファラを渡す方法」を実現するには、以下のように値を「unsafe-url」とすればOKです。</p>
-<pre><code>&lt;meta name="referrer" content="unsafe-url"&gt;</code></pre>
+<p>腰の静養に努めている間大きな助けになりましたので、同じヘルニア持ちの方にもぜひおすすめしたく、本記事でご紹介させていただきたいと思います。</p>
+<h2 class="hdg-l2-01">今回購入したバランスディスク（クッション）</h2>
+<p><img src="/images/blog/2018/05/04_01_01.jpg" alt="" width="660" height="500"></p>
+[amazon_link asins='B0056B6LWO' template='Original' store='webdiyturf-22' marketplace='JP' link_id='5c34b9a0-26b7-11e8-bc53-3715f021a08f']
+<p>購入時はなんと<strong>2個セットで2,480円</strong>でした。職場でバランスディスクを既に使用中の先輩に聞いたところ,
+初心者は完全に円形のものよりも少し盛り上がったもの？で、かつ滑り止めの突起が付いたものが良いとのこと。早速Amazonで該当の商品を物色し、2個セットの上記商品を選択しました。2個セットだと自宅と会社で同じものが使えるのでありがたいですね。</p>
+<h3 class="hdg-l3-01">エクササイズ用チューブも</h3>
+<p>特に私は必要としていなかったのですが、エクササイズに使えるチューブも同梱されています。</p>
+<p><img src="/images/blog/2018/05/04_01_02.jpg" alt="" width="660" height="500"></p>
+<h2 class="hdg-l2-01">空気の入れ方</h2>
+<p>早速、説明書を見ながら空気を入れていきたいと思います。</p>
+<ol class="list-number-01">
+<li>空気入れに針を接続する</li>
+<li>ディスクを裏返す</li>
+<li>空気栓の反対側を押し、空気栓側を膨らませる</li>
+<li>空気入れを空気栓に指し、空気を入れる</li>
+</ol>
+<p><img src="/images/blog/2018/05/04_01_03.jpg" alt="" width="660" height="800"></p>
+<h3 class="hdg-l3-01">&#9312;空気入れに針を接続する</h3>
+<p>同梱されている空気入れに針を接続します。</p>
+<p><img src="/images/blog/2018/05/04_01_12.jpg" alt="" width="660" height="400"></p>
+<h3 class="hdg-l3-01">&#9313;ディスクを裏返す</h3>
+<p>突起の付いていない方を上にします（写真は撮り忘れました。。。）</p>
+<h3 class="hdg-l3-01">&#9314;空気栓の反対側を押し、空気栓側を膨らませる</h3>
+<p>空気栓の反対側を押して空気栓側を膨らませます。これをやらずに空気入れの針を指すと、間違って表側に貫通してしまう恐れがあるので気をつけてください。</p>
+<p><img src="/images/blog/2018/05/04_01_04.jpg" alt="" width="660" height="500"></p>
+<h3 class="hdg-l3-01">&#9315;空気入れを空気栓に指し、空気を入れる</h3>
+<p>膨らませた状態で垂直に空気入れの針を指します。</p>
+<p><img src="/images/blog/2018/05/04_01_05.jpg" alt="" width="660" height="500"></p>
+<p>ボールや自転車と同じ要領で空気を入れていきます。空気の量はお好みでどうぞ。</p>
+<p><img src="/images/blog/2018/05/04_01_06.jpg" alt="" width="660" height="500"></p>
+<p>空気を入れる際は以下の注意事項に気をつけてください。</p>
+<p><img src="/images/blog/2018/05/04_01_09.jpg" alt="" width="660" height="200"></p>
 [adsense_middle]
-<h2 class="hdg-l2-01">実装されているのは一部のブラウザのみ</h2>
-<p>ただしこのmetaを記述すればリファラ問題が完全に解決するかといえばそうでもなく、一部のブラウザでの実装に留まっています。</p>
-<h3 class="hdg-l3-01">meta name="referrer"が実装されているブラウザ</h3>
-<ul class="list-bullet-01">
-<li>Firefox</li>
-<li>Chrome</li>
-</ul>
+<h2 class="hdg-l2-01">ご使用時の注意事項</h2>
+<p>使用時の注意事項として以下の内容が記載されています。念のため読んでおきましょう。</p>
+<p><img src="/images/blog/2018/05/04_01_07.jpg" alt="" width="660" height="500"></p>
+<h2 class="hdg-l2-01">トレーニングマニュアルも付属</h2>
+<p>今回私はヘルニアの痛みを和らげるために購入しましたが、このバランスボールはトレーニングやエクササイズにも最適です。以下のマニュアルも付いていますのでお好みでチャンレジしてみてはいかがでしょうか？</p>
+<p><img src="/images/blog/2018/05/04_01_08.jpg" alt="" width="660" height="500"></p>
+<h2 class="hdg-l2-01">早速座ってみた</h2>
+<p>早速膨らませて自宅の椅子で座ってみました。ヘルニアの間椅子に座ると坐骨神経痛でお尻や太ももが痛かったのですが、これでゆらゆら座っていると腰への不可が分散されるようで、幾分楽になりました。</p>
+<p><img src="/images/blog/2018/05/04_01_10.jpg" alt="" width="660" height="400"></p>
+<p>ただ長く座っているとお尻の突起が痛いので、その場合は裏返しにして座ると良いです。</p>
 <ul class="list-notice-01">
-<li><span>※</span>2018年4月30日時点</li>
+<li><span>※</span>説明書にはこの使い方は書いてないですが、職場のバランスディクスの先輩に聞いたところ特に問題ないそうです</li>
 </ul>
-<p>Safariで実装されていないのが痛いですね。iPhoneでも渡せるようになれば、かなり精緻な値が期待できるのですが。</p>
-<h2 class="hdg-l2-01">サーバ側で同様の設定をすることも可能</h2>
-<p>以下のページで詳しく解説されていますが、サーバ側でReferrer-Policyヘッダーにてmetaタグ同様の値を指定することもできるようです。</p>
-<ul class="list-link-01">
-<li><a href="https://qiita.com/wakaba@github/items/707d72f97f2862cd8000" target="_blank">Referrerを制御する</a></li>
-</ul>
+<p><img src="/images/blog/2018/05/04_01_11.jpg" alt="" width="660" height="400"></p>
 <h2 class="hdg-l2-01">まとめ</h2>
-<p>meta name="referrer"は一部のブラウザでしか実装されていないのが難点ですが、htmlに記述するだけでhttpsからhttpへの遷移でもリファラが渡せるようになるのはありがたいことですね。</p>
-<p>SSL化に合わせてSafari含め他のブラウザが追随することを期待して<strong>「とりあえず記述しておく」</strong>という考え方でも良いと思います。どうぞ本記事がご参考になれば幸いです。</p>
+<p>ヘルニアでなくてもこういったバランスディスク（クッション）を使うことで姿勢が良くなり、インナーマッスルも鍛えられます。姿勢が良くなることでヘルニアの予防にもつながりますのでいい事づくしです。ウエストの引き締めにもなります。</p>
+<p>オフィスでも仕事をしながら気軽にトレーニングできるのもいいですね。バランスボールだとちょっと目立ってしまいますが、これならとっつきやすいです。</p>
+<p>今回私が購入した商品はとてもしっかりしてますし、2個セットとお得なのでとてもおすすめです。バランスディスク（クッション）の購入を検討されている方に、ぜひ本記事をご参考にしていただければ幸いです。</p>
+[amazon_link asins='B0056B6LWO' template='Original' store='webdiyturf-22' marketplace='JP' link_id='5c34b9a0-26b7-11e8-bc53-3715f021a08f']
 
 
 
