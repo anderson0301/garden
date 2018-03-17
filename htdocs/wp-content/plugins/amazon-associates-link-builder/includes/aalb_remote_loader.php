@@ -1,7 +1,7 @@
 <?php
 
 /*
-Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
 Licensed under the GNU General Public License as published by the Free Software Foundation,
 Version 2.0 (the "License"). You may not use this file except in compliance with the License.
@@ -67,8 +67,7 @@ class Aalb_Remote_Loader {
             if( strpos ( $error_message, CURL_ERROR_TIMEOUT_STRING ) !== false ) {
                 throw new Exception( HTTP_TIME_OUT );
             }
-            /* translators: %s: Error message */
-            throw new Exception( sprintf( esc_html__( 'HTTP Request failed! %s', 'amazon-associates-link-builder' ), $error_message ) );
+            throw new Exception( 'HTTP Request failed!' . $error_message );
         }
         $code = $response['response']['code'];
         if ( $code != HTTP_SUCCESS ) {
@@ -76,7 +75,7 @@ class Aalb_Remote_Loader {
         }
         $response_body = wp_remote_retrieve_body( $response );
         if ( ! isset( $response_body ) || trim( $response_body ) === '' ) {
-            throw new Exception( esc_html__( 'Response body is empty', 'amazon-associates-link-builder' ) );
+            throw new Exception( 'Response body is empty' );
         }
 
         return $response_body;

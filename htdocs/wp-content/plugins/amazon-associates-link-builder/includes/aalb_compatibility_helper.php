@@ -1,7 +1,7 @@
 <?php
 
 /*
-Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
 Licensed under the GNU General Public License as published by the Free Software Foundation,
 Version 2.0 (the "License"). You may not use this file except in compliance with the License.
@@ -19,6 +19,9 @@ and limitations under the License.
  * @since      1.4.3
  * @package    AmazonAssociatesLinkBuilder
  * @subpackage AmazonAssociatesLinkBuilder/includes
+ *
+ * CAUTION: Any function present here should contain code that is compatible with at least PHP 5.3(even lower if possible) so
+ * that anyone not meeting compatibility requirements for min php versions gets deactivated successfully.
  */
 class Aalb_Compatibility_Helper {
 
@@ -30,7 +33,7 @@ class Aalb_Compatibility_Helper {
      * @return bool is_php_version_compatible
      */
     private function is_php_version_compatible() {
-        return version_compare(phpversion(), AALB_PLUGIN_MINIMUM_SUPPORTED_PHP_VERSION, ">=" );
+        return version_compare( phpversion(), AALB_PLUGIN_MINIMUM_SUPPORTED_PHP_VERSION, ">=" );
     }
 
     /**
@@ -50,11 +53,11 @@ class Aalb_Compatibility_Helper {
      *
      * @since 1.4.3
      */
-     public function incompatible_environment_message() {
-        printf("<div class=\"notice notice-error\">
+    public function incompatible_environment_message() {
+        printf( "<div class=\"notice notice-error\">
                <h3>Amazon Associates Link Builder Plugin Deactivated!</h3>
                <p><span style=\"color:red;\">%s plugin requires PHP Version %s or higher. You’re still on %s.</span>
-               </p></div>", AALB_PLUGIN_NAME, AALB_PLUGIN_MINIMUM_SUPPORTED_PHP_VERSION, phpversion());
+               </p></div>", AALB_PLUGIN_NAME, AALB_PLUGIN_MINIMUM_SUPPORTED_PHP_VERSION, phpversion() );
     }
 
     /**
@@ -63,19 +66,14 @@ class Aalb_Compatibility_Helper {
      * @since 1.4.3
      */
     public function aalb_deactivate() {
-        $plugin = plugin_basename(AALB_PLUGIN_DIR .'amazon-associates-link-builder.php' );
-
-        //To use functions is_plugin_active() and deactivate_plugins()
-        require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-
-        if(is_plugin_active($plugin) ) {
-            deactivate_plugins($plugin);
-            //Remove action_links from admin page present below the plugin
-            remove_filter( 'plugin_action_links_' . $plugin, 'aalb_add_action_links' );
-            $aalb_admin_notice_manager = Aalb_Admin_Notice_Manager::getInstance();
-            $aalb_admin_notice_manager->remove_all_notices();
-            $aalb_admin_notice_manager->add_notice($this, 'incompatible_environment_message');
-        }
+        $plugin = plugin_basename( AALB_PLUGIN_DIR . 'amazon-associates-link-builder.php' );
+        deactivate_plugins( $plugin );
+        //Remove action_links from admin page present below the plugin
+        remove_filter( 'plugin_action_links_' . $plugin, 'aalb_add_action_links' );
+        $aalb_admin_notice_manager = Aalb_Admin_Notice_Manager::getInstance();
+        $aalb_admin_notice_manager->remove_all_notices();
+        $aalb_admin_notice_manager->add_notice( $this, 'incompatible_environment_message' );
     }
 }
+
 ?>

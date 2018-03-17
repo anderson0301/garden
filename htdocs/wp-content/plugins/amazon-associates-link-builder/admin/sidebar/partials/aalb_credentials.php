@@ -1,7 +1,7 @@
 <?php
 
 /*
-Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
 Licensed under the GNU General Public License as published by the Free Software Foundation,
 Version 2.0 (the "License"). You may not use this file except in compliance with the License.
@@ -94,7 +94,7 @@ $cred_helper->handle_error_notices();
                             value="<?php echo get_option( AALB_CUSTOM_UPLOAD_PATH ) ?>" />
                     </td>
                     <td>
-                        <?php printf( __("This folder will be used to save files downloaded by the plugin (e.g. <a href=%1s target=%2s>The MaxMind IP2Country Database</a>) for local use. Absolute path required. <br><span class=\"aalb-bold\"> Default value:</span> *blank*, defaults to <code>wp_upload_dir()['basedir'] + '%3s'</code>", 'amazon-associates-link-builder' ), AALB_GEOLITE_COUNTRY_DB_DETAILS_URL, AALB_NEW_PAGE_TARGET, AALB_UPLOADS_FOLDER ); ?>
+                        <?php printf( __("This folder will be used to save files downloaded by the plugin (e.g. <a href=%1s target=%2s>The MaxMind IP2Country Database</a>) for local use. Absolute path required. <br><span class=\"aalb-bold\"> Default value:</span> <code>wp_upload_dir()['basedir'] + '%3s'</code>", 'amazon-associates-link-builder' ), AALB_GEOLITE_COUNTRY_DB_DETAILS_URL, AALB_NEW_PAGE_TARGET, AALB_UPLOADS_FOLDER ); ?>
                     </td>
                 </tr>
                 <tr>

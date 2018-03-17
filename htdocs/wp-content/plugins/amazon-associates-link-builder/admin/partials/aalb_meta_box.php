@@ -1,7 +1,7 @@
 <?php
 
 /*
-Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
 Licensed under the GNU General Public License as published by the Free Software Foundation,
 Version 2.0 (the "License"). You may not use this file except in compliance with the License.
@@ -23,8 +23,6 @@ include AALB_ADMIN_ITEM_SEARCH_ITEMS_PATH;
 include 'aalb_meta_box_tab_content.php';
 include 'aalb_admin_pop_up_content_hbs.php';
 $aalb_admin = new Aalb_Admin();
-$aalb_admin->aalb_enqueue_styles();
-$aalb_admin->aalb_enqueue_scripts();
 
 /*
  * Below is an example of context to be passed to the below template

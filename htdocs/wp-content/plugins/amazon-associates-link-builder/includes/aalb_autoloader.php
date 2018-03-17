@@ -1,7 +1,7 @@
 <?php
 
 /*
-Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
 Licensed under the GNU General Public License as published by the Free Software Foundation,
 Version 2.0 (the "License"). You may not use this file except in compliance with the License.
@@ -54,6 +54,8 @@ class Aalb_Autoloader {
         new self( AALB_LIBRARY_DIR );
         new self( AALB_SIDEBAR_HELPER_DIR );
         new self( AALB_IP_2_COUNTRY_DIR );
+        new self( AALB_EXCEPTIONS_DIR );
+        new self( AALB_IO_DIR );
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 
 /*
-Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
 Licensed under the GNU General Public License as published by the Free Software Foundation,
 Version 2.0 (the "License"). You may not use this file except in compliance with the License.
@@ -18,6 +18,9 @@ and limitations under the License.
  * @since      1.0.0
  * @package    AmazonAssociatesLinkBuilder
  * @subpackage AmazonAssociatesLinkBuilder/includes
+ *
+ * CAUTION: Any function present here should contain code that is compatible with at least PHP 5.3(even lower if possible) so
+ * that anyone not meeting compatibility requirements for min php versions gets deactivated successfully.
  */
 class Aalb_Deactivator {
 
