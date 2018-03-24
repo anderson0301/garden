@@ -3,54 +3,60 @@
 
 <!--======================================ここから記事用ソース======================================-->
 
-<p>先日からGoogle Search ConsoleでいくつかのAMPページでエラーが発生していることが確認されました。原因を調べたところ、どうやら3月14日にアップデートした、Amazonアソシエイトのリンクを生成するWordPressのプラグイン<strong>「Associates Link Builder 1.6.0」が悪さしている模様。</strong></p>
+<p>今更ですが、Web屋の芝生DIYではfaviconを設定していないなと思い、サイトのブランディングを高めるためにも設定することに。本記事では、PCやスマートフォンの様々な場所で表示されるfaviconの設定方法とその役割についてまとめてみました。</p>
 [adsense_top]
-<p>おそらくWordPressでAMPページを実装しかつプラグインを使っている人は同じ事象に出くわしている人も多いのではないでしょうか。そこで本記事では、同バージョンのAssociates Link Builderを利用していてもAMPエラーが発生しないようにする方法をご紹介したいと思います。</p>
-<h2 class="hdg-l2-01">AMPエラーの内容について</h2>
-<p>Google Search Consoleでエラーが出ているのでおやと思い確認すると、以下のエラーが複数のページで通知されていました。</p>
-<blockquote>
-<p>AMPドキュメントでインラインの「style」属性を使用することはできません。「style amp-custom」タグを代わりに使用してください。</p>
-</blockquote>
-<p>インラインでスタイル書いた覚えなんてないぞと思い、該当のページのソースを確認したところ以下の記述を発見。</p>
-<pre><code>&lt;img src=&quot;https://ir-jp.amazon-adsystem.com/XXX&quot; width=&quot;1px&quot; height=&quot;1px&quot; alt=&quot;&quot; style=&quot;position: fixed !important; bottom: -1px !important; right: -1px !important; border:none !important; margin:0px !important;&quot; /&gt;</code></pre>
-<p>プラグインで生成しているAmazonアソシエイトのリンクの先頭に記述されていました。1pxの透明画像のようです。プラグインの導入時は確かになかったので、間違いなくバージョンアップした1.6.0の影響だろうとすぐに察知。</p>
-<p>プラグインのファイルを検索すると、以下のファイルに該当の記述を発見しました。</p>
-<pre><code>/wp-content/plugins/amazon-associates-link-builder/lib/php/aalb_impression_generator.php</code></pre>
-<p>上記ファイルの中身を見ると、たしかに同様のインラインスタイルで書かれたソースが確認できます。</p>
-<pre><code>return '&lt;img src=&quot;' . $image_url . '&quot; width=&quot;1px&quot; height=&quot;1px&quot; alt=&quot;&quot; style=&quot;position: fixed !important; bottom: -1px !important; right: -1px !important; border:none !important; margin:0px !important;&quot; /&gt;';</code></pre>
-<h2 class="hdg-l2-01">対処方法</h2>
-<p>対象方法は2パターンあります。1つ目は、以下のようにimgタグ自体生成されないようにする方法です。</p>
-<pre><code>return '';</code></pre>
-<p>もしくは以下のようにインラインスタイルを削除するだけでもエラーは解消することができます。</p>
-<pre><code>return '&lt;img src=&quot;' . $image_url . '&quot; width=&quot;1px&quot; height=&quot;1px&quot; alt=&quot;&quot; /&gt;';</code></pre>
-<ul class="list-notice-01">
-<li><span>※</span>念のため編集の際は自己責任でお願い致します</li>
+<h2 class="hdg-l2-01">faviconとは？</h2>
+<p>faviconは<strong>「favorite icon」</strong>の略で、Webサイトのシンボルマークです。普段Webサイトを閲覧するシーンでよく目にすることなるため、サイトの印象を決定づける重要な要素となります。</p>
+<h3 class="hdg-l3-01">主に表示される場所</h3>
+<ul class="list-bullet-01">
+<li>スマートフォンのホーム画面</li>
+<li>スマートフォンのブラウザ（Chrome）のブックマーク一覧</li>
+<li>スマートフォンのブラウザ（Chrome）のタブ選択時</li>
+<li>スマートフォンのブラウザ（Safari）のお気に入り</li>
+<li>PCブラウザのタブ</li>
+<li>PCブラウザのタブックマーク一覧</li>
+<li>PCブラウザのアドレスバー</li>
 </ul>
-<h2 class="hdg-l2-01">何のためのソースなのか？</h2>
-<p>プラグインの公式サイトの変更履歴を見ると、以下のように記載されています。</p>
+<p>こうして列挙してみると、本当に多くの場所で表示されることがお分かりいただけるかと思います。</p>
+<h2 class="hdg-l2-01">faviconを設定するメリット</h2>
+<p>faviconを設定することで主に以下のメリットを生み出すことができます。</p>
+<ul class="list-bullet-01">
+<li>他のサイトと差別化することができる</li>
+<li>ブランディングの向上</li>
+</ul>
+<h3 class="hdg-l3-01">他のサイトと差別化することができる</h3>
+<p>せっかくユーザーがサイトを気に入りブックマークに追加してくれても、faviconが設定されていないと他のブックマークに埋もれがちです。そのため再訪問率も変わってきます。どうしたってfaviconが設定されているサイトのほうが目に入ってきやすいので、その差は明らかです。設定しておくことで<strong>「ああ、このアイコンのサイトだな」</strong>とユーザーが視覚的に覚えやすくなります。</p>
+<h3 class="hdg-l3-01">ブランディングの向上</h3>
+<p>誰でも知っている企業のサイトをいくつか見てみてください。ほとんどのサイトが設定されていることでしょう。小さいfaviconですが、サイトの完成度やブランディングの向上にfaviconは一役買っているわけです。有名サイト相手でも、faviconを設定していればサイト規模では劣っても、ブックマーク一覧などでは同等の勝負をすることが可能になります。</p>
+[adsense_middle]
+<h2 class="hdg-l2-01">おすすめのfavicon設定方法</h2>
+<p>昔とは違ってfavicon1つ作るにしても、レスポンシブなWebサイトの考え方同様、各デバイスで適切に見えるよう考える必要があります。調べてみるとfaviconはデバイスやブラウザによって表示されるサイズが様々で、どのサイズを作成するかはよく　吟味する必要があります。以下のサイトで各サイズや拡張子における表示の挙動がよくまとめられていたので、参考にさせていただきました。</p>
 <ul class="list-link-01">
-<li><a href="https://ja.wordpress.org/plugins/amazon-associates-link-builder/#developers" target="_blank">Amazon Associates Link Builder &mdash; WordPressプラグイン</a></li>
+<li><a href="https://mamewaza.com/support/blog/favicon2017.html">faviconやホーム画面アイコンの指定方法2017</a></li>
 </ul>
-<blockquote>
-<p>Added Impressions data in reports shown on respective associates website. This will work only for ads rendered after upgrade to this release.</p>
-</blockquote>
-<p>直訳すると以下のような感じです。</p>
-<blockquote>
-<p>表示レポートにインプレッションデータを追加しました。これは、このリリースへのアップグレード後にレンダリングされた広告に対してのみ機能します。</p></p>
-</blockquote>
-<p>phpファイルの中身にもコメントアウトで「impression tracking〜」と記載があるので、Amazon側でトラッキングするためのソースと解釈しました。</p>
-<p>はっきり言って1pxとはいえdisplay:none;されているわけでもないのでデザインに影響する以上、ちょっとあまりいい気分じゃありませんね。。。</p>
-<p>しかも<strong>「アップグレード後にレンダリングされた」</strong>ということは実質全てのリンクに影響するということです。</p>
-<ul class="list-notice-01">
-<li><span>※</span>実際かなり過去のページにも影響を及ぼしました</li>
+<p>「2017」と銘打っていますが、じっくり読むと2018年5月現在も同様の設定で問題ないと判断しました。</p>
+<h3 class="hdg-l3-01">&#9312;まずは画像を用意</h3>
+<p>上記のサイトで勧められている仕様同様、以下の2枚の画像を用意します。</p>
+<ul class="list-link-01">
+<li><a href="/favicon.ico" target="_blank">64px×64pxのfavicon.ico</a></li>
+<li><a href="/apple-touch-icon.png" target="_blank">180px×180pxのapple-touch-icon.png</a></li>
 </ul>
-<p>1pxだけ領域を保持するだけならまだしも、Web屋の芝生DIYのAMPページではこれのおかげでエラー発生だけでなく、びっくりするくらいレイアウト崩れを起こしてしまったので、というかAMP対応している人全滅でしょこれというような機能追加のされ方をしている点について、そのあたりどう考えていたのか開発者に小一時間問い詰めたいところです。</p>
+<p>favicon.icoは様々なサイズがありますが、64pxのサイズが最も汎用性が高く、多くの場所で問題なく表示することが可能です。apple-touch-icon.pngはfavicon.icoでカバーしきれないiOSおよびAndroid環境のホーム画面用の画像をカバーするために作成します。</p>
+<p>favicon.icoはPhotoshopなどで作成した画像をpngで書き出し、以下のサイトで.icoの拡張子に変換します。</p>
+<ul class="list-link-01">
+<li><a href="https://www.icoconverter.com/" target="_blank">Online ICO converter</a></li>
+</ul>
+<h3 class="hdg-l3-01">&#9313;以下の記述をmetaに追加</h3>
+<p>favicon.icoとapple-touch-icon.pngをサイトにアップロード後、metaに以下の記述を追加します。ここではルート直下に画像を格納しましたが、任意のフォルダに格納してもOKです。</p>
+<pre><code>&lt;link rel=&quot;icon&quot; href=&quot;/favicon.ico&quot; type=&quot;image/x-icon&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; href=&quot;/apple-touch-icon.png&quot; sizes=&quot;180x180&quot;&gt;</code></pre>
+<h3 class="hdg-l3-01">&#9314;faviconが表示されることを確認</h3>
+<p>PCやスマートフォンのブラウザで、ブックマークに追加してみたりホーム画面に追加するなどし、作成した画像が表示されていることを確認しましょう。</p>
+<p><img src="/images/blog/2018/05/11_01_01.png" alt="" width="660" height="300"></p>
+<p><img src="/images/blog/2018/05/11_01_02.png" alt="" width="660" height="500"></p>
 <h2 class="hdg-l2-01">まとめ</h2>
-<p>冒頭で述べた通り、Associates Link Builder 1.6.0を利用し、かつAMP対応をされているサイトは影響を受ける可能性が高いと思われます。Amazon側でトラッキングするためのもののようなので、特にこのphpを改変しても動作に影響することはありません。</p>
-<ul class="list-notice-01">
-<li><span>※</span>しつこいようですが、編集の際は自己責任でお願い致します</li>
-</ul>
-<p>本記事が同事象に遭遇された方のご参考になれば幸いです。</p>
+<p>ご紹介させていただいたように、faviconの設定を行うことでサイトを1つ上の段階へ引き上げることが可能です。「自分のサイトへの愛着も湧く」という副産物も期待できます（笑）</p>
+<p>画像を作成する手間はかかりますが、導入自体の敷居もそんなに高くありません。metaへの追加も、WordPressなどであればテンプレートに追加するだけで一気に全ページに反映させることもできます。faviconの設定の際は、ぜひ本記事をご参考にしていただければ幸いです。</p>
 
 <!--======================================ここまで記事用ソース======================================-->
 

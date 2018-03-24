@@ -12,6 +12,8 @@
 <meta property="og:title" content="<?php if($monthnum||$year||$cat){?><?php if($cat){?><?php single_cat_title();?><?php }elseif($monthnum||$year){echo $year.'年';?><?php if($monthnum){echo $monthnum.'月';}}?><?php } ?>の記事一覧">
 <meta property="og:description" content="<?php if($monthnum||$year||$cat){?><?php if($cat){?><?php single_cat_title();?><?php }elseif($monthnum||$year){echo $year.'年';?><?php if($monthnum){echo $monthnum.'月';}}?><?php } ?>の記事一覧を掲載しています。">
 <link rel="stylesheet" href="/shared/css/basic.css" media="all">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
 </head>
 <body class="lyt-main-sub">
 <?php get_header(); ?>

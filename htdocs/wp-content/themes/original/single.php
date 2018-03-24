@@ -22,6 +22,8 @@
 <meta property="og:image" content="<?php the_post_thumbnail_url(); ?>">
 <meta property="og:title" content="<?php the_title(); ?>">
 <meta property="og:description" content="<?php echo get_the_excerpt(); ?>">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
 <?php if($myAmp):?>
 <?php $canonical_url = get_permalink(); ?>
 <link rel="canonical" href="<?php echo $canonical_url; ?>">

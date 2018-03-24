@@ -12,6 +12,8 @@
 <meta property="og:title" content="カテゴリー「<?php $category = get_the_category();echo $category[0]->cat_name;?>」の記事一覧">
 <meta property="og:description" content="<? foreach((get_the_category()) as $cat) {echo $cat->category_description . '';} ?>">
 <link rel="stylesheet" href="/shared/css/basic.css" media="all">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
 </head>
 <body class="lyt-main-sub <?php $cat = get_the_category();$cat = $cat[0];?><?php echo $cat->category_nicename; ?>">
 <?php get_header(); ?>

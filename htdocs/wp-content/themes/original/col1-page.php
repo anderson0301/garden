@@ -17,6 +17,8 @@ Template Name:固定ページ（1カラム）
 <meta property="og:title" content="<?php the_title(); ?> | Web屋の芝生DIY">
 <meta property="og:description" content="<?php echo get_the_excerpt(); ?>">
 <link rel="stylesheet" href="/shared/css/basic.css" media="all">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
 </head>
 <body class="lyt-main">
 <?php get_header(); ?>
