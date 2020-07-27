@@ -1,4 +1,45 @@
-#–³‹ƒtƒ@ƒCƒ‹ƒŠƒXƒg
-node_modules/
-*/.DS_Store
-gulpfile.js
+ï»¿# Files
+Thumbs.db
+
+# Directory
+.bundle_modules
+.DS_Store/
+.sass-cache
+.svn/
+node_modules
+
+# backup
+*.bak
+*.BAK
+
+# Dreamweaver
+notes_
+_compareTemp
+
+# WebStorm
+.idea
+
+# VisualStudio Code
+.vscode
+
+# å¿…è¦ã«å¿œã˜ã¦
+#*.psd
+#*.ai
+#*.xd
+#*.lzh
+#*.7z
+#*.tar
+#*.gz
+#*.bz2
+#*.xz
+#*.mp4
+#*.mp3
+#*.doc
+#*.docx
+#*.xls
+#*.xlsx
+#*.pdf
+#*.ppt
+#*.pptx
+#*.exe
+#*.zip
